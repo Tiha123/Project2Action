@@ -3,24 +3,24 @@ using UnityEngine.Events;
 
 public static class AbilityExtension
 {
-    public static bool Has(this ref Ability abilities, Ability a)
+    public static bool Has(this ref AbilityFlag abilities, AbilityFlag a)
     {
         return (abilities&a)==a;
     }
 
-    public static void Add(this ref Ability abilities, Ability a, UnityAction onComplete)
+    public static void Add(this ref AbilityFlag abilities, AbilityFlag a, UnityAction onComplete)
     {
         abilities |= a;
         onComplete?.Invoke();
     }
 
-    public static void Remove(this ref Ability abilities, Ability a, UnityAction onComplete)
+    public static void Remove(this ref AbilityFlag abilities, AbilityFlag a, UnityAction onComplete)
     {
         abilities &= ~a;
         onComplete?.Invoke();
     }
 
-    public static void Use(this ref Ability abilities, Ability a, UnityAction action)
+    public static void Use(this ref AbilityFlag abilities, AbilityFlag a, UnityAction action)
     {
         if(abilities.Has(a))
         {
