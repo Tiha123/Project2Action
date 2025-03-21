@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using CustomInspector;
 using UnityEngine;
@@ -13,19 +12,16 @@ public class AbilityControl : MonoBehaviour
 
     private readonly Dictionary<AbilityFlag, Ability> actives=new Dictionary<AbilityFlag, Ability>();
 
-    public void AddAbility(AbilityData d, bool immediate)
+    public void AddAbility(AbilityData d)
     {
         if(datas.Contains(d))
         {
             return;
         }
         datas.Add(d);
-        var ability=d.CreateAbility(this.transform);
+        var ability=d.CreateAbility(GetComponent<CharacterControl>());
         Flags.Add(d.Flag,null);
-        if(immediate)
-        {
-            actives[d.Flag]=ability;
-        }
+        actives[d.Flag]=ability;
     }
     public void RemoveAbility(AbilityData d)
     {
@@ -46,12 +42,15 @@ public class AbilityControl : MonoBehaviour
         }
     }
 
-    [Space(10)] public AbilityData testdata;
-    [Space(10)] public AbilityData testdata2;
-    IEnumerator Start()
+    public void Trigger(AbilityFlag flag)
     {
-        yield return new WaitForEndOfFrame(); 
-        AddAbility(testdata, true);
-        AddAbility(testdata2, true);
+        foreach(var pair in actives)
+        {
+            AbilityFlag a=pair.Key;
+            if(a.Has(flag))
+            {
+                pair.Value.Activate();
+            }
+        }
     }
 }

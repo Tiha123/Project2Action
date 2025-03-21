@@ -5081,6 +5081,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c26e4ce1a805174889c55aacf899d69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityControl: {fileID: 0}
+  initialAbilities:
+  - {fileID: 11400000, guid: 5a5ad8b059c8bbf4eb1b64cbf65395c4, type: 2}
+  - {fileID: 11400000, guid: e98ad84b48b264c489fba4447d41f8b5, type: 2}
 --- !u!114 &6718880742775085173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5095,8 +5099,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Flags: 0
   datas: []
-  testdata: {fileID: 11400000, guid: 5a5ad8b059c8bbf4eb1b64cbf65395c4, type: 2}
-  testdata2: {fileID: 11400000, guid: e98ad84b48b264c489fba4447d41f8b5, type: 2}
 --- !u!1 &6747765639903128452
 GameObject:
   m_ObjectHideFlags: 0

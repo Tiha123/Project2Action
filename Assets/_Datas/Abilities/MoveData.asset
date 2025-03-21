@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa04913e40d6ca04083f78f6bf778278, type: 3}
   m_Name: MoveData
   m_EditorClassIdentifier: 
-  speed: 10
+  Effect: 2
+  movespeed: 3000
+  rotatespeed: 50
