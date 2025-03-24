@@ -10,7 +10,8 @@ public class CharacterControl : MonoBehaviour
     [HideInInspector] public AbilityControl abilityControl;
     public List<AbilityData> initialAbilities = new List<AbilityData>();
     [ReadOnly] public bool isGrounded;
-    [HideInInspector] public Rigidbody rb;
+    [HideInInspector] public CharacterController cc;
+    [HideInInspector] public Animator animator;
 
     void Awake()
     {
@@ -18,9 +19,13 @@ public class CharacterControl : MonoBehaviour
         {
             Debug.LogWarning("CharacterControl ] AbilityControl없음");
         }
-        if(TryGetComponent(out rb)==false)
+        if(TryGetComponent(out cc)==false)
         {
-            Debug.LogWarning("CharacterControl ] Rigidbody없음");
+            Debug.LogWarning("CharacterControl ] CharacterController없음");
+        }
+        if(TryGetComponent(out animator)==false)
+        {
+            Debug.LogWarning("CharacterControl ] Animator없음");
         }
     }
 
@@ -28,7 +33,7 @@ public class CharacterControl : MonoBehaviour
     {
         foreach (var dat in initialAbilities)
         {
-            abilityControl.AddAbility(dat);
+            abilityControl.AddAbility(dat, true);
         }
     }
 
@@ -42,7 +47,7 @@ public class CharacterControl : MonoBehaviour
         
         if(Input.GetButtonDown("Jump"))
         {
-            abilityControl.Trigger(AbilityFlag.Jump);
+            abilityControl.Activate(AbilityFlag.Jump);
         }
 
     }

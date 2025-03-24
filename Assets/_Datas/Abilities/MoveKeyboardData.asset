@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa04913e40d6ca04083f78f6bf778278, type: 3}
-  m_Name: MoveData
+  m_Name: MoveKeyboardData
   m_EditorClassIdentifier: 
   Effect: 2
-  movespeed: 3000
-  rotatespeed: 50
+  movePerSec: 10
+  rotatePerSec: 1080

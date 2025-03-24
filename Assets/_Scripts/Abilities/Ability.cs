@@ -32,12 +32,30 @@ public abstract class AbilityData : ScriptableObject
 
 //abstract: 무조건 정의
 //virtual: 옵션
-public abstract class Ability
+public abstract class Ability 
 {
-    public abstract AbilityData Data { get; }
-    protected CharacterControl owner;
-    public Ability(CharacterControl ow) => this.owner = ow;
     public virtual void Activate() { }
     public virtual void Deactivate() { }
     public virtual void Update() { }
+    public virtual void FixedUpdate() { } //  빠르게(물리연산속도)업데이트
+    public virtual AbilityData Getdata()
+    {
+        return null;
+    }
+}
+
+public abstract class Ability<D> : Ability where D : AbilityData
+{
+    public D data;
+    protected CharacterControl owner;
+    public Ability(D data, CharacterControl ow)
+    {
+        this.owner = ow;
+        this.data=data;
+    }
+
+    public override AbilityData Getdata()
+    {
+        return (AbilityData)data;
+    }
 }
