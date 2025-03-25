@@ -33,13 +33,20 @@ public class AbilityMoveKeyboard : Ability<AbilityMoveKeyboardData>
     }
     void Movement()
     {
-        owner.cc.Move(direction * data.movePerSec * Time.deltaTime);
-        if (owner.isGrounded==true)
+        Vector3 movement=direction * data.movePerSec * 50f * Time.deltaTime;
+        Vector3 velocity=new Vector3(movement.x, owner.rb.linearVelocity.y, movement.z);
+        owner.rb.linearVelocity = velocity; //movePerSec과 GetRelativeVelocity값을 동기화하기위한 상수
+        Debug.Log(owner.rb.linearVelocity);
+        if (owner.isGrounded == true)
         {
-            float dist=Vector3.Distance(Vector3.zero, owner.cc.velocity);
-            float targetspeed=Mathf.Clamp01(Mathf.Abs(dist)/data.movePerSec);
-            float movespd=Mathf.Lerp(owner.animator.GetFloat("movespeed"), targetspeed, Time.deltaTime*10f);
-            owner.animator?.SetFloat("movespeed",movespd );
+            float velocity2 = Vector3.Distance(Vector3.zero, owner.rb.linearVelocity);
+            float targetspeed = Mathf.Clamp01(Mathf.Abs(velocity2) / data.movePerSec);
+            float movespd = Mathf.Lerp(owner.animator.GetFloat("movespeed"), targetspeed, Time.deltaTime * 10f);
+            owner.animator?.SetFloat("movespeed", movespd);
+            // if(horz==0f&&vert==0f)
+            // {
+            //     owner.animator?.CrossFadeInFixedTime("RUNTOSTOP", 0.2f, 0, 0f);
+            // }
         }
     }
 

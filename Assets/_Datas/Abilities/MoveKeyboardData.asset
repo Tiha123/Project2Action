@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: MoveKeyboardData
   m_EditorClassIdentifier: 
   Effect: 2
-  movePerSec: 10
-  rotatePerSec: 1080
+  movePerSec: 15
+  rotatePerSec: 720

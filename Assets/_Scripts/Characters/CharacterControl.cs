@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using CustomInspector;
+using UnityEngine.AI;
 
 // GAS(Game ability system)
 
@@ -10,7 +11,10 @@ public class CharacterControl : MonoBehaviour
     [HideInInspector] public AbilityControl abilityControl;
     public List<AbilityData> initialAbilities = new List<AbilityData>();
     [ReadOnly] public bool isGrounded;
-    [HideInInspector] public CharacterController cc;
+    [ReadOnly] public bool isLanding;
+    public float isGroundedOffset=1.1f;
+    public float isLandingOffset=3.0f;
+    [HideInInspector] public Rigidbody rb;
     [HideInInspector] public Animator animator;
 
     void Awake()
@@ -19,9 +23,9 @@ public class CharacterControl : MonoBehaviour
         {
             Debug.LogWarning("CharacterControl ] AbilityControl없음");
         }
-        if(TryGetComponent(out cc)==false)
+        if(TryGetComponent(out rb)==false)
         {
-            Debug.LogWarning("CharacterControl ] CharacterController없음");
+            Debug.LogWarning("CharacterControl ] Rigidbody없음");
         }
         if(TryGetComponent(out animator)==false)
         {
@@ -39,7 +43,8 @@ public class CharacterControl : MonoBehaviour
 
     void Update()
     {
-        isGrounded=Physics.Raycast(transform.position+Vector3.up,Vector3.down,1.1f);
+        isGrounded=Physics.Raycast(transform.position+Vector3.up,Vector3.down,isGroundedOffset);
+        isLanding=Physics.Raycast(transform.position+Vector3.up,Vector3.down,isLandingOffset);
         InputKeyboard();
     }
     void InputKeyboard()

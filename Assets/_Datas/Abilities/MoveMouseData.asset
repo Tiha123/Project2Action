@@ -14,4 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Effect: 1
   movePerSec: 10
-  rotatePerSec: 50
+  rotatePerSec: 1080
+  stopDistance: 0.3
+  runtostopDistance: 1.5
+  isArrived: 1
