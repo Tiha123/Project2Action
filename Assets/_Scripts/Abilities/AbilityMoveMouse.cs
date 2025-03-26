@@ -16,12 +16,21 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
     Vector3 finaltarget;
     float currentVelocity;
     private RaycastHit hitinfo;
+    private ParticleSystem marker;
 
     public AbilityMoveMouse(AbilityMoveMouseData data, CharacterControl ow) : base(data, ow)
     {
         camera = Camera.main;
         path = new NavMeshPath();
+        marker=GameObject.Instantiate(data.marker).GetComponent<ParticleSystem>();
+        if(marker==null)
+        {
+            Debug.LogWarning("MoveMouse ] marker없음");
+        }
+        marker.gameObject.SetActive(false);
     }
+
+    
 
     public override void FixedUpdate()
     {
@@ -45,7 +54,10 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hitinfo))
             {
+                marker.gameObject.SetActive(true);
+                marker.transform.position=hitinfo.point+Vector3.up;
                 SetDestination(hitinfo.point);
+                marker.Play();
             }
         }
 
@@ -70,7 +82,6 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
         Vector3 movement = direction * data.movePerSec * 50f * Time.deltaTime;
         owner.rb.linearVelocity = new Vector3(movement.x, owner.rb.linearVelocity.y, movement.z);
         currentVelocity = Vector3.Distance(Vector3.zero, owner.rb.linearVelocity);
-        Debug.Log(currentVelocity);
 
         if (Vector3.Distance(target, owner.transform.position) < data.stopDistance)
         {
@@ -105,7 +116,7 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
         next = 1;
         finaltarget = corners[corners.Length - 1];
         data.isArrived = false;
-        stopTrigger = Vector3.Distance(owner.rb.position, hitinfo.point) > data.runtostopDistance ? false : true;
+        stopTrigger = Vector3.Distance(owner.rb.position, hitinfo.point) > data.runtostopDistance+3f ? false : true;
         DrawDebugPath();
     }
 

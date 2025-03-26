@@ -15,6 +15,7 @@ MonoBehaviour:
   Effect: 1
   movePerSec: 10
   rotatePerSec: 1080
-  stopDistance: 0.3
-  runtostopDistance: 1.5
+  stopDistance: 0.2
+  runtostopDistance: 1
   isArrived: 1
+  marker: {fileID: 1215210573372408, guid: f2a47a92099261641b107ca697c2c8e9, type: 3}
