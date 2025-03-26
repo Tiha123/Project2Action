@@ -8,13 +8,14 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
     private NavMeshPath path;
     private Vector3[] corners;
     int next;
-    bool stopTrigger=false;
-    
+    bool stopTrigger = false;
+
     Quaternion lookrot;
     Vector3 target;
     Vector3 direction;
     Vector3 finaltarget;
     float currentVelocity;
+    private RaycastHit hitinfo;
 
     public AbilityMoveMouse(AbilityMoveMouseData data, CharacterControl ow) : base(data, ow)
     {
@@ -42,9 +43,9 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
         if (Input.GetMouseButtonDown(1))
         {
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out var hit))
+            if (Physics.Raycast(ray, out hitinfo))
             {
-                SetDestination(hit.point);
+                SetDestination(hitinfo.point);
             }
         }
 
@@ -68,7 +69,7 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
 
         Vector3 movement = direction * data.movePerSec * 50f * Time.deltaTime;
         owner.rb.linearVelocity = new Vector3(movement.x, owner.rb.linearVelocity.y, movement.z);
-        currentVelocity=Vector3.Distance(Vector3.zero,owner.rb.linearVelocity);
+        currentVelocity = Vector3.Distance(Vector3.zero, owner.rb.linearVelocity);
         Debug.Log(currentVelocity);
 
         if (Vector3.Distance(target, owner.transform.position) < data.stopDistance)
@@ -84,10 +85,10 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
 
     void MoveAnimation()
     {
-        if (Vector3.Distance(finaltarget, owner.rb.position) < data.runtostopDistance&&data.isArrived==false&&stopTrigger==false)
+        if (Vector3.Distance(finaltarget, owner.rb.position) < data.runtostopDistance && data.isArrived == false&&stopTrigger==false)
         {
             owner.animator?.CrossFadeInFixedTime("RUNTOSTOP", 0.2f, 0, 0f);
-            stopTrigger=true;
+            stopTrigger = true;
         }
         float a = data.isArrived ? 0f : Mathf.Clamp01(currentVelocity);
         float movespd = Mathf.Lerp(owner.animator.GetFloat("movespeed"), a, Time.deltaTime * 10f);
@@ -102,9 +103,9 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
         }
         corners = path.corners;
         next = 1;
-        finaltarget=corners[corners.Length-1];
+        finaltarget = corners[corners.Length - 1];
         data.isArrived = false;
-        stopTrigger=false;
+        stopTrigger = Vector3.Distance(owner.rb.position, hitinfo.point) > data.runtostopDistance ? false : true;
         DrawDebugPath();
     }
 
