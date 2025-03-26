@@ -11,9 +11,7 @@ public class CharacterControl : MonoBehaviour
     [HideInInspector] public AbilityControl abilityControl;
     public List<AbilityData> initialAbilities = new List<AbilityData>();
     [ReadOnly] public bool isGrounded;
-    [ReadOnly] public bool isLanding;
     public float isGroundedOffset=1.1f;
-    public float isLandingOffset=3.0f;
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public Animator animator;
 
@@ -44,7 +42,6 @@ public class CharacterControl : MonoBehaviour
     void Update()
     {
         isGrounded=Physics.Raycast(transform.position+Vector3.up,Vector3.down,isGroundedOffset);
-        isLanding=Physics.Raycast(transform.position+Vector3.up,Vector3.down,isLandingOffset);
         InputKeyboard();
     }
     void InputKeyboard()

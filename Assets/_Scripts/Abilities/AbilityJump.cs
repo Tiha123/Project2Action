@@ -10,17 +10,18 @@ public class AbilityJump : Ability<AbilityJumpData>
 
     public override void Activate()
     {
-        if (owner.isGrounded == false || owner.rb == null || isJumping ==true)
+        if (owner.isGrounded == false || owner.rb == null || isJumping == true)
         {
             return;
         }
         isJumping = true;
-        owner.animator.CrossFadeInFixedTime("JUMPUP", 0.2f, 0, 0f);
+        owner.animator.CrossFadeInFixedTime("JUMPUP", 0.1f, 0, 0f);
         //owner.animator?.SetTrigger("JumpUp");
     }
 
     public override void Deactivate()
     {
+        owner.animator.CrossFadeInFixedTime("JUMPDOWN", 0.02f, 0, 0f); //jumpForce와 linearvelocity의 동기화
         elapsed = 0f;
         isJumping = false;
         //owner.animator?.SetTrigger("JumpDown");
@@ -33,19 +34,16 @@ public class AbilityJump : Ability<AbilityJumpData>
         {
             return;
         }
-        if (elapsed < data.jumpDuration)
-        {
-            elapsed += Time.deltaTime;
-            t = elapsed / data.jumpDuration;
-            float height = data.jumpCurve.Evaluate(t) * data.jumpForce;
+        elapsed += Time.deltaTime;
+        t = Mathf.Clamp01(elapsed / data.jumpDuration);
 
-            Vector3 velocity = owner.rb.linearVelocity;
-            velocity.y = height * Time.deltaTime;
-            owner.rb.linearVelocity = velocity * 800; //jumpForce와 linearvelocity의 동기화
-        }
-        else if (owner.isLanding == true)
+        Vector3 velocity = owner.rb.linearVelocity;
+        velocity.y = data.jumpCurve.Evaluate(t) * data.jumpForce;
+        owner.rb.linearVelocity = velocity;
+
+        if (t > 0.3f && owner.isGrounded)
         {
-                owner.abilityControl.Deactivate(data.Flag);
+            owner.abilityControl.Deactivate(data.Flag);
         }
     }
 }

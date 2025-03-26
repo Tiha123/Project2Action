@@ -14,6 +14,7 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
     Vector3 target;
     Vector3 direction;
     Vector3 finaltarget;
+    float currentVelocity;
 
     public AbilityMoveMouse(AbilityMoveMouseData data, CharacterControl ow) : base(data, ow)
     {
@@ -67,6 +68,8 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
 
         Vector3 movement = direction * data.movePerSec * 50f * Time.deltaTime;
         owner.rb.linearVelocity = new Vector3(movement.x, owner.rb.linearVelocity.y, movement.z);
+        currentVelocity=Vector3.Distance(Vector3.zero,owner.rb.linearVelocity);
+        Debug.Log(currentVelocity);
 
         if (Vector3.Distance(target, owner.transform.position) < data.stopDistance)
         {
@@ -86,7 +89,7 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
             owner.animator?.CrossFadeInFixedTime("RUNTOSTOP", 0.2f, 0, 0f);
             stopTrigger=true;
         }
-        float a = data.isArrived ? 0f : 1f;
+        float a = data.isArrived ? 0f : Mathf.Clamp01(currentVelocity);
         float movespd = Mathf.Lerp(owner.animator.GetFloat("movespeed"), a, Time.deltaTime * 10f);
         owner.animator?.SetFloat("movespeed", movespd);
     }

@@ -1167,82 +1167,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1199036530}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1127150292
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1127150293}
-  - component: {fileID: 1127150294}
-  m_Layer: 0
-  m_Name: Adaptive Probe Volume
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1127150293
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1127150292}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1372100359}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1127150294
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1127150292}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cded085d155cde949b60f67a11dbc3bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mode: 2
-  size: {x: 10, y: 10, z: 10}
-  overrideRendererFilters: 0
-  minRendererVolumeSize: 0.1
-  objectLayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  lowestSubdivLevelOverride: 0
-  highestSubdivLevelOverride: 3
-  overridesSubdivLevels: 0
-  mightNeedRebaking: 0
-  cachedTransform:
-    e00: 1
-    e01: 0
-    e02: 0
-    e03: -0
-    e10: 0
-    e11: 1
-    e12: 0
-    e13: -0
-    e20: 0
-    e21: 0
-    e22: 1
-    e23: -0
-    e30: 0
-    e31: 0
-    e32: 0
-    e33: 1
-  cachedHashCode: 2065320044
-  fillEmptySpaces: 0
-  version: 2
-  globalVolume: 0
 --- !u!1 &1199036529
 GameObject:
   m_ObjectHideFlags: 0
@@ -1452,7 +1376,6 @@ Transform:
   - {fileID: 127264671}
   - {fileID: 869857649}
   - {fileID: 535119704}
-  - {fileID: 1127150293}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1470027254
@@ -4227,12 +4150,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityControl: {fileID: 0}
   initialAbilities:
-  - {fileID: 11400000, guid: e98ad84b48b264c489fba4447d41f8b5, type: 2}
   - {fileID: 11400000, guid: 94dae3775272d4944b2fe5908edcab2d, type: 2}
+  - {fileID: 11400000, guid: e98ad84b48b264c489fba4447d41f8b5, type: 2}
   isGrounded: 0
-  isLanding: 0
   isGroundedOffset: 1.1
-  isLandingOffset: 2
   rb: {fileID: 0}
   animator: {fileID: 0}
 --- !u!1 &5065727832602838922
