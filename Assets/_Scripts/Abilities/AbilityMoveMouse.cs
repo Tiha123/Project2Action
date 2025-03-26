@@ -65,7 +65,7 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
 
     void FollowPath()
     {
-        if (corners == null || corners.Length <= 0 || data.isArrived == true)
+        if (corners == null || corners.Length <= 0 || owner.isArrived == true)
         {
             return;
         }
@@ -88,7 +88,7 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
             next++;
             if (next >= corners.Length)
             {
-                data.isArrived = true;
+                owner.isArrived = true;
                 owner.rb.linearVelocity = Vector3.zero;
             }
         }
@@ -96,12 +96,12 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
 
     void MoveAnimation()
     {
-        if (Vector3.Distance(finaltarget, owner.rb.position) < data.runtostopDistance && data.isArrived == false&&stopTrigger==false)
+        if (Vector3.Distance(finaltarget, owner.rb.position) < data.runtostopDistance && owner.isArrived == false&&stopTrigger==false)
         {
             owner.animator?.CrossFadeInFixedTime("RUNTOSTOP", 0.2f, 0, 0f);
             stopTrigger = true;
         }
-        float a = data.isArrived ? 0f : Mathf.Clamp01(currentVelocity);
+        float a = owner.isArrived ? 0f : Mathf.Clamp01(currentVelocity);
         float movespd = Mathf.Lerp(owner.animator.GetFloat("movespeed"), a, Time.deltaTime * 10f);
         owner.animator?.SetFloat("movespeed", movespd);
     }
@@ -115,7 +115,7 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
         corners = path.corners;
         next = 1;
         finaltarget = corners[corners.Length - 1];
-        data.isArrived = false;
+        owner.isArrived = false;
         stopTrigger = Vector3.Distance(owner.rb.position, hitinfo.point) > data.runtostopDistance+3f ? false : true;
         DrawDebugPath();
     }

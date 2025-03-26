@@ -10,9 +10,9 @@ public class PoolManager : BehaviourSingleton<PoolManager>
     private Dictionary<PoolBehaviour, ObjectPool<PoolBehaviour>> prefabs;
     private Dictionary<PoolBehaviour, ObjectPool<PoolBehaviour>> instances;
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
         prefabs = new Dictionary<PoolBehaviour, ObjectPool<PoolBehaviour>>();
         instances = new Dictionary<PoolBehaviour, ObjectPool<PoolBehaviour>>();
     }
@@ -65,7 +65,7 @@ public class PoolManager : BehaviourSingleton<PoolManager>
         var pool =prefabs[pb];
         var clone = pool.Get();
         clone.transform.SetPositionAndRotation(pos,rot);
-        clone.transform.SetParent(parent);
+        clone.transform.SetParent(parent ?? transform);
 
         instances.Add(clone, pool);
 

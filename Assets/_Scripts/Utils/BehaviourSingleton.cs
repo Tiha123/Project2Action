@@ -26,6 +26,11 @@ public abstract class BehaviourSingleton<T> : MonoBehaviour where T: MonoBehavio
 
     protected abstract bool isDontdestroy();
 
+    protected virtual void Awake()
+    {
+        
+    }
+
     protected virtual void Start()
     {
         if(I!=null&&I!=this)

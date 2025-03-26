@@ -10,10 +10,14 @@ public class CharacterControl : MonoBehaviour
 {
     [HideInInspector] public AbilityControl abilityControl;
     public List<AbilityData> initialAbilities = new List<AbilityData>();
+    
     [ReadOnly] public bool isGrounded;
+    [ReadOnly] public bool isArrived = true;
+
     public float isGroundedOffset=1.1f;
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public Animator animator;
+
 
     void Awake()
     {

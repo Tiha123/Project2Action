@@ -4153,6 +4153,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 94dae3775272d4944b2fe5908edcab2d, type: 2}
   - {fileID: 11400000, guid: e98ad84b48b264c489fba4447d41f8b5, type: 2}
   isGrounded: 0
+  isArrived: 1
   isGroundedOffset: 1.1
   rb: {fileID: 0}
   animator: {fileID: 0}
@@ -4509,6 +4510,7 @@ GameObject:
   - component: {fileID: 5020505520488724403}
   - component: {fileID: 8247079091894749966}
   - component: {fileID: 8247079091894749967}
+  - component: {fileID: 8247079091894749968}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -6025,6 +6027,21 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &8247079091894749968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5712651114791242448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a007effe2d77b7419c1e02d212b9217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Lfoot: {fileID: 6589074817110240022}
+  Rfoot: {fileID: 8329610321453847387}
+  smoke: {fileID: -2196661249110058857, guid: 0d879c6f654b17e4e8b87b32da426228, type: 3}
 --- !u!4 &8329610321453847387
 Transform:
   m_ObjectHideFlags: 0

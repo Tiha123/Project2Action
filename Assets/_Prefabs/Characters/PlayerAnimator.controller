@@ -21,7 +21,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 7f4721adc379aa348a871b9fec9f3df7, type: 3}
+  m_Motion: {fileID: 7400000, guid: bcaa1cb33802540458e1da5f30ba9044, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -41,9 +41,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0.1
   m_TransitionOffset: 0
-  m_ExitTime: 0.7222222
+  m_ExitTime: 0.9
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -58,7 +58,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: -203655887218126122, guid: fdddce57e8c2d2948a87b5290c48d892, type: 3}
+    m_Motion: {fileID: 7400000, guid: 6f22b1620cb39c041b6aefde49c9d624, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -66,7 +66,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -203655887218126122, guid: 16dd55bab891bca4c80d9efb5046b1d8, type: 3}
+    m_Motion: {fileID: 7400000, guid: 03b7ce71228c0ff4ab83a224ddee2828, type: 2}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -211,7 +211,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 035e5097075b0674f8011efdb4430a93, type: 3}
+  m_Motion: {fileID: 7400000, guid: 8e6b48e3a23aaba44886b1c0f327c7bc, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -237,7 +237,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: e4aac7faa9ec03c42a6080df828afda0, type: 3}
+  m_Motion: {fileID: 7400000, guid: edfe75b9078c1ee4cb22f379a0f56579, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

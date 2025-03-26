@@ -9,7 +9,6 @@ public class AbilityMoveMouseData : AbilityData
     public float rotatePerSec=1080f;
     public float stopDistance=0.1f;
     public float runtostopDistance=1f;
-    public bool isArrived = true;
 
     [Space(20)]
     public GameObject marker; // 3d 피킹 마커 오브젝트
