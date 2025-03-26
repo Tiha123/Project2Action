@@ -347,7 +347,7 @@ MonoBehaviour:
   supportLayerMaskChunkSize: 0
   supportOffsetsChunkSize: 0
   supportDataChunkSize: 163840
-  lightingScenario: On
+  lightingScenario: Default
   version: 2
   freezePlacement: 1
   probeOffset: {x: 0, y: 0, z: 0}
@@ -369,7 +369,7 @@ MonoBehaviour:
     m_Keys:
     - 81114d3bbfc5f2e4da3521b3f1642ae2
     m_Values:
-    - hasProbeVolume: 1
+    - hasProbeVolume: 0
       bakeScene: 1
       bounds:
         m_Center: {x: 0, y: 0, z: 0}
