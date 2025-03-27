@@ -9,10 +9,10 @@ public enum AbilityFlag
 {
     None = 0,
     MoveKeyboard = 1 << 0,// 0001
-    MoveMouse = 1 << 1,
-    Jump = 1 << 2,// 0010
-    Dodge = 1 << 3,// 0100
-    Attack = 1 << 4// 1000
+    MoveMouse = 1 << 1,// 0010
+    Jump = 1 << 2,// 0100
+    Dodge = 1 << 3,// 1000
+    Attack = 1 << 4
 }
 
 public enum AbilityEffect

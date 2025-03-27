@@ -51,12 +51,12 @@ public class CharacterControl : MonoBehaviour
     #region InputSystem
     public void OnMoveKeyboard(InputAction.CallbackContext ctx)
     {
+        
         if(ctx.performed || ctx.canceled)
         {
             abilityControl.Activate(AbilityFlag.MoveKeyboard, ctx);
         }
     }
-
 
     public void OnMoveMouse(InputAction.CallbackContext ctx)
     {

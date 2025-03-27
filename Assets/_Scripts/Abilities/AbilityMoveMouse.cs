@@ -37,7 +37,7 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
             if (Physics.Raycast(ray, out hitinfo))
             {
                 marker.gameObject.SetActive(true);
-                marker.transform.position=hitinfo.point+Vector3.up;
+                marker.transform.position=hitinfo.point+Vector3.up*0.2f;
                 SetDestination(hitinfo.point);
                 marker.Play();
             }
