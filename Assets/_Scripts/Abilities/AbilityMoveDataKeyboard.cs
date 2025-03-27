@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="Abilities/MoveKeyboard")]
 public class AbilityMoveKeyboardData : AbilityData
 {
-    public override AbilityFlag Flag => AbilityFlag.Move;
+    public override AbilityFlag Flag => AbilityFlag.MoveKeyboard;
 
     public float movePerSec=10f;
     public float rotatePerSec=50f;

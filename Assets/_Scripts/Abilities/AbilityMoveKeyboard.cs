@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.Animations;
+using UnityEngine.InputSystem;
 
 public class AbilityMoveKeyboard : Ability<AbilityMoveKeyboardData>
 {
@@ -7,6 +9,7 @@ public class AbilityMoveKeyboard : Ability<AbilityMoveKeyboardData>
     Vector3 direction;
     Vector3 camForward, camRight;
     float velocity;
+    InputAction.CallbackContext context;
     public AbilityMoveKeyboard(AbilityMoveKeyboardData data, CharacterControl owner) : base(data, owner)
     {
         cameraTransform = Camera.main.transform;
@@ -19,18 +22,32 @@ public class AbilityMoveKeyboard : Ability<AbilityMoveKeyboardData>
         Movement();
     }
 
+    public override void Activate(InputAction.CallbackContext context)
+    {
+        this.context=context;
+        owner.isArrived=context.canceled;
+    }
+
     void InputKeyboard()
     {
-        horz = Input.GetAxisRaw("Horizontal");
-        vert = Input.GetAxisRaw("Vertical");
+    
+        Vector2 move=context.ReadValue<Vector2>();
+
+        horz=move.x;
+        vert=move.y;
+
         camForward = cameraTransform.forward;
         camRight = cameraTransform.right;
+
         camForward.y = 0;
         camRight.y = 0;
+
         camForward.Normalize();
         camRight.Normalize();
+
         direction = (camForward * vert + camRight * horz).normalized;
     }
+
     void Movement()
     {
         Vector3 movement=direction * data.movePerSec * 50f * Time.deltaTime;

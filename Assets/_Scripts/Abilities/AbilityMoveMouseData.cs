@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="Abilities/MoveMouse")]
 public class AbilityMoveMouseData : AbilityData
 {
-    public override AbilityFlag Flag => AbilityFlag.Move;
+    public override AbilityFlag Flag => AbilityFlag.MoveMouse;
 
     public float movePerSec=10f;
     public float rotatePerSec=1080f;

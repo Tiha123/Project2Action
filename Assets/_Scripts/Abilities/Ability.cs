@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using UnityEngine.InputSystem;
 
 // MVC: Model View Control
 
@@ -7,10 +8,11 @@ using System;
 public enum AbilityFlag
 {
     None = 0,
-    Move = 1 << 0,// 0001
-    Jump = 1 << 1,// 0010
-    Dodge = 1 << 2,// 0100
-    Attack = 1 << 3// 1000
+    MoveKeyboard = 1 << 0,// 0001
+    MoveMouse = 1 << 1,
+    Jump = 1 << 2,// 0010
+    Dodge = 1 << 3,// 0100
+    Attack = 1 << 4// 1000
 }
 
 public enum AbilityEffect
@@ -34,7 +36,7 @@ public abstract class AbilityData : ScriptableObject
 //virtual: 옵션
 public abstract class Ability 
 {
-    public virtual void Activate() { }
+    public virtual void Activate(InputAction.CallbackContext context) { }
     public virtual void Deactivate() { }
     public virtual void Update() { }
     public virtual void FixedUpdate() { } //  빠르게(물리연산속도)업데이트

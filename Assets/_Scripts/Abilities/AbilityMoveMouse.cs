@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
 public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
 {
@@ -30,7 +31,19 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
         marker.gameObject.SetActive(false);
     }
 
-    
+    public override void Activate(InputAction.CallbackContext context)
+    {
+            Ray ray = camera.ScreenPointToRay(Mouse.current.position.ReadValue());
+            if (Physics.Raycast(ray, out hitinfo))
+            {
+                marker.gameObject.SetActive(true);
+                marker.transform.position=hitinfo.point+Vector3.up;
+                SetDestination(hitinfo.point);
+                marker.Play();
+            }
+    }
+
+
 
     public override void FixedUpdate()
     {
@@ -43,25 +56,9 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
 
     public override void Update()
     {
-        InputMouse();
         MoveAnimation();
     }
 
-    void InputMouse()
-    {
-        if (Input.GetMouseButtonDown(1))
-        {
-            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hitinfo))
-            {
-                marker.gameObject.SetActive(true);
-                marker.transform.position=hitinfo.point+Vector3.up;
-                SetDestination(hitinfo.point);
-                marker.Play();
-            }
-        }
-
-    }
 
     void FollowPath()
     {

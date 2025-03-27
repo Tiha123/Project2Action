@@ -3,8 +3,8 @@ using UnityEngine;
 public class AnimationEventListener : MonoBehaviour
 {
     private CharacterControl cc;
-    public Transform Lfoot, Rfoot;
-    public PoolableParticle smoke;
+    public Transform Lfoot, Rfoot, Root;
+    public PoolableParticle smoke, smoke2;
 
     void Awake()
     {
@@ -30,5 +30,11 @@ public class AnimationEventListener : MonoBehaviour
         {
             PoolManager.I.Spawn(smoke, Rfoot.position, Quaternion.identity, null);
         }
+    }
+
+    public void JumpDown()
+    {
+        Vector3 offset=Root.position+Vector3.up*0.1f;
+        PoolManager.I.Spawn(smoke2, offset, Quaternion.identity, null);
     }
 }

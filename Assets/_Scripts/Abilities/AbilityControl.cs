@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CustomInspector;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 // abiltyDatas 외부에서 능력 부여/회수 인터페이스
 // abilities abilityDatas에서 갱신해서 행동
@@ -57,7 +58,7 @@ public class AbilityControl : MonoBehaviour
         }
     }
 
-    public void Activate(AbilityFlag flag)
+    public void Activate(AbilityFlag flag, InputAction.CallbackContext ctx)
     {
         foreach(var d in datas)
         {
@@ -67,7 +68,7 @@ public class AbilityControl : MonoBehaviour
                 {
                     actives[flag]=d.CreateAbility(GetComponent<CharacterControl>());
                 }
-                actives[flag].Activate();
+                actives[flag].Activate(ctx);
                 // HashSet<> 중복 X 자동정렬
             }
         }

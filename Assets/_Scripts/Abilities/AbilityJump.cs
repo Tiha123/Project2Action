@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class AbilityJump : Ability<AbilityJumpData>
 {
@@ -8,7 +9,7 @@ public class AbilityJump : Ability<AbilityJumpData>
 
     }
 
-    public override void Activate()
+    public override void Activate(InputAction.CallbackContext ctx)
     {
         if (owner.isGrounded == false || owner.rb == null || isJumping == true)
         {
