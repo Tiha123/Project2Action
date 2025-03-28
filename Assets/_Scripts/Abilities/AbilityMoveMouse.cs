@@ -100,7 +100,6 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
         }
         else if (owner.isArrived == false && stopTrigger == true)
         {
-            Debug.Log("1");
             stopTrigger = false;
         }
         float a = owner.isArrived ? 0f : Mathf.Clamp01(currentVelocity);
@@ -118,7 +117,7 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
         next = 1;
         finaltarget = corners[corners.Length - 1];
         owner.isArrived = false;
-        stopTrigger = Vector3.Distance(owner.rb.position, hitinfo.point) > data.runtostopDistance.y ? false : true;
+        stopTrigger = Vector3.Distance(owner.rb.position, hitinfo.point) < data.runtostopDistance.y ? false : true;
         DrawDebugPath();
     }
 

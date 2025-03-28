@@ -5,4 +5,8 @@ using UnityEngine.Events;
 public class GameEvent : BehaviourSingleton<GameEvent>
 {
     protected override bool isDontdestroy()=>true;
+
+    public UnityAction eventCameraEvent;
+
+    public void TriggerCameraEvent()=>eventCameraEvent?.Invoke();
 }

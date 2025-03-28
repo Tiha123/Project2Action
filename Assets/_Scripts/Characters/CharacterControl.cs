@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using CustomInspector;
 using UnityEngine.InputSystem;
+using Unity.Cinemachine;
 
 // GAS(Game ability system)
 
@@ -26,6 +27,8 @@ public class CharacterControl : MonoBehaviour
     public float isGroundedOffset = 1.1f;
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public Animator animator;
+
+    public CinemachineVirtualCameraBase maincamera;
 
 
     void Awake()
