@@ -98,10 +98,10 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
             owner.animator?.CrossFadeInFixedTime(owner._RUNTOSTOP, 0.2f, 0, 0f);
             stopTrigger = true;
         }
-        else if (owner.isArrived == false && stopTrigger == true)
-        {
-            stopTrigger = false;
-        }
+        // else if (owner.isArrived == false && stopTrigger == true)
+        // {
+        //     stopTrigger = false;
+        // }
         float a = owner.isArrived ? 0f : Mathf.Clamp01(currentVelocity);
         float movespd = Mathf.Lerp(owner.animator.GetFloat(owner._MOVESPEED), a, Time.deltaTime * 10f);
         owner.animator?.SetFloat(owner._MOVESPEED, movespd);
@@ -117,7 +117,9 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
         next = 1;
         finaltarget = corners[corners.Length - 1];
         owner.isArrived = false;
-        stopTrigger = Vector3.Distance(owner.rb.position, hitinfo.point) < data.runtostopDistance.y ? false : true;
+        Debug.Log(data.runtostopDistance);
+        Debug.Log(Vector3.Distance(owner.rb.position, hitinfo.point));
+        stopTrigger = Vector3.Distance(owner.rb.position, hitinfo.point) > data.runtostopDistance.y ? false : true;
         DrawDebugPath();
     }
 
