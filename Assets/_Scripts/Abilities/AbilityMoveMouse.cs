@@ -23,8 +23,8 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
     {
         camera = Camera.main;
         path = new NavMeshPath();
-        marker=GameObject.Instantiate(data.marker).GetComponent<ParticleSystem>();
-        if(marker==null)
+        marker = GameObject.Instantiate(data.marker).GetComponent<ParticleSystem>();
+        if (marker == null)
         {
             Debug.LogWarning("MoveMouse ] marker없음");
         }
@@ -33,14 +33,14 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
 
     public override void Activate(InputAction.CallbackContext context)
     {
-            Ray ray = camera.ScreenPointToRay(Mouse.current.position.ReadValue());
-            if (Physics.Raycast(ray, out hitinfo))
-            {
-                marker.gameObject.SetActive(true);
-                marker.transform.position=hitinfo.point+Vector3.up*0.2f;
-                SetDestination(hitinfo.point);
-                marker.Play();
-            }
+        Ray ray = camera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        if (Physics.Raycast(ray, out hitinfo))
+        {
+            marker.gameObject.SetActive(true);
+            marker.transform.position = hitinfo.point + Vector3.up * 0.2f;
+            SetDestination(hitinfo.point);
+            marker.Play();
+        }
     }
 
 
@@ -93,14 +93,19 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
 
     void MoveAnimation()
     {
-        if (Vector3.Distance(finaltarget, owner.rb.position) < data.runtostopDistance && owner.isArrived == false&&stopTrigger==false)
+        if (Vector3.Distance(finaltarget, owner.rb.position) < data.runtostopDistance.x && owner.isArrived == false && stopTrigger == false)
         {
-            owner.animator?.CrossFadeInFixedTime("RUNTOSTOP", 0.2f, 0, 0f);
+            owner.animator?.CrossFadeInFixedTime(owner._RUNTOSTOP, 0.2f, 0, 0f);
             stopTrigger = true;
         }
+        else if (owner.isArrived == false && stopTrigger == true)
+        {
+            Debug.Log("1");
+            stopTrigger = false;
+        }
         float a = owner.isArrived ? 0f : Mathf.Clamp01(currentVelocity);
-        float movespd = Mathf.Lerp(owner.animator.GetFloat("movespeed"), a, Time.deltaTime * 10f);
-        owner.animator?.SetFloat("movespeed", movespd);
+        float movespd = Mathf.Lerp(owner.animator.GetFloat(owner._MOVESPEED), a, Time.deltaTime * 10f);
+        owner.animator?.SetFloat(owner._MOVESPEED, movespd);
     }
 
     void SetDestination(Vector3 destination)
@@ -113,7 +118,7 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
         next = 1;
         finaltarget = corners[corners.Length - 1];
         owner.isArrived = false;
-        stopTrigger = Vector3.Distance(owner.rb.position, hitinfo.point) > data.runtostopDistance+3f ? false : true;
+        stopTrigger = Vector3.Distance(owner.rb.position, hitinfo.point) > data.runtostopDistance.y ? false : true;
         DrawDebugPath();
     }
 

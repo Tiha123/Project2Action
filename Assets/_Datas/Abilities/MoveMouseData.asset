@@ -16,5 +16,5 @@ MonoBehaviour:
   movePerSec: 6
   rotatePerSec: 1080
   stopDistance: 0.2
-  runtostopDistance: 1
+  runtostopDistance: {x: 1, y: 7}
   marker: {fileID: 1215210573372408, guid: f2a47a92099261641b107ca697c2c8e9, type: 3}

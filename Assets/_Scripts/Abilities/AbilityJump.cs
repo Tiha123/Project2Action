@@ -16,13 +16,13 @@ public class AbilityJump : Ability<AbilityJumpData>
             return;
         }
         isJumping = true;
-        owner.animator.CrossFadeInFixedTime("JUMPUP", 0.1f, 0, 0f);
+        owner.animator.CrossFadeInFixedTime(owner._JUMPUP, 0.1f, 0, 0f);
         //owner.animator?.SetTrigger("JumpUp");
     }
 
     public override void Deactivate()
     {
-        owner.animator.CrossFadeInFixedTime("JUMPDOWN", 0.02f, 0, 0f); //jumpForce와 linearvelocity의 동기화
+        owner.animator.CrossFadeInFixedTime(owner._JUMPDOWN, 0.02f, 0, 0f); //jumpForce와 linearvelocity의 동기화
         elapsed = 0f;
         isJumping = false;
         //owner.animator?.SetTrigger("JumpDown");

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 
 public class AbilityMoveKeyboard : Ability<AbilityMoveKeyboardData>
@@ -14,6 +13,7 @@ public class AbilityMoveKeyboard : Ability<AbilityMoveKeyboardData>
     {
         cameraTransform = Camera.main.transform;
         velocity = data.rotatePerSec;
+        
     }
     public override void FixedUpdate()
     {
@@ -57,8 +57,8 @@ public class AbilityMoveKeyboard : Ability<AbilityMoveKeyboardData>
         {
             float velocity2 = Vector3.Distance(Vector3.zero, owner.rb.linearVelocity);
             float targetspeed = Mathf.Clamp01(Mathf.Abs(velocity2) / data.movePerSec);
-            float movespd = Mathf.Lerp(owner.animator.GetFloat("movespeed"), targetspeed, Time.deltaTime * 10f);
-            owner.animator?.SetFloat("movespeed", movespd);
+            float movespd = Mathf.Lerp(owner.animator.GetFloat(owner._MOVESPEED), targetspeed, Time.deltaTime * 10f);
+            owner.animator?.SetFloat(owner._MOVESPEED, movespd);
             // if(horz==0f&&vert==0f)
             // {
             //     owner.animator?.CrossFadeInFixedTime("RUNTOSTOP", 0.2f, 0, 0f);
