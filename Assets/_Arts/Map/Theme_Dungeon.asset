@@ -1048,8 +1048,8 @@ MonoBehaviour:
   canBeDeleted: 1
   canBeSelected: 1
   canBeMoved: 1
-  selected: 0
-  zIndex: 573
+  selected: 1
+  zIndex: 633
   inputPins:
   - {fileID: -9148363868879122792}
   outputPins:
@@ -1927,7 +1927,7 @@ MonoBehaviour:
   indexCounter:
     index: 65
   topZIndex:
-    index: 630
+    index: 633
   nodes:
   - {fileID: 4472717505230382508}
   - {fileID: 2163432663080690030}
@@ -1953,7 +1953,6 @@ MonoBehaviour:
   - {fileID: 7357702955774658281}
   - {fileID: 5420412255461244889}
   - {fileID: -4533342929850195407}
-  - {fileID: 0}
   - {fileID: -3357324006956402503}
   - {fileID: -4708972461272799203}
   - {fileID: 8149461479465222021}
@@ -3610,7 +3609,7 @@ MonoBehaviour:
   canBeDeleted: 1
   canBeSelected: 1
   canBeMoved: 1
-  selected: 1
+  selected: 0
   zIndex: 630
   inputPins:
   - {fileID: 2331790089248896249}

@@ -31,7 +31,18 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
         marker.gameObject.SetActive(false);
     }
 
-    public override void Activate(InputAction.CallbackContext context)
+    public override void Activate()
+    {
+        owner.actionInput.Player.MoveMouse.performed+=InputMove;
+        
+    }
+
+    public override void Deactivate()
+    {
+        owner.actionInput.Player.MoveMouse.performed-=InputMove;
+    }
+
+    void InputMove(InputAction.CallbackContext ctx)
     {
         Ray ray = camera.ScreenPointToRay(Mouse.current.position.ReadValue());
         if (Physics.Raycast(ray, out hitinfo))
@@ -42,8 +53,6 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
             marker.Play();
         }
     }
-
-
 
     public override void FixedUpdate()
     {
@@ -117,8 +126,6 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
         next = 1;
         finaltarget = corners[corners.Length - 1];
         owner.isArrived = false;
-        Debug.Log(data.runtostopDistance);
-        Debug.Log(Vector3.Distance(owner.rb.position, hitinfo.point));
         stopTrigger = Vector3.Distance(owner.rb.position, hitinfo.point) > data.runtostopDistance.y ? false : true;
         DrawDebugPath();
     }

@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using CustomInspector;
-using UnityEngine.InputSystem;
 using Unity.Cinemachine;
+using Project2Action;
+using UnityEngine.InputSystem;
 
 // GAS(Game ability system)
 
@@ -11,11 +12,11 @@ public class CharacterControl : MonoBehaviour
 {
 
     #region Animator Hashset
-    [HideInInspector] public int _MOVESPEED=Animator.StringToHash("movespeed");
-    [HideInInspector] public int _RUNTOSTOP=Animator.StringToHash("RUNTOSTOP");
-    [HideInInspector] public int _JUMPUP=Animator.StringToHash("JUMPUP");
-    [HideInInspector] public int _JUMPDOWN=Animator.StringToHash("JUMPDOWN");
-    [HideInInspector] public int _LOCOMOTION=Animator.StringToHash("Running");
+    [HideInInspector] public int _MOVESPEED = Animator.StringToHash("movespeed");
+    [HideInInspector] public int _RUNTOSTOP = Animator.StringToHash("RUNTOSTOP");
+    [HideInInspector] public int _JUMPUP = Animator.StringToHash("JUMPUP");
+    [HideInInspector] public int _JUMPDOWN = Animator.StringToHash("JUMPDOWN");
+    [HideInInspector] public int _LOCOMOTION = Animator.StringToHash("Running");
     #endregion
 
     [HideInInspector] public AbilityControl abilityControl;
@@ -30,6 +31,9 @@ public class CharacterControl : MonoBehaviour
 
     public CinemachineVirtualCameraBase maincamera;
 
+    [HideInInspector] public ActionGameInput actionInput;
+    private ActionGameInput.PlayerActions playerActions;
+    InputAction.CallbackContext context;
 
     void Awake()
     {
@@ -45,6 +49,9 @@ public class CharacterControl : MonoBehaviour
         {
             Debug.LogWarning("CharacterControl ] Animator없음");
         }
+
+        actionInput = new ActionGameInput();
+        playerActions = actionInput.Player;
     }
 
     void Start()
@@ -60,30 +67,18 @@ public class CharacterControl : MonoBehaviour
         isGrounded = Physics.Raycast(transform.position + Vector3.up, Vector3.down, isGroundedOffset);
     }
 
-    #region InputSystem
-    public void OnMoveKeyboard(InputAction.CallbackContext ctx)
+    void OnDestroy()
     {
-        
-        if(ctx.performed || ctx.canceled)
-        {
-            abilityControl.Activate(AbilityFlag.MoveKeyboard, ctx);
-        }
+        actionInput.Dispose();
     }
 
-    public void OnMoveMouse(InputAction.CallbackContext ctx)
+    void OnEnable()
     {
-        if(ctx.performed)
-        {
-            abilityControl.Activate(AbilityFlag.MoveMouse, ctx);
-        }
+        playerActions.Enable();
     }
 
-    public void OnJump(InputAction.CallbackContext ctx)
+    void OnDisable()
     {
-        if(ctx.performed)
-        {
-            abilityControl.Activate(AbilityFlag.Jump, ctx);
-        }
+        playerActions.Disable();
     }
-    #endregion
 }

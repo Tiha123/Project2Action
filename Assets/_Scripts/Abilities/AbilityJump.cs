@@ -1,3 +1,4 @@
+using Project2Action;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,22 +10,16 @@ public class AbilityJump : Ability<AbilityJumpData>
 
     }
 
-    public override void Activate(InputAction.CallbackContext ctx)
+    public override void Activate()
     {
-        if (owner.isGrounded == false || owner.rb == null || isJumping == true)
-        {
-            return;
-        }
-        isJumping = true;
-        owner.animator.CrossFadeInFixedTime(owner._JUMPUP, 0.1f, 0, 0f);
+        owner.actionInput.Player.Jump.performed += InputJump;
         //owner.animator?.SetTrigger("JumpUp");
     }
 
     public override void Deactivate()
     {
-        owner.animator.CrossFadeInFixedTime(owner._JUMPDOWN, 0.02f, 0, 0f); //jumpForce와 linearvelocity의 동기화
-        elapsed = 0f;
-        isJumping = false;
+
+        owner.actionInput.Player.Jump.performed -= InputJump;
         //owner.animator?.SetTrigger("JumpDown");
     }
     float elapsed = 0f;
@@ -44,7 +39,32 @@ public class AbilityJump : Ability<AbilityJumpData>
 
         if (t > 0.3f && owner.isGrounded)
         {
-            owner.abilityControl.Deactivate(data.Flag);
+            JumpDown();
+        }
+    }
+
+    private void JumpUp()
+    {
+         if (owner.isGrounded == false || owner.rb == null || isJumping == true)
+            {
+                return;
+            }
+            elapsed = 0f;
+            isJumping = true;
+            owner.animator.CrossFadeInFixedTime(owner._JUMPUP, 0.1f, 0, 0f);
+    }
+
+    private void JumpDown()
+    {
+        isJumping = false;
+        owner.animator.CrossFadeInFixedTime(owner._JUMPDOWN, 0.02f, 0, 0f); //jumpForce와 linearvelocity의 동기화
+    }
+
+    private void InputJump(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+           JumpUp();
         }
     }
 }

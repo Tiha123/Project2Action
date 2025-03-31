@@ -29,6 +29,7 @@ public class AbilityControl : MonoBehaviour
         if(immediate)
         {
             actives[d.Flag]=ability;
+            ability.Activate();
         }
     }
     public void RemoveAbility(AbilityData d)
@@ -58,7 +59,7 @@ public class AbilityControl : MonoBehaviour
         }
     }
 
-    public void Activate(AbilityFlag flag, InputAction.CallbackContext ctx)
+    public void Activate(AbilityFlag flag)
     {
         foreach(var d in datas)
         {
@@ -68,8 +69,8 @@ public class AbilityControl : MonoBehaviour
                 {
                     actives[flag]=d.CreateAbility(GetComponent<CharacterControl>());
                 }
-                actives[flag].Activate(ctx);
                 // HashSet<> 중복 X 자동정렬
+                actives[flag].Activate();
             }
         }
     }

@@ -2,7 +2,7 @@ using DungeonArchitect;
 using Unity.AI.Navigation;
 using UnityEngine;
 
-public class EventDungeonBuilt : DungeonEventListener
+public class DungeonEventBuilt : DungeonEventListener
 {
     public bool isAuto = false;
     public NavMeshSurface nvSurface;

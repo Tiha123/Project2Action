@@ -8,30 +8,40 @@ public class AbilityMoveKeyboard : Ability<AbilityMoveKeyboardData>
     Vector3 direction;
     Vector3 camForward, camRight;
     float velocity;
-    InputAction.CallbackContext context;
+
+    
     public AbilityMoveKeyboard(AbilityMoveKeyboardData data, CharacterControl owner) : base(data, owner)
     {
         cameraTransform = Camera.main.transform;
         velocity = data.rotatePerSec;
         
     }
+
+    
     public override void FixedUpdate()
     {
-        InputKeyboard();
         Rotate();
         Movement();
     }
 
-    public override void Activate(InputAction.CallbackContext context)
+    public override void Activate()
     {
-        this.context=context;
-        owner.isArrived=context.canceled;
+        owner.actionInput.Player.Move.performed += InputMove;
+        owner.actionInput.Player.Move.canceled += InputStop;
     }
 
-    void InputKeyboard()
+    public override void Deactivate()
     {
-    
-        Vector2 move=context.ReadValue<Vector2>();
+        owner.actionInput.Player.Move.performed -= InputMove;
+        owner.actionInput.Player.Move.canceled -= InputStop;
+
+        Stop();
+    }
+
+    void InputMove(InputAction.CallbackContext ctx)
+    {
+        owner.isArrived=!ctx.performed;
+        Vector2 move=ctx.ReadValue<Vector2>();
 
         horz=move.x;
         vert=move.y;
@@ -46,6 +56,22 @@ public class AbilityMoveKeyboard : Ability<AbilityMoveKeyboardData>
         camRight.Normalize();
 
         direction = (camForward * vert + camRight * horz).normalized;
+    }
+
+    void InputStop(InputAction.CallbackContext ctx)
+    {
+        owner.isArrived=ctx.canceled;
+        if(ctx.canceled)
+        {
+            Stop();
+        }
+    }
+    
+    void Stop()
+    {
+        direction=Vector3.zero;
+        owner.rb.linearVelocity = Vector3.zero;
+        owner.animator?.SetFloat(owner._MOVESPEED, 0f);
     }
 
     void Movement()
