@@ -58,7 +58,7 @@ public class CharacterControl : MonoBehaviour
         {
             Debug.LogWarning("CharacterControl ] Animator없음");
         }
-        model=transform.Find("_Model");
+        model=transform.Find("_Model_");
         eyePoint=transform.Find("_Eyepoint_");
 
         actionInput = new ActionGameInput();
@@ -96,19 +96,23 @@ public class CharacterControl : MonoBehaviour
 
     public void Visible(bool b)
     {
-        model.gameObject.SetActive(b);
+        model?.gameObject.SetActive(b);
     }
     
-    async UniTaskVoid DelayCall(int millisec, UnityAction onCoplete)
+    async UniTaskVoid DelayCall(int millisec, UnityAction oncomplete)
     {
         try
         {
             await UniTask.Delay(millisec, cancellationToken: cts.Token);
-
+            oncomplete?.Invoke();
         }
         catch (Exception e)
         {
             Debug.LogWarning(e);
+        }
+        finally
+        {
+            cts.Cancel();
         }
     }
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7003032783486963343}
   - component: {fileID: 2647540470999799450}
   - component: {fileID: 983300352698969339}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: wall_archPointy_decorated
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventcameraSwitch: {fileID: 11400000, guid: fea73e1e4e6da5b40b487fedaffc578e, type: 2}
+  virtualCamera: {fileID: 0}
 --- !u!65 &983300352698969339
 BoxCollider:
   m_ObjectHideFlags: 0

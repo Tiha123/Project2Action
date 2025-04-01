@@ -64,16 +64,20 @@ public class CharacterEventControl : MonoBehaviour
     }
 
 
-    async UniTaskVoid DelayCall(int millisec, UnityAction onCoplete)
+    async UniTaskVoid DelayCall(int millisec, UnityAction oncomplete)
     {
         try
         {
             await UniTask.Delay(millisec, cancellationToken: cts.Token);
-
+            oncomplete?.Invoke();
         }
         catch (Exception e)
         {
             Debug.LogWarning(e);
+        }
+        finally
+        {
+            cts.Cancel();
         }
     }
 
