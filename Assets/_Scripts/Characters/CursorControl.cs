@@ -10,15 +10,12 @@ public class CursorControl : MonoBehaviour
     [SerializeField] Transform cursorP;
     [SerializeField] LineRenderer line;
     private Camera cam;
-
-    void Awake()
-    {
-        cam = Camera.main;
-    }
+    public Transform EyePoint{get => eyePoint; set => eyePoint=value;}
+    public Transform CursorPoint{get => cursorP;}
 
     void Start()
     {
-        
+        cam = Camera.main;   
         if (TryGetComponent(out line)==false)
         {
             Debug.LogWarning("CursorContorl ] LineRenderer 없음");
@@ -39,6 +36,10 @@ public class CursorControl : MonoBehaviour
 
     void Update()
     {
+        if(eyePoint==null || cam==null)
+        {
+            return;
+        }
         Ray ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
         if (Physics.Raycast(ray, out var hit))
         {

@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 739ea5dc6e92c5b4d8e9a765bbef19b7, type: 3}
+  m_Name: EventPlayerSpawnBefore
+  m_EditorClassIdentifier: 
+  playerCC: {fileID: 6705689894759066695, guid: 20bb3adf429fb5d4f9940bbf9e6b2b64, type: 3}
+  playerCursor: {fileID: 4220364671401181866, guid: 1e9d1b3577d49084ea5916403a8b5d76, type: 3}
+  playerCamera: {fileID: 6185240944512569207, guid: ad3ec971d3def2d46959da14db214786, type: 3}

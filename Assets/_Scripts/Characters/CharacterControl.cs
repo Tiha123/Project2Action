@@ -4,6 +4,10 @@ using CustomInspector;
 using Unity.Cinemachine;
 using Project2Action;
 using UnityEngine.InputSystem;
+using Cysharp.Threading.Tasks;
+using UnityEngine.Events;
+using System;
+using System.Threading;
 
 // GAS(Game ability system)
 
@@ -24,6 +28,8 @@ public class CharacterControl : MonoBehaviour
 
     [ReadOnly] public bool isGrounded;
     [ReadOnly] public bool isArrived = true;
+    public Transform eyePoint;
+    [ReadOnly] public Transform model;
 
     public float isGroundedOffset = 1.1f;
     [HideInInspector] public Rigidbody rb;
@@ -34,6 +40,9 @@ public class CharacterControl : MonoBehaviour
     [HideInInspector] public ActionGameInput actionInput;
     private ActionGameInput.PlayerActions playerActions;
     InputAction.CallbackContext context;
+    CancellationTokenSource disableCancellation = new CancellationTokenSource();
+    CancellationTokenSource destroyCancellation = new CancellationTokenSource();
+    CancellationTokenSource cts = new CancellationTokenSource();
 
     void Awake()
     {
@@ -49,6 +58,8 @@ public class CharacterControl : MonoBehaviour
         {
             Debug.LogWarning("CharacterControl ] Animator없음");
         }
+        model=transform.Find("_Model");
+        eyePoint=transform.Find("_Eyepoint_");
 
         actionInput = new ActionGameInput();
         playerActions = actionInput.Player;
@@ -56,6 +67,7 @@ public class CharacterControl : MonoBehaviour
 
     void Start()
     {
+        Visible(false);
         foreach (var dat in initialAbilities)
         {
             abilityControl.AddAbility(dat, true);
@@ -80,5 +92,23 @@ public class CharacterControl : MonoBehaviour
     void OnDisable()
     {
         playerActions.Disable();
+    }
+
+    public void Visible(bool b)
+    {
+        model.gameObject.SetActive(b);
+    }
+    
+    async UniTaskVoid DelayCall(int millisec, UnityAction onCoplete)
+    {
+        try
+        {
+            await UniTask.Delay(millisec, cancellationToken: cts.Token);
+
+        }
+        catch (Exception e)
+        {
+            Debug.LogWarning(e);
+        }
     }
 }
