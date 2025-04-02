@@ -104,7 +104,7 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
     {
         if (Vector3.Distance(finaltarget, owner.rb.position) < data.runtostopDistance.x && owner.isArrived == false && stopTrigger == false)
         {
-            owner.animator?.CrossFadeInFixedTime(owner._RUNTOSTOP, 0.2f, 0, 0f);
+            owner.Animate(owner._RUNTOSTOP, 0.2f);
             stopTrigger = true;
         }
         // else if (owner.isArrived == false && stopTrigger == true)

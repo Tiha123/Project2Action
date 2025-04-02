@@ -18,7 +18,7 @@ public class GameEventListener : MonoBehaviour
 
     void OnEventCameraSwitch(GameEventCameraSwitch e)
     {
-        Debug.Log($"이벤트 {e} 인아웃");
+        SwitchCamera(e.inout);
     }
 
     void SwitchCamera(bool on)

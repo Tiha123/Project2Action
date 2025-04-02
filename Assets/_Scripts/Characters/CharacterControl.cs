@@ -3,11 +3,6 @@ using UnityEngine;
 using CustomInspector;
 using Unity.Cinemachine;
 using Project2Action;
-using UnityEngine.InputSystem;
-using Cysharp.Threading.Tasks;
-using UnityEngine.Events;
-using System;
-using System.Threading;
 
 // GAS(Game ability system)
 
@@ -21,6 +16,7 @@ public class CharacterControl : MonoBehaviour
     [HideInInspector] public int _JUMPUP = Animator.StringToHash("JUMPUP");
     [HideInInspector] public int _JUMPDOWN = Animator.StringToHash("JUMPDOWN");
     [HideInInspector] public int _LOCOMOTION = Animator.StringToHash("Running");
+    [HideInInspector] public int _SPAWN = Animator.StringToHash("Spawn");
     #endregion
 
     [HideInInspector] public AbilityControl abilityControl;
@@ -39,10 +35,6 @@ public class CharacterControl : MonoBehaviour
 
     [HideInInspector] public ActionGameInput actionInput;
     private ActionGameInput.PlayerActions playerActions;
-    InputAction.CallbackContext context;
-    CancellationTokenSource disableCancellation = new CancellationTokenSource();
-    CancellationTokenSource destroyCancellation = new CancellationTokenSource();
-    CancellationTokenSource cts = new CancellationTokenSource();
 
     void Awake()
     {
@@ -96,23 +88,11 @@ public class CharacterControl : MonoBehaviour
 
     public void Visible(bool b)
     {
-        model?.gameObject.SetActive(b);
+        model.gameObject.SetActive(b);
     }
     
-    async UniTaskVoid DelayCall(int millisec, UnityAction oncomplete)
+    public void Animate(int hash, float duration, int layer = 0)
     {
-        try
-        {
-            await UniTask.Delay(millisec, cancellationToken: cts.Token);
-            oncomplete?.Invoke();
-        }
-        catch (Exception e)
-        {
-            Debug.LogWarning(e);
-        }
-        finally
-        {
-            cts.Cancel();
-        }
+        animator?.CrossFadeInFixedTime(hash,duration,layer,0f);
     }
 }

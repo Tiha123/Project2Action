@@ -1,9 +1,6 @@
-using System;
-using System.Threading;
 using UnityEngine;
-using Cysharp.Threading.Tasks;
-using UnityEngine.Events;
 using CustomInspector;
+using System.Collections;
 
 public class CharacterEventControl : MonoBehaviour
 {
@@ -15,9 +12,6 @@ public class CharacterEventControl : MonoBehaviour
     [Space(10), HorizontalLine("Events",color:FixedColor.Blue), HideField] public bool _l1;
 
     CharacterControl cc;
-    CancellationTokenSource disableCancellation = new CancellationTokenSource();
-    CancellationTokenSource destroyCancellation = new CancellationTokenSource();
-    CancellationTokenSource cts = new CancellationTokenSource();
 
     void Start()
     {
@@ -31,11 +25,6 @@ public class CharacterEventControl : MonoBehaviour
     {
         eventPlayerSpawnAfter?.Register(OneventPlayerSpawnAfter);
         eventCameraSwitch?.Register(OneventCameraSwitch);
-        if (disableCancellation != null)
-        {
-            disableCancellation.Dispose();
-        }
-        disableCancellation = new CancellationTokenSource();
     }
 
     void OnDisable()
@@ -43,11 +32,7 @@ public class CharacterEventControl : MonoBehaviour
         eventCameraSwitch?.Unregister(OneventCameraSwitch);
     }
 
-    private void OnDestroy()
-    {
-        destroyCancellation.Cancel();
-        destroyCancellation.Dispose();
-    }
+
 
     void OneventCameraSwitch(GameEventCameraSwitch e)
     {
@@ -65,26 +50,21 @@ public class CharacterEventControl : MonoBehaviour
 
     void OneventPlayerSpawnAfter(EventPlayerSpawnAfter e)
     {
-        cc.Visible(true);
+        StartCoroutine(SpawnSequence(e));
     }
 
-
-    async UniTaskVoid DelayCall(int millisec, UnityAction oncomplete)
+    IEnumerator SpawnSequence(EventPlayerSpawnAfter e)
     {
-        try
-        {
-            await UniTask.Delay(millisec, cancellationToken: cts.Token);
-            oncomplete?.Invoke();
-        }
-        catch (Exception e)
-        {
-            Debug.LogWarning(e);
-        }
-        finally
-        {
-            cts.Cancel();
-        }
+        yield return new WaitForSeconds(1f);
+        //GameManager.I.DelayCallAsync(1000,()=>{Debug.Log(10);}).Forget();
+        PoolManager.I.Spawn(e.particleSpawn,transform.position,Quaternion.identity, null);
+        yield return new WaitForSeconds(0.2f);
+        cc.Visible(true);
+        cc.Animate(cc._SPAWN, 0f);
     }
+
+
+    
 
     //비동기(Async)
     // 1. 코루틴 (Co-routine)

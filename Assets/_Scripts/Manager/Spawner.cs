@@ -57,9 +57,10 @@ public class Spawner : MonoBehaviour
         cursor.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
         cursor.EyePoint=cc.eyePoint;
 
-
         eventPlayerSpawnAfter.eyePoint=cc.eyePoint;
         eventPlayerSpawnAfter.cursorPoint=cursor.CursorPoint;
         eventPlayerSpawnAfter.Raise();
+        //GameManager.I.DelayCallAsync(1000,()=>eventPlayerSpawnAfter.Raise());
+        
     }
 }

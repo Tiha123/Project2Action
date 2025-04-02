@@ -13,7 +13,7 @@ public class CameraControl : MonoBehaviour
 
     void OnEnable()
     {
-        eventPlayerSpawnAfter.Register(OneventPlayerSpawn);
+        eventPlayerSpawnAfter?.Register(OneventPlayerSpawn);
     }
 
     void OnDisable()
