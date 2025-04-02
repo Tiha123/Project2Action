@@ -3,12 +3,17 @@ using System.Threading;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using UnityEngine.Events;
+using CustomInspector;
 
 public class CharacterEventControl : MonoBehaviour
 {
+    [HorizontalLine("Events",color:FixedColor.Blue), HideField] public bool _l0;
     [SerializeField] EventPlayerSpawnBefore eventPlayerSpawnBefore;
     [SerializeField] EventPlayerSpawnAfter eventPlayerSpawnAfter;
     [SerializeField] GameEventCameraSwitch eventCameraSwitch;
+
+    [Space(10), HorizontalLine("Events",color:FixedColor.Blue), HideField] public bool _l1;
+
     CharacterControl cc;
     CancellationTokenSource disableCancellation = new CancellationTokenSource();
     CancellationTokenSource destroyCancellation = new CancellationTokenSource();

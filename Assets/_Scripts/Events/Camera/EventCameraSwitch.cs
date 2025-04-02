@@ -1,10 +1,12 @@
-using UnityEngine;
 
-[CreateAssetMenu]
+using UnityEngine;
+using CustomInspector;
+
+[CreateAssetMenu(menuName ="GameEvent/EventCameraSwitch")]
 
 public class GameEventCameraSwitch : GameEvent<GameEventCameraSwitch>
 {
     public override GameEventCameraSwitch item=> this;
 
-    public bool inout;
+    [ReadOnly] public bool inout;
 }

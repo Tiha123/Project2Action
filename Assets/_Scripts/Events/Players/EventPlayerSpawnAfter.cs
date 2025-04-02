@@ -1,10 +1,11 @@
 using UnityEngine;
+using CustomInspector;
 
-[CreateAssetMenu(fileName = "EventPlayerSpawnAfter", menuName = "Scriptable Objects/EventPlayerSpawnAfter")]
+[CreateAssetMenu(menuName = "GameEvent/EventPlayerSpawnAfter")]
 public class EventPlayerSpawnAfter : GameEvent<EventPlayerSpawnAfter>
 {
     public override EventPlayerSpawnAfter item => this;
 
-    public Transform eyePoint;
-    public Transform cursorPoint;
+    [ReadOnly] public Transform eyePoint;
+    [ReadOnly] public Transform cursorPoint;
 }

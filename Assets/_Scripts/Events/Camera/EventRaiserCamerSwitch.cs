@@ -1,9 +1,7 @@
 using UnityEngine;
 using Unity.Cinemachine;
 using System.Threading.Tasks;
-
-[CreateAssetMenu]
-public class GameEventSenderCameraSwitch : MonoBehaviour
+public class EventRaiserCameraSwitch : MonoBehaviour
 {
     [SerializeField] GameEventCameraSwitch eventcameraSwitch;
 

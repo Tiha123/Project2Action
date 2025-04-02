@@ -1,15 +1,21 @@
+using CustomInspector;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {   
     #region EVENTS
     [Space(20)]
+    [HorizontalLine("Events", color:FixedColor.Blue), HideField]public bool _l0;
     [SerializeField] EventPlayerSpawnBefore eventPlayerSpawnBefore;
     [SerializeField] EventPlayerSpawnAfter eventPlayerSpawnAfter;
     #endregion
 
+    [HorizontalLine(color:FixedColor.Blue), HideField] public bool _l1;
+
+    [Space(20)]
     public float radius = 2f;
     public float lineLength=4f;
+    public Transform spawnPoint;
 
 
     void OnEnable()

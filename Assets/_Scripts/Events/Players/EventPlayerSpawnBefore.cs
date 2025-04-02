@@ -1,11 +1,12 @@
 using UnityEngine;
+using CustomInspector;
 
-[CreateAssetMenu(fileName = "EventPlayerSpawnBefore", menuName = "Scriptable Objects/EventPlayerSpawnBefore")]
+[CreateAssetMenu(menuName = "GameEvent/EventPlayerSpawnBefore")]
 public class EventPlayerSpawnBefore : GameEvent<EventPlayerSpawnBefore>
 {
     public override EventPlayerSpawnBefore item => this;
 
-    public CharacterControl playerCC;
-    public CursorControl playerCursor;
-    public CameraControl playerCamera;
+    [ReadOnly] public CharacterControl playerCC;
+    [ReadOnly] public CursorControl playerCursor;
+    [ReadOnly] public CameraControl playerCamera;
 }
