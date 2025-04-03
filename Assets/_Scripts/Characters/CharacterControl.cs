@@ -34,6 +34,7 @@ public class CharacterControl : MonoBehaviour
 
     [HideInInspector] public ActionGameInput actionInput;
     private ActionGameInput.PlayerActions playerActions;
+    public ActorType actorType=ActorType.None;
 
     void Awake()
     {

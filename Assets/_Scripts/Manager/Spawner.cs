@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Threading.Tasks;
 using CustomInspector;
 using UnityEngine;
 
@@ -20,12 +22,12 @@ public class Spawner : MonoBehaviour
 
     void OnEnable()
     {
-        eventPlayerSpawnBefore.Register(OneventPlayerSpawned);
+        eventPlayerSpawnBefore.Register(OneventPlayerSpawnBefore);
     }
 
     void OnDisable()
     {
-        eventPlayerSpawnBefore.Unregister(OneventPlayerSpawned);
+        eventPlayerSpawnBefore.Unregister(OneventPlayerSpawnBefore);
     }
 
     void Start()
@@ -41,17 +43,15 @@ public class Spawner : MonoBehaviour
         Gizmos.DrawLine(transform.position, transform.position + transform.forward * lineLength);
     }
 
-    void OneventPlayerSpawned(EventPlayerSpawnBefore e)
+    void OneventPlayerSpawnBefore(EventPlayerSpawnBefore e)
     {
         if (e.playerCC == null || e.playerCursor == null || e.playerCamera == null)
         {
             return;
         }
         CameraControl camera = Instantiate(e.playerCamera);
-        CharacterControl cc = Instantiate(e.playerCC);
         Quaternion rot = Quaternion.LookRotation(spawnPoint.forward);
-        cc.transform.SetPositionAndRotation(spawnPoint.position, rot);
-
+        CharacterControl cc = Instantiate(e.playerCC,spawnPoint.position, rot, null);
         CursorControl cursor = Instantiate(e.playerCursor);
         cursor.EyePoint = cc.eyePoint;
 

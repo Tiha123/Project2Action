@@ -23,6 +23,7 @@ public class AnimationEventListener : MonoBehaviour
         {   
             Debug.LogWarning("AnimationEventListener ] CharacterControl 없음");
         }
+        modelRoot=transform.FindSlot("_model_");
     }
 
     void OnEnable()
@@ -37,7 +38,6 @@ public class AnimationEventListener : MonoBehaviour
 
     IEnumerator FindSlots()
     {
-        modelRoot=transform.FindSlot("_model_");
         yield return new WaitUntil(()=>cc.animator.avatar!=null);
         if(modelRoot==null)
         {

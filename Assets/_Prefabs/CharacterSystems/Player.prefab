@@ -711,6 +711,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   animator: {fileID: 0}
   maincamera: {fileID: 2829597221679300942}
+  actorType: 0
 --- !u!114 &2352494605834990818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -723,6 +724,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e27899cff3d7214f83fa9072e7f603d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventPlayerSpawnAfter: {fileID: 11400000, guid: 7afc779f97481b64d950c2b124f96e51, type: 2}
   Flags: 0
   datas: []
 --- !u!114 &1441540204986163357

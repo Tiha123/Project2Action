@@ -8,7 +8,10 @@ using UnityEngine.InputSystem;
 // abilities abilityDatas에서 갱신해서 행동
 public class AbilityControl : MonoBehaviour
 {
-    [Title("Ability System",fontSize =15, alignment =TextAlignment.Center), HideField] bool _h0;
+    [Title("Event",fontSize =15, alignment =TextAlignment.Center), HideField] bool _h0;
+    [SerializeField] EventPlayerSpawnAfter eventPlayerSpawnAfter;
+
+    [Title("Ability System",fontSize =15, alignment =TextAlignment.Center), HideField] bool _h1;
     [Space(20), ReadOnly]public AbilityFlag Flags=AbilityFlag.None;
     [Space(10), SerializeField] List<AbilityData> datas = new List<AbilityData>();
 
@@ -41,6 +44,11 @@ public class AbilityControl : MonoBehaviour
         datas.Remove(d);
         Flags.Remove(d.Flag,null);
         actives.Remove(d.Flag);
+    }
+
+    void Awake()
+    {
+        eventPlayerSpawnAfter.Register(OneventPlayerSpawnAfter);
     }
 
     void Update()
@@ -88,6 +96,14 @@ public class AbilityControl : MonoBehaviour
                     actives.Remove(flag);
                 }
             }
+        }
+    }
+
+    void OneventPlayerSpawnAfter(EventPlayerSpawnAfter e)
+    {
+        foreach(var v in e.actorProfile.initialAbilities)
+        {
+            AddAbility(v,true);
         }
     }
 }
