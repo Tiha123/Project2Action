@@ -1,8 +1,15 @@
 using UnityEngine;
 using CustomInspector;
+using System.Collections;
 
 public class AnimationEventListener : MonoBehaviour
 {
+    [HorizontalLine("Events", color: FixedColor.Blue), HideField] public bool _l0;
+    [SerializeField] EventPlayerSpawnBefore eventPlayerSpawnBefore;
+    [SerializeField] EventPlayerSpawnAfter eventPlayerSpawnAfter;
+    [SerializeField] GameEventCameraSwitch eventCameraSwitch;
+
+    [Space(10), HorizontalLine("Events", color: FixedColor.Blue), HideField] public bool _l1;
     [ReadOnly] public CharacterControl cc;
     private Transform modelRoot;
     public PoolableParticle smoke, smoke2;
@@ -18,9 +25,20 @@ public class AnimationEventListener : MonoBehaviour
         }
     }
 
-    void OnValidate()
+    void OnEnable()
+    {
+        eventPlayerSpawnAfter.Register(OneventPlayerSpawnAfter);
+    }
+
+    public void OneventPlayerSpawnAfter(EventPlayerSpawnAfter e)
+    {
+        StartCoroutine(FindSlots());
+    }
+
+    IEnumerator FindSlots()
     {
         modelRoot=transform.FindSlot("_model_");
+        yield return new WaitUntil(()=>cc.animator.avatar!=null);
         if(modelRoot==null)
         {
             Debug.LogWarning("AnimationEventListener ] Modelroot 없음");

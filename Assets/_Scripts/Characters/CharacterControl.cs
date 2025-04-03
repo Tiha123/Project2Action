@@ -20,7 +20,6 @@ public class CharacterControl : MonoBehaviour
     #endregion
 
     [HideInInspector] public AbilityControl abilityControl;
-    public List<AbilityData> initialAbilities = new List<AbilityData>();
 
     [ReadOnly] public bool isGrounded;
     [ReadOnly] public bool isArrived = true;
@@ -60,10 +59,10 @@ public class CharacterControl : MonoBehaviour
     void Start()
     {
         Visible(false);
-        foreach (var dat in initialAbilities)
-        {
-            abilityControl.AddAbility(dat, true);
-        }
+        // foreach (var dat in initialAbilities)
+        // {
+        //     abilityControl.AddAbility(dat, true);
+        // }
     }
 
     void Update()

@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 7076625315778211311}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -108,8 +108,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fed8279c47cd6c45bb644a1b6aae9ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _l0: 0
   eventPlayerSpawnBefore: {fileID: 11400000, guid: 103caf9788b73ee4c9afb3cb33cfe316, type: 2}
   eventPlayerSpawnAfter: {fileID: 11400000, guid: 7afc779f97481b64d950c2b124f96e51, type: 2}
+  actorProfile: {fileID: 11400000, guid: 735c62bf8325f284e90f0c02a4326d77, type: 2}
+  _l1: 0
+  spawnPoint: {fileID: 7443431731249241807}
   radius: 1
   lineLength: 2
-  spawnPoint: {fileID: 7443431731249241807}

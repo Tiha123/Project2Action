@@ -5,12 +5,12 @@ public class EventRaiserCameraSwitch : MonoBehaviour
 {
     [SerializeField] GameEventCameraSwitch eventcameraSwitch;
 
-    [SerializeField] CinemachineVirtualCameraBase virtualCamera;
+    // [SerializeField] CinemachineVirtualCameraBase virtualCamera;
 
-    void Start()
-    {
-        virtualCamera.Priority=0;
-    }
+    // void Start()
+    // {
+    //     virtualCamera.Priority=0;
+    // }
 
     void OnTriggerEnter(Collider other)
     {
