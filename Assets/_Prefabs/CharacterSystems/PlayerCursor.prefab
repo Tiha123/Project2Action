@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5422015492950482496}
   - component: {fileID: 790724939650629775}
   m_Layer: 0
-  m_Name: _CursorPoint_
+  m_Name: _CursorFixedPoint_
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 82a41b761b5ca81469e5a057f9644917, type: 2}
+  - {fileID: 2100000, guid: d7755870993d7584f9a379ee1a9a011a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 465027478854161180}
   - component: {fileID: 1201486768710220729}
   m_Layer: 0
-  m_Name: HitPoint
+  m_Name: _CursorPoint_
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -150,7 +150,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0823749e304f8d5418c88bfd180f505f, type: 2}
+  - {fileID: 2100000, guid: aeba1f3dec2ef3a4096ceb8bd5a02198, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -221,9 +221,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isShow: 1
   eyePoint: {fileID: 0}
-  hitP: {fileID: 6070405943807445575}
-  cursorP: {fileID: 8650767719114805219}
+  cursorFixedPoint: {fileID: 0}
+  cursorP: {fileID: 6070405943807445575}
+  cursorFixedP: {fileID: 8650767719114805219}
   line: {fileID: 4261106391789527912}
+  cursorType: 0
+  cursors:
+  - type: 0
+    cursorAttatchTexture: {fileID: 2800000, guid: 41de360261832d945871ef355e95a7e5, type: 3}
+    cursorOffset: {x: 0, y: 0}
+  - type: 1
+    cursorAttatchTexture: {fileID: 2800000, guid: bfb13bf211745f54daad6dc7bf427670, type: 3}
+    cursorOffset: {x: 0, y: 0}
+  - type: 2
+    cursorAttatchTexture: {fileID: 2800000, guid: e8ac01812c2aa3e45b46942d54e42fb1, type: 3}
+    cursorOffset: {x: 0, y: 0}
+  - type: 3
+    cursorAttatchTexture: {fileID: 2800000, guid: 0b67dd362779257418027922661d08b5, type: 3}
+    cursorOffset: {x: 0, y: 0}
 --- !u!120 &4261106391789527912
 LineRenderer:
   serializedVersion: 2
@@ -232,7 +247,7 @@ LineRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8628171144406013435}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
