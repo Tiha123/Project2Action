@@ -7,7 +7,12 @@ public class AbilityJump : Ability<AbilityJumpData>
     private bool isJumping = false;
     public AbilityJump(AbilityJumpData data, CharacterControl owner) : base(data, owner)
     {
-
+        if(owner.profile==null)
+        {
+            return;
+        }
+        data.jumpForce=owner.profile.jumpPower;
+        data.jumpDuration=owner.profile.jumpDuration;
     }
 
     public override void Activate()

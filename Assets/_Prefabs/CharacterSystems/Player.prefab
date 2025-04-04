@@ -710,8 +710,8 @@ MonoBehaviour:
   isGroundedOffset: 1.1
   rb: {fileID: 0}
   animator: {fileID: 0}
+  profile: {fileID: 11400000, guid: 735c62bf8325f284e90f0c02a4326d77, type: 2}
   maincamera: {fileID: 2829597221679300942}
-  actorType: 0
 --- !u!114 &2352494605834990818
 MonoBehaviour:
   m_ObjectHideFlags: 0

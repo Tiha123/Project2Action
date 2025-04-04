@@ -1,13 +1,14 @@
 using UnityEngine;
+using CustomInspector;
 
 [CreateAssetMenu(menuName ="Abilities/Jump")]
 public class AbilityJumpData : AbilityData
 {
     public override AbilityFlag Flag => AbilityFlag.Jump;
 
-    public float jumpForce=30f;
+    [ReadOnly] public float jumpForce=30f;
 
-    public float jumpDuration=0.3f;
+    [ReadOnly] public float jumpDuration=0.3f;
 
     public AnimationCurve jumpCurve;
 

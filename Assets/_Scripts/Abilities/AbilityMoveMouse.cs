@@ -29,6 +29,12 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
             Debug.LogWarning("MoveMouse ] marker없음");
         }
         marker.gameObject.SetActive(false);
+        if(owner.profile==null)
+        {
+            return;
+        }
+        data.movePerSec=owner.profile.movePerSec;
+        data.rotatePerSec=owner.profile.rotatePerSec;
     }
 
     public override void Activate()

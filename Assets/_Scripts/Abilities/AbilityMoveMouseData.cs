@@ -6,8 +6,8 @@ public class AbilityMoveMouseData : AbilityData
 {
     public override AbilityFlag Flag => AbilityFlag.MoveMouse;
 
-    public float movePerSec=10f;
-    public float rotatePerSec=1080f;
+    [ReadOnly] public float movePerSec=10f;
+    [ReadOnly] public float rotatePerSec=1080f;
     public float stopDistance=0.1f;
 
     [Tooltip("min: runtostop모션 발동지점, max: runtostop 발동할 거리")]

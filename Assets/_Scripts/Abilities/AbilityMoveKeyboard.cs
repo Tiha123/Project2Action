@@ -7,14 +7,18 @@ public class AbilityMoveKeyboard : Ability<AbilityMoveKeyboardData>
     Transform cameraTransform;
     Vector3 direction;
     Vector3 camForward, camRight;
-    float velocity;
+    float _rotvel;
 
     
     public AbilityMoveKeyboard(AbilityMoveKeyboardData data, CharacterControl owner) : base(data, owner)
     {
         cameraTransform = Camera.main.transform;
-        velocity = data.rotatePerSec;
-        
+        if(owner.profile==null)
+        {
+            return;
+        }
+        data.movePerSec=owner.profile.movePerSec;
+        data.rotatePerSec=owner.profile.rotatePerSec;
     }
 
     
@@ -101,7 +105,7 @@ public class AbilityMoveKeyboard : Ability<AbilityMoveKeyboardData>
         // Atan2: Vector2(x,z)가 있을 때 해당 각도를 알려준다(radian)
         // pie(π) (3.14) => 180 degree
         float angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-        float smoothangle = Mathf.SmoothDampAngle(owner.transform.eulerAngles.y, angle, ref velocity, 0.1f);
+        float smoothangle = Mathf.SmoothDampAngle(owner.transform.eulerAngles.y, angle, ref data.rotatePerSec, 0.1f);
         owner.transform.rotation = Quaternion.Euler(owner.transform.rotation.x, smoothangle, owner.transform.rotation.z);
     }
 }

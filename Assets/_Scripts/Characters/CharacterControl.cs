@@ -29,13 +29,12 @@ public class CharacterControl : MonoBehaviour
     public float isGroundedOffset = 1.1f;
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public Animator animator;
+    public ActorProfile profile;
 
     public CinemachineVirtualCameraBase maincamera;
 
     [HideInInspector] public ActionGameInput actionInput;
     private ActionGameInput.PlayerActions playerActions;
-    public ActorType actorType=ActorType.None;
-
     void Awake()
     {
         if (TryGetComponent(out abilityControl) == false)
@@ -57,14 +56,7 @@ public class CharacterControl : MonoBehaviour
         playerActions = actionInput.Player;
     }
 
-    void Start()
-    {
-        Visible(false);
-        // foreach (var dat in initialAbilities)
-        // {
-        //     abilityControl.AddAbility(dat, true);
-        // }
-    }
+
 
     void Update()
     {
