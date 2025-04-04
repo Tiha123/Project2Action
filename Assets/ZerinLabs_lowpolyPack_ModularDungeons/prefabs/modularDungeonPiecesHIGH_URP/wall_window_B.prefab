@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7357620119716515911
 Transform:
@@ -100,12 +100,14 @@ GameObject:
   - component: {fileID: 3721492010907724330}
   - component: {fileID: 6960854385892005587}
   - component: {fileID: 6640993401982497481}
+  - component: {fileID: 1845596582042438070}
+  - component: {fileID: 4891493466706310622}
   m_Layer: 2
   m_Name: wall_window_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5692096910179225628
 Transform:
@@ -199,3 +201,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.064863, y: 6.03927, z: 0.97355545}
   m_Center: {x: -0.0037878752, y: 3.0113175, z: 0.08039491}
+--- !u!114 &1845596582042438070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8693418580823384591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24dcf6805ba2c44f69a5c394d31a3392, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NodeId: 55352424-8ab0-40ad-9903-485eebaa10e0
+  dungeon: {fileID: 0}
+  affectsNavigation: 1
+  userData: 0
+  externallyManaged: 0
+--- !u!114 &4891493466706310622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8693418580823384591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24dcf6805ba2c44f69a5c394d31a3392, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NodeId: 55352424-8ab0-40ad-9903-485eebaa10e0
+  dungeon: {fileID: 0}
+  affectsNavigation: 1
+  userData: 0
+  externallyManaged: 0

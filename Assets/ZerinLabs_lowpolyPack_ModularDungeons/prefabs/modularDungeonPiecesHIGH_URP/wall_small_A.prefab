@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8449595672886487964
 Transform:
@@ -98,12 +98,13 @@ GameObject:
   - component: {fileID: 7182961482719001175}
   - component: {fileID: 3500290877837575854}
   - component: {fileID: 6777827711755020283}
+  - component: {fileID: 7240604743407227167}
   m_Layer: 2
   m_Name: wall_small_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2230416332401688673
 Transform:
@@ -195,3 +196,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.0950212, y: 6.0392694, z: 0.8581701}
   m_Center: {x: -0.0030363798, y: 3.0113187, z: -0.025851369}
+--- !u!114 &7240604743407227167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2931665299442676338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24dcf6805ba2c44f69a5c394d31a3392, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NodeId: 55352424-8ab0-40ad-9903-485eebaa10e0
+  dungeon: {fileID: 0}
+  affectsNavigation: 1
+  userData: 0
+  externallyManaged: 0

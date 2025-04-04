@@ -1,6 +1,7 @@
 using UnityEngine;
 using CustomInspector;
 using System.Collections;
+using System.Linq;
 
 public class CharacterEventControl : MonoBehaviour
 {
@@ -60,15 +61,23 @@ public class CharacterEventControl : MonoBehaviour
         {
             Debug.LogError("모델 없음");
         }
-        Instantiate(e.actorProfile.model, cc.model);
-        cc.animator.avatar = e.actorProfile.avatar;
+        var clone = Instantiate(e.actorProfile.model, cc.model);
+        clone.GetComponentsInChildren<SkinnedMeshRenderer>().ToList().ForEach(m=>
+        {
+            m.gameObject.layer=LayerMask.NameToLayer("Silhouette");
+        });
+
+
         if (e.actorProfile.avatar == null)
         {
             Debug.LogError("아바타 없음");
         }
+        cc.animator.avatar = e.actorProfile.avatar;
         yield return new WaitForSeconds(1f);
         //GameManager.I.DelayCallAsync(1000,()=>{Debug.Log(10);}).Forget();
         PoolManager.I.Spawn(e.particleSpawn, transform.position, Quaternion.identity, null);
+
+
         cc.Visible(true);
         cc.Animate(cc._SPAWN, 0f);
 

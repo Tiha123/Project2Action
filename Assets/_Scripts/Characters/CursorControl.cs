@@ -4,7 +4,7 @@ using CustomInspector;
 using System.Collections.Generic;
 
 
-public enum CursorType { Move, Attack, Interact, Dialogue}
+public enum CursorType { Move=0, Interact, Attack, Dialogue}
 
 
 [System.Serializable]
@@ -28,9 +28,14 @@ public class CursorControl : MonoBehaviour
     public Transform EyePoint { get => eyePoint; set => eyePoint = value; }
     public Transform CursorFixedPoint { get => cursorFixedP; }
 
-    public CursorType cursorType;
+    public CursorType cursorType=CursorType.Move;
 
     [SerializeField] List<CursorData> cursors = new List<CursorData>();
+
+    private GameObject currHovered;
+
+    private GameObject prevHovered;
+
     void Start()
     {
         cam = Camera.main;
@@ -46,16 +51,33 @@ public class CursorControl : MonoBehaviour
 
     void Update()
     {
-        if (cursorFixedPoint == null || cam == null)
+        if (cam == null)
         {
             return;
         }
+        prevHovered=currHovered;
         Ray ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
         if (Physics.Raycast(ray, out var hit))
         {
+            currHovered=hit.collider.gameObject;
+            if(currHovered!=prevHovered)
+            {
+                OnHoverEnter();
+            }
+            
             cursorP.position = hit.point;
             cursorFixedP.position = new Vector3(hit.point.x, eyePoint.position.y, hit.point.z);
+
             DrawLine();
+        }
+        else 
+        {
+            if(prevHovered!=null)
+            {
+                OnHoverExit(currHovered);
+            }
+            currHovered=null;
+
         }
     }
 
@@ -77,4 +99,36 @@ public class CursorControl : MonoBehaviour
             Cursor.SetCursor(cursor.cursorAttatchTexture, cursor.cursorOffset, CursorMode.Auto);
         }
     }
+
+    void OnHoverEnter()
+    {
+        if(prevHovered != null)
+        {
+            prevHovered.layer=LayerMask.NameToLayer("Default");
+            SetCursor(CursorType.Move);
+        }
+
+        var sel=currHovered.GetComponentInParent<CursorSelectable>();
+        if (sel==null)
+        {
+            return;
+        }
+
+
+        if(currHovered != null)
+        {
+            currHovered.layer=LayerMask.NameToLayer("Outline");
+            SetCursor(sel.cursorType);
+        }
+    }
+
+    void OnHoverExit(GameObject o)
+    {
+        SetCursor(CursorType.Move);
+        if(prevHovered!=null)
+        {
+            prevHovered.layer=LayerMask.NameToLayer("Default");
+        }
+    }
+    
 }
