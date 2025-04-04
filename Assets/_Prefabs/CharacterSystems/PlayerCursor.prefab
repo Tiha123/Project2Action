@@ -229,9 +229,9 @@ MonoBehaviour:
   cursors:
   - type: 0
     cursorAttatchTexture: {fileID: 2800000, guid: 41de360261832d945871ef355e95a7e5, type: 3}
-    cursorOffset: {x: 0, y: 0}
+    cursorOffset: {x: -15, y: 15}
   - type: 1
-    cursorAttatchTexture: {fileID: 2800000, guid: bfb13bf211745f54daad6dc7bf427670, type: 3}
+    cursorAttatchTexture: {fileID: 2800000, guid: d2e7728db784c2249a3db05a1bcffa82, type: 3}
     cursorOffset: {x: 0, y: 0}
   - type: 2
     cursorAttatchTexture: {fileID: 2800000, guid: e8ac01812c2aa3e45b46942d54e42fb1, type: 3}
