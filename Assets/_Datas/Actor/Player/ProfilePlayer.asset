@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f4149de9b3ddd84081a61834863ee56, type: 3}
+  m_Name: ProfilePlayer
+  m_EditorClassIdentifier: 
+  _l0: 0
+  alias: Player
+  portrait: {fileID: 21300000, guid: b8c009161d2d48a478ce957ea482049e, type: 3}
+  model: {fileID: 919132149155446097, guid: abe188b376c86d740a0a2d99e896643e, type: 3}
+  avatar: {fileID: 9000000, guid: abe188b376c86d740a0a2d99e896643e, type: 3}
+  _l1: 0
+  health: 100
+  movePerSec: 10
+  rotatePerSec: 1080
+  jumpPower: 10
+  jumpDuration: 0.5
+  _l2: 0
+  initialAbilities:
+  - {fileID: 11400000, guid: e98ad84b48b264c489fba4447d41f8b5, type: 2}
+  - {fileID: 11400000, guid: 94dae3775272d4944b2fe5908edcab2d, type: 2}

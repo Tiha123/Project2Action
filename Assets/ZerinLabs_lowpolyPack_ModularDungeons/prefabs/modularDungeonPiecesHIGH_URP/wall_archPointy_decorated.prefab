@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorType: 1
+  meshRenderer: {fileID: 7003032783486963343}
 --- !u!114 &8287391060353981417
 MonoBehaviour:
   m_ObjectHideFlags: 0

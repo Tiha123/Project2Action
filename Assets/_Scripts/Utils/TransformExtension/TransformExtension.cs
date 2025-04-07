@@ -1,18 +1,23 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class TransformExtension
 {
-    public static Transform FindSlot(this Transform t, string slotname)
+    public static Transform FindSlot(this Transform root, params string[] slotnames)
     {
-        Transform[] children= t.GetComponentsInChildren<Transform>();
-        foreach(Transform v in children)
+        List<Transform> children = root.GetComponentsInChildren<Transform>().ToList();
+        foreach (var slot in slotnames)
         {
-            if(v.name.ToLower().Contains(slotname))
+            foreach (Transform t in children)
             {
-                return v;
+                if (t.name.ToLower().Contains(slot.ToLower()))
+                {
+                    return t;
+                }
             }
         }
-        Debug.LogWarning($"탐색 실패 {slotname}");
+        Debug.LogWarning($"못 찾음: {slotnames.ToList()}");
         return null;
     }
 }
