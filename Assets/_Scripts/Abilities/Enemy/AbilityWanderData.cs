@@ -10,7 +10,7 @@ public class AbilityWanderData : AbilityData
     [ReadOnly] public float rotatePerSec=1080f;
     public float stopDistance=0.1f;
 
-    public override Ability CreateAbility(IActorControl owner) => new AbilityWander(this, owner);
+    public override Ability CreateAbility(CharacterControl owner) => new AbilityWander(this, owner);
 
 [Tooltip("배회할 범위(radius)")]
     public float wanderRadius=5f;

@@ -604,6 +604,7 @@ GameObject:
   - component: {fileID: 519003058095728005}
   - component: {fileID: 6505904252214494461}
   - component: {fileID: 3598630607898070357}
+  - component: {fileID: 170273050424723198}
   - component: {fileID: 6705689894759066695}
   - component: {fileID: 2352494605834990818}
   - component: {fileID: 1441540204986163357}
@@ -684,6 +685,18 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &170273050424723198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8144856337956261130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e221583c9cf86434983719b764709ed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6705689894759066695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -696,12 +709,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c26e4ce1a805174889c55aacf899d69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _MOVESPEED: 1550561881
-  _RUNTOSTOP: 1348743103
-  _JUMPUP: 1184341671
-  _JUMPDOWN: 745124790
-  _LOCOMOTION: -526601997
-  _SPAWN: 1372578019
   abilityControl: {fileID: 0}
   isGrounded: 0
   isArrived: 1

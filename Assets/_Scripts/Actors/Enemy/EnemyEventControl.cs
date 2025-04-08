@@ -11,11 +11,11 @@ public class EnemyEventControl : MonoBehaviour
 
     [Space(10), HorizontalLine("Events", color: FixedColor.Blue), HideField] public bool _l1;
 
-    public EnemyControl ec;
+    public CharacterControl cc;
 
     void Awake()
     {
-        if (TryGetComponent(out ec) == false)
+        if (TryGetComponent(out cc) == false)
         {
             Debug.LogWarning($"GameEventControl ] CharacterControl 없음");
         }
@@ -38,12 +38,12 @@ public class EnemyEventControl : MonoBehaviour
 
     IEnumerator SpawnSequence(EventEnemySpawnAfter e)
     {
-        ec.Profile = e.actorProfile;
+        cc.Profile = e.actorProfile;
         if (e.actorProfile.model == null)
         {
             Debug.LogError("모델 없음");
         }
-        var clone = Instantiate(e.actorProfile.model, ec.model);
+        var clone = Instantiate(e.actorProfile.model, cc.model);
         clone.GetComponentsInChildren<SkinnedMeshRenderer>().ToList().ForEach(m =>
         {
             m.gameObject.layer = LayerMask.NameToLayer("Silhouette");
@@ -54,13 +54,13 @@ public class EnemyEventControl : MonoBehaviour
         {
             Debug.LogError("아바타 없음");
         }
-        ec.animator.avatar = e.actorProfile.avatar;
+        cc.animator.avatar = e.actorProfile.avatar;
         yield return new WaitForSeconds(1f);
-        ec.Visible(true);
+        cc.Visible(true);
 
-        foreach(var dat in ec.Profile.initialAbilities)
+        foreach(var dat in cc.Profile.initialAbilities)
         {
-            ec.abilityControl.AddAbility(dat);
+            cc.abilityControl.AddAbility(dat);
         }
     }
 

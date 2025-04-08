@@ -25,7 +25,7 @@ public enum AbilityFlag
 public abstract class AbilityData : ScriptableObject
 {
     public abstract AbilityFlag Flag { get; }
-    public abstract Ability CreateAbility(IActorControl owner);
+    public abstract Ability CreateAbility(CharacterControl owner);
 }
 
 //abstract: 무조건 정의
@@ -45,8 +45,8 @@ public abstract class Ability
 public abstract class Ability<D> : Ability where D : AbilityData
 {
     public D data;
-    protected IActorControl owner;
-    public Ability(D data, IActorControl ow)
+    protected CharacterControl owner;
+    public Ability(D data, CharacterControl ow)
     {
         this.owner = ow;
         this.data=data;

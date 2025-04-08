@@ -1,13 +1,10 @@
-using System.Collections.Generic;
 using UnityEngine;
 using CustomInspector;
-using Unity.Cinemachine;
-using Project2Action;
 
 // GAS(Game ability system)
 
 // 캐릭터관리
-public class CharacterControl : MonoBehaviour, IActorControl
+public class CharacterControl : MonoBehaviour
 {
 
 
@@ -23,11 +20,7 @@ public class CharacterControl : MonoBehaviour, IActorControl
     [HideInInspector] public Animator animator;
     [SerializeField, ReadOnly] private ActorProfile profile;
 
-    public CinemachineVirtualCameraBase maincamera;
-
-    [HideInInspector] public ActionGameInput actionInput;
-    private ActionGameInput.PlayerActions playerActions;
-
+    
     public ActorProfile Profile 
     { 
         get => profile; 
@@ -51,31 +44,15 @@ public class CharacterControl : MonoBehaviour, IActorControl
         model=transform.Find("_Model_");
         eyePoint=transform.Find("_Eyepoint_");
 
-        actionInput = new ActionGameInput();
-        playerActions = actionInput.Player;
+        
     }
-
-
 
     void Update()
     {
         isGrounded = Physics.Raycast(transform.position + Vector3.up, Vector3.down, isGroundedOffset);
     }
 
-    void OnDestroy()
-    {
-        actionInput.Dispose();
-    }
-
-    void OnEnable()
-    {
-        playerActions.Enable();
-    }
-
-    void OnDisable()
-    {
-        playerActions.Disable();
-    }
+    
 
     public void Visible(bool b)
     {

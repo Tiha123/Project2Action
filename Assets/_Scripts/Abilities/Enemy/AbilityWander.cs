@@ -5,8 +5,6 @@ using UnityEngine.AI;
 
 public class AbilityWander : Ability<AbilityWanderData>
 {
-    EnemyControl ownerEC;
-
     private Camera camera;
     private NavMeshPath path;
     private Vector3[] corners;
@@ -19,15 +17,14 @@ public class AbilityWander : Ability<AbilityWanderData>
     private RaycastHit hitinfo;
     private ParticleSystem marker;
 
-    public AbilityWander(AbilityWanderData data, IActorControl owner) : base(data, owner)
+    public AbilityWander(AbilityWanderData data, CharacterControl owner) : base(data, owner)
     {
         path=new NavMeshPath();
-        ownerEC = (EnemyControl)owner;
-        if (ownerEC.Profile == null)
+        if (owner.Profile == null)
         {
             return;
         }
-        data.movePerSec=ownerEC.Profile.movePerSec;
+        data.movePerSec=owner.Profile.movePerSec;
     }
 
     public override void Activate()
@@ -59,12 +56,12 @@ public class AbilityWander : Ability<AbilityWanderData>
     void RandomPosition()
     {
 
-        if (ownerEC.isArrived == false)
+        if (owner.isArrived == false)
         {
             return;
         }
 
-        Vector3 rndpos = ownerEC.transform.position + Random.insideUnitSphere * data.wanderRadius;
+        Vector3 rndpos = owner.transform.position + Random.insideUnitSphere * data.wanderRadius;
         rndpos.y=1f;
         Debug.Log(rndpos);
 
@@ -74,31 +71,31 @@ public class AbilityWander : Ability<AbilityWanderData>
 
     void FollowPath()
     {
-        if (corners == null || corners.Length <= 0 || ownerEC.isArrived == true)
+        if (corners == null || corners.Length <= 0 || owner.isArrived == true)
         {
             return;
         }
         target = corners[next];
-        direction = (target - ownerEC.transform.position).normalized;
+        direction = (target - owner.transform.position).normalized;
         direction.y = 0f;
         if (direction != Vector3.zero)
         {
             lookrot = Quaternion.LookRotation(direction);
         }
 
-        ownerEC.transform.rotation = Quaternion.RotateTowards(ownerEC.transform.rotation, lookrot, data.rotatePerSec * Time.deltaTime);
+        owner.transform.rotation = Quaternion.RotateTowards(owner.transform.rotation, lookrot, data.rotatePerSec * Time.deltaTime);
 
         Vector3 movement = direction * data.movePerSec * 50f * Time.deltaTime;
-        ownerEC.rb.linearVelocity = new Vector3(movement.x, ownerEC.rb.linearVelocity.y, movement.z);
-        currentVelocity = Vector3.Distance(Vector3.zero, ownerEC.rb.linearVelocity);
+        owner.rb.linearVelocity = new Vector3(movement.x, owner.rb.linearVelocity.y, movement.z);
+        currentVelocity = Vector3.Distance(Vector3.zero, owner.rb.linearVelocity);
 
-        if (Vector3.Distance(target, ownerEC.transform.position) < data.stopDistance)
+        if (Vector3.Distance(target, owner.transform.position) < data.stopDistance)
         {
             next++;
             if (next >= corners.Length)
             {
-                ownerEC.isArrived = true;
-                ownerEC.rb.linearVelocity = Vector3.zero;
+                owner.isArrived = true;
+                owner.rb.linearVelocity = Vector3.zero;
             }
         }
     }
@@ -109,14 +106,14 @@ public class AbilityWander : Ability<AbilityWanderData>
         // {
         //     stopTrigger = false;
         // }
-        float a = ownerEC.isArrived ? 0f : Mathf.Clamp01(currentVelocity);
-        float movespd = Mathf.Lerp(ownerEC.animator.GetFloat(AnimatorHashSet._MOVESPEED), a, Time.deltaTime * 10f);
-        ownerEC.animator?.SetFloat(AnimatorHashSet._MOVESPEED, movespd);
+        float a = owner.isArrived ? 0f : Mathf.Clamp01(currentVelocity);
+        float movespd = Mathf.Lerp(owner.animator.GetFloat(AnimatorHashSet._MOVESPEED), a, Time.deltaTime * 10f);
+        owner.animator?.SetFloat(AnimatorHashSet._MOVESPEED, movespd);
     }
 
     void SetDestination(Vector3 destination)
     {
-        if (!NavMesh.CalculatePath(ownerEC.transform.position, destination, NavMesh.AllAreas, path))
+        if (!NavMesh.CalculatePath(owner.transform.position, destination, NavMesh.AllAreas, path))
         {
             Debug.Log($"경로탐색 실패!{destination}");
             return;
@@ -124,7 +121,7 @@ public class AbilityWander : Ability<AbilityWanderData>
         corners = path.corners;
         next = 1;
         finaltarget = corners[corners.Length - 1];
-        ownerEC.isArrived = false;
+        owner.isArrived = false;
     }
 
 }

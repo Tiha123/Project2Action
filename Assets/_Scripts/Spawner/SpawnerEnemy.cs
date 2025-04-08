@@ -5,6 +5,7 @@ public class SpawnerEnemy : Spawner
 {
     [SerializeField] EventEnemySpawnBefore eventEnemySpawnBefore;
     [SerializeField] EventEnemySpawnAfter eventEnemySpawnAfter;
+    CharacterControl cc;
     void OnEnable()
     {
         eventEnemySpawnBefore?.Register(OneventEnemySpawnBefore);
@@ -16,11 +17,10 @@ public class SpawnerEnemy : Spawner
 
     }
 
-    EnemyControl _enemy;
     void OneventEnemySpawnBefore(EventEnemySpawnBefore e)
     {
         Quaternion rot = Quaternion.LookRotation(spawnPoint.forward);
-        _enemy = Instantiate(e.EnemyEC, spawnPoint.position, rot, null);
+        cc = Instantiate(e.EnemyCC, spawnPoint.position, rot, null);
 
         StartCoroutine(SpawnAfter());
     }
@@ -29,7 +29,7 @@ public class SpawnerEnemy : Spawner
     {
         yield return new WaitForEndOfFrame();
         eventEnemySpawnAfter.actorProfile = actorProfile;
-        eventEnemySpawnAfter.eyePoint = _enemy.eyePoint;
+        eventEnemySpawnAfter.eyePoint = cc.eyePoint;
         eventEnemySpawnAfter?.Raise();
     }
 }

@@ -66,7 +66,7 @@ GameObject:
   - component: {fileID: 5886903026107040406}
   - component: {fileID: 8789233919411697456}
   - component: {fileID: 7850288157636259974}
-  - component: {fileID: 3283762164438718526}
+  - component: {fileID: 7581007429705451201}
   - component: {fileID: 1788118017875550485}
   - component: {fileID: 8118017171825755783}
   m_Layer: 2
@@ -144,7 +144,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &3283762164438718526
+--- !u!114 &7581007429705451201
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -153,17 +153,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 4900478787726182111}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62608c75eae4b2d4fab3d111cafb5ed3, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c26e4ce1a805174889c55aacf899d69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   abilityControl: {fileID: 0}
+  isGrounded: 0
   isArrived: 1
   eyePoint: {fileID: 0}
   model: {fileID: 0}
+  isGroundedOffset: 1.1
   rb: {fileID: 0}
   animator: {fileID: 0}
-  profile: {fileID: 11400000, guid: a1986f393c6a180458370a2d0bbe104a, type: 2}
-  maincamera: {fileID: 0}
+  profile: {fileID: 0}
 --- !u!114 &1788118017875550485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,7 +180,7 @@ MonoBehaviour:
   _l0: 0
   eventEnemySpawnAfter: {fileID: 11400000, guid: 49668d952e156b24d8656278e3732df6, type: 2}
   _l1: 0
-  ec: {fileID: 3283762164438718526}
+  cc: {fileID: 0}
 --- !u!114 &8118017171825755783
 MonoBehaviour:
   m_ObjectHideFlags: 0
