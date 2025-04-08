@@ -5,7 +5,7 @@ using Unity.Cinemachine;
 // GAS(Game ability system)
 
 // 캐릭터관리
-public class EnemyControl : MonoBehaviour
+public class EnemyControl : MonoBehaviour, IActorControl
 {
 
     [HideInInspector] public AbilityControl abilityControl;
@@ -15,9 +15,15 @@ public class EnemyControl : MonoBehaviour
     [ReadOnly] public Transform model;
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public Animator animator;
-    public ActorProfile profile;
+    [SerializeField, ReadOnly] private ActorProfile profile;
 
     public CinemachineVirtualCameraBase maincamera;
+
+    public ActorProfile Profile 
+    { 
+        get => profile; 
+        set => profile=value; 
+    }
 
     void Awake()
     {

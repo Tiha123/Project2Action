@@ -7,7 +7,7 @@ using Project2Action;
 // GAS(Game ability system)
 
 // 캐릭터관리
-public class CharacterControl : MonoBehaviour
+public class CharacterControl : MonoBehaviour, IActorControl
 {
 
     #region Animator Hashset
@@ -29,12 +29,19 @@ public class CharacterControl : MonoBehaviour
     public float isGroundedOffset = 1.1f;
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public Animator animator;
-    public ActorProfile profile;
+    [SerializeField, ReadOnly] private ActorProfile profile;
 
     public CinemachineVirtualCameraBase maincamera;
 
     [HideInInspector] public ActionGameInput actionInput;
     private ActionGameInput.PlayerActions playerActions;
+
+    public ActorProfile Profile 
+    { 
+        get => profile; 
+        set => profile=value; 
+    }
+
     void Awake()
     {
         if (TryGetComponent(out abilityControl) == false)

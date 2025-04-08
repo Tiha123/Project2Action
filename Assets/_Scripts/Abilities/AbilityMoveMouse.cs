@@ -11,6 +11,8 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
     int next;
     bool stopTrigger = false;
 
+    CharacterControl ownerCC;
+
     Quaternion lookrot;
     Vector3 target;
     Vector3 direction;
@@ -19,8 +21,9 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
     private RaycastHit hitinfo;
     private ParticleSystem marker;
 
-    public AbilityMoveMouse(AbilityMoveMouseData data, CharacterControl ow) : base(data, ow)
+    public AbilityMoveMouse(AbilityMoveMouseData data, IActorControl ow) : base(data, ow)
     {
+        ownerCC=(CharacterControl)owner;
         camera = Camera.main;
         path = new NavMeshPath();
         marker = GameObject.Instantiate(data.marker).GetComponent<ParticleSystem>();
@@ -29,23 +32,23 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
             Debug.LogWarning("MoveMouse ] marker없음");
         }
         marker.gameObject.SetActive(false);
-        if(owner.profile==null)
+        if(ownerCC.Profile==null)
         {
             return;
         }
-        data.movePerSec=owner.profile.movePerSec;
-        data.rotatePerSec=owner.profile.rotatePerSec;
+        data.movePerSec=owner.Profile.movePerSec;
+        data.rotatePerSec=owner.Profile.rotatePerSec;
     }
 
     public override void Activate()
     {
-        owner.actionInput.Player.MoveMouse.performed+=InputMove;
+        ownerCC.actionInput.Player.MoveMouse.performed+=InputMove;
         
     }
 
     public override void Deactivate()
     {
-        owner.actionInput.Player.MoveMouse.performed-=InputMove;
+        ownerCC.actionInput.Player.MoveMouse.performed-=InputMove;
     }
 
     void InputMove(InputAction.CallbackContext ctx)
@@ -62,7 +65,7 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
 
     public override void FixedUpdate()
     {
-        if (owner == null || owner.rb == null)
+        if (ownerCC == null || ownerCC.rb == null)
         {
             return;
         }
@@ -77,62 +80,62 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
 
     void FollowPath()
     {
-        if (corners == null || corners.Length <= 0 || owner.isArrived == true)
+        if (corners == null || corners.Length <= 0 || ownerCC.isArrived == true)
         {
             return;
         }
         target = corners[next];
-        direction = (target - owner.transform.position).normalized;
+        direction = (target - ownerCC.transform.position).normalized;
         direction.y = 0f;
         if (direction != Vector3.zero)
         {
             lookrot = Quaternion.LookRotation(direction);
         }
 
-        owner.transform.rotation = Quaternion.RotateTowards(owner.transform.rotation, lookrot, data.rotatePerSec * Time.deltaTime);
+        ownerCC.transform.rotation = Quaternion.RotateTowards(ownerCC.transform.rotation, lookrot, data.rotatePerSec * Time.deltaTime);
 
         Vector3 movement = direction * data.movePerSec * 50f * Time.deltaTime;
-        owner.rb.linearVelocity = new Vector3(movement.x, owner.rb.linearVelocity.y, movement.z);
-        currentVelocity = Vector3.Distance(Vector3.zero, owner.rb.linearVelocity);
+        ownerCC.rb.linearVelocity = new Vector3(movement.x, ownerCC.rb.linearVelocity.y, movement.z);
+        currentVelocity = Vector3.Distance(Vector3.zero, ownerCC.rb.linearVelocity);
 
-        if (Vector3.Distance(target, owner.transform.position) < data.stopDistance)
+        if (Vector3.Distance(target, ownerCC.transform.position) < data.stopDistance)
         {
             next++;
             if (next >= corners.Length)
             {
-                owner.isArrived = true;
-                owner.rb.linearVelocity = Vector3.zero;
+                ownerCC.isArrived = true;
+                ownerCC.rb.linearVelocity = Vector3.zero;
             }
         }
     }
 
     void MoveAnimation()
     {
-        if (Vector3.Distance(finaltarget, owner.rb.position) < data.runtostopDistance.x && owner.isArrived == false && stopTrigger == false)
+        if (Vector3.Distance(finaltarget, ownerCC.rb.position) < data.runtostopDistance.x && ownerCC.isArrived == false && stopTrigger == false)
         {
-            owner.Animate(owner._RUNTOSTOP, 0.2f);
+            ownerCC.Animate(ownerCC._RUNTOSTOP, 0.2f);
             stopTrigger = true;
         }
         // else if (owner.isArrived == false && stopTrigger == true)
         // {
         //     stopTrigger = false;
         // }
-        float a = owner.isArrived ? 0f : Mathf.Clamp01(currentVelocity);
-        float movespd = Mathf.Lerp(owner.animator.GetFloat(owner._MOVESPEED), a, Time.deltaTime * 10f);
-        owner.animator?.SetFloat(owner._MOVESPEED, movespd);
+        float a = ownerCC.isArrived ? 0f : Mathf.Clamp01(currentVelocity);
+        float movespd = Mathf.Lerp(ownerCC.animator.GetFloat(ownerCC._MOVESPEED), a, Time.deltaTime * 10f);
+        ownerCC.animator?.SetFloat(ownerCC._MOVESPEED, movespd);
     }
 
     void SetDestination(Vector3 destination)
     {
-        if (!NavMesh.CalculatePath(owner.transform.position, destination, NavMesh.AllAreas, path))
+        if (!NavMesh.CalculatePath(ownerCC.transform.position, destination, NavMesh.AllAreas, path))
         {
             return;
         }
         corners = path.corners;
         next = 1;
         finaltarget = corners[corners.Length - 1];
-        owner.isArrived = false;
-        stopTrigger = Vector3.Distance(owner.rb.position, hitinfo.point) > data.runtostopDistance.y ? false : true;
+        ownerCC.isArrived = false;
+        stopTrigger = Vector3.Distance(ownerCC.rb.position, hitinfo.point) > data.runtostopDistance.y ? false : true;
         DrawDebugPath();
     }
 

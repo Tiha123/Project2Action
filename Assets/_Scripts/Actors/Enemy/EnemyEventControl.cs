@@ -37,7 +37,7 @@ public class EnemyEventControl : MonoBehaviour
 
     IEnumerator SpawnSequence(EventEnemySpawnAfter e)
     {
-        ec.profile = e.actorProfile;
+        ec.Profile = e.actorProfile;
         if (e.actorProfile.model == null)
         {
             Debug.LogError("모델 없음");

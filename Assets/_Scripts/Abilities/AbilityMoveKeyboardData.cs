@@ -9,7 +9,7 @@ public class AbilityMoveKeyboardData : AbilityData
     [ReadOnly] public float movePerSec=10f;
     [ReadOnly] public float rotatePerSec=50f;
 
-    public override Ability CreateAbility(CharacterControl owner)
+    public override Ability CreateAbility(IActorControl owner)
     {
         return new AbilityMoveKeyboard(this, owner);
     }

@@ -16,7 +16,7 @@ public class AbilityMoveMouseData : AbilityData
     [Space(20)]
     public GameObject marker; // 3d 피킹 마커 오브젝트
 
-    public override Ability CreateAbility(CharacterControl owner)
+    public override Ability CreateAbility(IActorControl owner)
     {
         return new AbilityMoveMouse(this, owner);
     }

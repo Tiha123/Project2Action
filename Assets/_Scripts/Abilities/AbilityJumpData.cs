@@ -12,5 +12,5 @@ public class AbilityJumpData : AbilityData
 
     public AnimationCurve jumpCurve;
 
-    public override Ability CreateAbility(CharacterControl owner) => new AbilityJump(this, owner);
+    public override Ability CreateAbility(IActorControl owner) => new AbilityJump(this, owner);
 }

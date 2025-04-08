@@ -12,15 +12,12 @@ public enum AbilityFlag
     MoveMouse = 1 << 1,// 0010
     Jump = 1 << 2,// 0100
     Dodge = 1 << 3,// 1000
-    Attack = 1 << 4
+    Attack = 1 << 4,
+
+    // 적 캐릭터
+    Wander=1<<5
 }
 
-public enum AbilityEffect
-{
-    Instant,
-    Duration,
-    Infinite
-}
 
 // 데이터 담당: 역할
 // 1. Ability의 타입을 정한다
@@ -28,8 +25,7 @@ public enum AbilityEffect
 public abstract class AbilityData : ScriptableObject
 {
     public abstract AbilityFlag Flag { get; }
-    public AbilityEffect Effect;
-    public abstract Ability CreateAbility(CharacterControl owner);
+    public abstract Ability CreateAbility(IActorControl owner);
 }
 
 //abstract: 무조건 정의
@@ -49,8 +45,8 @@ public abstract class Ability
 public abstract class Ability<D> : Ability where D : AbilityData
 {
     public D data;
-    protected CharacterControl owner;
-    public Ability(D data, CharacterControl ow)
+    protected IActorControl owner;
+    public Ability(D data, IActorControl ow)
     {
         this.owner = ow;
         this.data=data;

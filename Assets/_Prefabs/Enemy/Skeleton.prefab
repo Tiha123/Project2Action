@@ -68,6 +68,7 @@ GameObject:
   - component: {fileID: 7850288157636259974}
   - component: {fileID: 3283762164438718526}
   - component: {fileID: 1788118017875550485}
+  - component: {fileID: 8118017171825755783}
   m_Layer: 2
   m_Name: Skeleton
   m_TagString: Untagged
@@ -179,6 +180,21 @@ MonoBehaviour:
   eventEnemySpawnAfter: {fileID: 11400000, guid: 49668d952e156b24d8656278e3732df6, type: 2}
   _l1: 0
   ec: {fileID: 3283762164438718526}
+--- !u!114 &8118017171825755783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4900478787726182111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e27899cff3d7214f83fa9072e7f603d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventPlayerSpawnAfter: {fileID: 11400000, guid: 7afc779f97481b64d950c2b124f96e51, type: 2}
+  Flags: 0
+  datas: []
 --- !u!1 &5036525786499316343
 GameObject:
   m_ObjectHideFlags: 0

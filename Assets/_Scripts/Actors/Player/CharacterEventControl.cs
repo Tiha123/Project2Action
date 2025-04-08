@@ -56,7 +56,7 @@ public class CharacterEventControl : MonoBehaviour
 
     IEnumerator SpawnSequence(EventPlayerSpawnAfter e)
     {
-        cc.profile=e.actorProfile;
+        cc.Profile=e.actorProfile;
         if (e.actorProfile.model == null)
         {
             Debug.LogError("모델 없음");
