@@ -2,6 +2,7 @@ using UnityEngine;
 using CustomInspector;
 using System.Collections;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class EnemyEventControl : MonoBehaviour
 {
@@ -56,9 +57,11 @@ public class EnemyEventControl : MonoBehaviour
         ec.animator.avatar = e.actorProfile.avatar;
         yield return new WaitForSeconds(1f);
         ec.Visible(true);
-        //GameManager.I.DelayCallAsync(1000,()=>{Debug.Log(10);}).Forget();
-        //PoolManager.I.Spawn(e.particleSpawn, transform.position, Quaternion.identity, null);
-        //ec.Animate(ec._SPAWN, 0f);
+
+        foreach(var dat in ec.Profile.initialAbilities)
+        {
+            ec.abilityControl.AddAbility(dat);
+        }
     }
 
 

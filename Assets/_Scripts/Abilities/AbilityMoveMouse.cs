@@ -113,7 +113,7 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
     {
         if (Vector3.Distance(finaltarget, ownerCC.rb.position) < data.runtostopDistance.x && ownerCC.isArrived == false && stopTrigger == false)
         {
-            ownerCC.Animate(ownerCC._RUNTOSTOP, 0.2f);
+            ownerCC.Animate(AnimatorHashSet._RUNTOSTOP, 0.2f);
             stopTrigger = true;
         }
         // else if (owner.isArrived == false && stopTrigger == true)
@@ -121,8 +121,8 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
         //     stopTrigger = false;
         // }
         float a = ownerCC.isArrived ? 0f : Mathf.Clamp01(currentVelocity);
-        float movespd = Mathf.Lerp(ownerCC.animator.GetFloat(ownerCC._MOVESPEED), a, Time.deltaTime * 10f);
-        ownerCC.animator?.SetFloat(ownerCC._MOVESPEED, movespd);
+        float movespd = Mathf.Lerp(ownerCC.animator.GetFloat(AnimatorHashSet._MOVESPEED), a, Time.deltaTime * 10f);
+        ownerCC.animator?.SetFloat(AnimatorHashSet._MOVESPEED, movespd);
     }
 
     void SetDestination(Vector3 destination)

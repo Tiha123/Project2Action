@@ -10,14 +10,6 @@ using Project2Action;
 public class CharacterControl : MonoBehaviour, IActorControl
 {
 
-    #region Animator Hashset
-    [HideInInspector] public int _MOVESPEED = Animator.StringToHash("movespeed");
-    [HideInInspector] public int _RUNTOSTOP = Animator.StringToHash("RUNTOSTOP");
-    [HideInInspector] public int _JUMPUP = Animator.StringToHash("JUMPUP");
-    [HideInInspector] public int _JUMPDOWN = Animator.StringToHash("JUMPDOWN");
-    [HideInInspector] public int _LOCOMOTION = Animator.StringToHash("Running");
-    [HideInInspector] public int _SPAWN = Animator.StringToHash("Spawn");
-    #endregion
 
     [HideInInspector] public AbilityControl abilityControl;
 

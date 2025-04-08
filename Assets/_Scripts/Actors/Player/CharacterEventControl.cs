@@ -79,7 +79,7 @@ public class CharacterEventControl : MonoBehaviour
 
 
         cc.Visible(true);
-        cc.Animate(cc._SPAWN, 0f);
+        cc.Animate(AnimatorHashSet._SPAWN, 0f);
 
     }
 
