@@ -15,7 +15,8 @@ public enum AbilityFlag
     Attack = 1 << 4,
 
     // 적 캐릭터
-    Wander=1<<5
+    Wander=1<<5,
+    Trace=1<<6
 }
 
 

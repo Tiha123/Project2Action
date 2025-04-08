@@ -60,7 +60,7 @@ public class EnemyEventControl : MonoBehaviour
 
         foreach(var dat in cc.Profile.initialAbilities)
         {
-            cc.abilityControl.AddAbility(dat);
+            cc.abilityControl.AddAbility(dat,true);
         }
     }
 

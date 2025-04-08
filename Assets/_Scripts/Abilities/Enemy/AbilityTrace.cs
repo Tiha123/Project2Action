@@ -3,7 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AbilityWander : Ability<AbilityWanderData>
+public class AbilityTrace : Ability<AbilityTraceData>
 {
     private Camera camera;
     private NavMeshPath path;
@@ -17,7 +17,7 @@ public class AbilityWander : Ability<AbilityWanderData>
     private RaycastHit hitinfo;
     private ParticleSystem marker;
 
-    public AbilityWander(AbilityWanderData data, CharacterControl owner) : base(data, owner)
+    public AbilityTrace(AbilityTraceData data, CharacterControl owner) : base(data, owner)
     {
         path=new NavMeshPath();
         if (owner.Profile == null)
@@ -29,7 +29,12 @@ public class AbilityWander : Ability<AbilityWanderData>
 
     public override void Activate()
     {
+        GameObject p=GameObject.FindGameObjectWithTag("Player");//TempCode
 
+        if(p!=null)
+        {
+            data.traceTarget=p.transform;
+        }
     }
 
     public override void Deactivate()
@@ -39,12 +44,7 @@ public class AbilityWander : Ability<AbilityWanderData>
     float elapese;
     public override void Update()
     {
-        elapese += Time.deltaTime;
-        if (elapese > data.wanderStay)
-        {
-            RandomPosition();
-            elapese = 0f;
-        }
+        TargetPosition();
     }
 
     public override void FixedUpdate()
@@ -52,21 +52,14 @@ public class AbilityWander : Ability<AbilityWanderData>
         FollowPath();
     }
 
-    void RandomPosition()
+    void TargetPosition()
     {
-
-        if (owner.isArrived == false)
+        if(data.traceTarget==null||owner.isArrived==false)
         {
             return;
         }
 
-        Vector3 rndpos = owner.transform.position + Random.insideUnitSphere * data.wanderRadius;
-        rndpos.y=1f;
-        Debug.Log(rndpos);
-
-        SetDestination(rndpos);
     }
-
 
     void FollowPath()
     {
