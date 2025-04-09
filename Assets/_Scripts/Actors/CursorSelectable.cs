@@ -3,7 +3,7 @@ using UnityEngine;
 public class CursorSelectable : MonoBehaviour
 {
     public CursorType cursorType;
-    public Renderer targetRenderer;
+    public Renderer meshRenderer;
     
     [Tooltip("아웃라인 Material")]
     public Material selectableMaterial;
@@ -12,29 +12,27 @@ public class CursorSelectable : MonoBehaviour
 
     public void SetupRenderer()
     {
-        if(targetRenderer!=null)
+        if(meshRenderer!=null)
         {
             return;
         }
-        Debug.Log("못찾음1");
-        targetRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
 
-        if(targetRenderer != null)
+        if(meshRenderer != null)
         {
             return;
         }
-        Debug.Log("못찾음2");
-        targetRenderer=GetComponentInChildren<MeshRenderer>();
+        meshRenderer=GetComponentInChildren<MeshRenderer>();
     }
 
     public void Select(bool on)
     {
-        if (targetRenderer == null)
+        if (meshRenderer == null)
         {
             return;
         }
         string layerName = on ? "Outline" : "Default";
-        targetRenderer.gameObject.layer = LayerMask.NameToLayer(layerName);
+        meshRenderer.gameObject.layer = LayerMask.NameToLayer(layerName);
 
         selectableMaterial?.SetFloat("_Thickness", selectableThickness);
     }

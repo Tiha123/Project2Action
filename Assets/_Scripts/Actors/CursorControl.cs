@@ -60,6 +60,10 @@ public class CursorControl : MonoBehaviour
         if (Physics.Raycast(ray, out var hit))
         {
             currHovered = hit.collider.gameObject.GetComponent<CursorSelectable>();
+            if(currHovered==null)
+            {
+                currHovered = hit.collider.gameObject.GetComponentInParent<CursorSelectable>();
+            }
             if (currHovered != prevHovered)
             {
                 OnHoverEnter();

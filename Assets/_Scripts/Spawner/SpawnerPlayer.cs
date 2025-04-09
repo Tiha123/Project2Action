@@ -29,7 +29,7 @@ public class SpawnerPlayer : Spawner
 
         eventPlayerSpawnAfter.eyePoint = cc.eyePoint;
         eventPlayerSpawnAfter.cursorPoint = cursor.EyePoint;
-        eventPlayerSpawnAfter.actorProfile = actorProfile;
+        eventPlayerSpawnAfter.actorProfile = actorProfile[Random.Range(0,actorProfile.Count)];
         eventPlayerSpawnAfter.Raise();
         //GameManager.I.DelayCallAsync(1000,()=>eventPlayerSpawnAfter.Raise());
 

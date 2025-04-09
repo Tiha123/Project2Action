@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1bc40ee7c20682469a18810fa0916ac, type: 3}
-  m_Name: MoveMouseData
+  m_Script: {fileID: 11500000, guid: 3cd06f86c5bf4e649a2dd75550300a56, type: 3}
+  m_Name: EventSensorTargetExit
   m_EditorClassIdentifier: 
-  movePerSec: 10
-  rotatePerSec: 1080
-  stopDistance: 0.2
-  runtostopDistance: {x: 0.5, y: 4}
-  marker: {fileID: 1215210573372408, guid: f2a47a92099261641b107ca697c2c8e9, type: 3}
+  from: {fileID: 0}
+  to: {fileID: 0}

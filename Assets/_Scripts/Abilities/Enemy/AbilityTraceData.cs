@@ -4,7 +4,7 @@ using CustomInspector;
 [CreateAssetMenu(menuName = "Abilities/Trace")]
 public class AbilityTraceData : AbilityData
 {
-    public override AbilityFlag Flag => AbilityFlag.Wander;
+    public override AbilityFlag Flag => AbilityFlag.Trace;
 
     [ReadOnly] public float movePerSec = 10f;
     [ReadOnly] public float rotatePerSec = 1080f;

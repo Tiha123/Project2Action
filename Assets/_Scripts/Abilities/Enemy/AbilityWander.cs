@@ -16,7 +16,6 @@ public class AbilityWander : Ability<AbilityWanderData>
     float currentVelocity;
     private RaycastHit hitinfo;
     private ParticleSystem marker;
-    public EventEnemyDetect eventEnemyDetect;
 
     public AbilityWander(AbilityWanderData data, CharacterControl owner) : base(data, owner)
     {
@@ -35,7 +34,7 @@ public class AbilityWander : Ability<AbilityWanderData>
 
     public override void Deactivate()
     {
-        
+        owner.isArrived=true;
     }
     float elapese;
     public override void Update()
@@ -71,7 +70,7 @@ public class AbilityWander : Ability<AbilityWanderData>
 
     void FollowPath()
     {
-        owner.Display($"{owner.rb.linearVelocity.magnitude}");
+        owner.Display(data.Flag.ToString());
         if (corners == null || corners.Length <= 0 || owner.isArrived == true)
         {
             return;

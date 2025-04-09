@@ -25,4 +25,5 @@ MonoBehaviour:
   jumpDuration: 0
   _l2: 0
   initialAbilities:
+  - {fileID: 11400000, guid: f08ba019914d4114b9687c6f56c8d02d, type: 2}
   - {fileID: 11400000, guid: 7e60887defbb0d24dbb53436be0d9252, type: 2}

@@ -27252,10 +27252,6 @@ PrefabInstance:
       propertyPath: dungeon
       value: 
       objectReference: {fileID: 4127474156132625350}
-    - target: {fileID: 8287391060353981417, guid: a4c9dff9d0ec2df429fe6964e464070e, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8724338043910486611, guid: a4c9dff9d0ec2df429fe6964e464070e, type: 3}
       propertyPath: m_Name
       value: wall_archPointy_decorated

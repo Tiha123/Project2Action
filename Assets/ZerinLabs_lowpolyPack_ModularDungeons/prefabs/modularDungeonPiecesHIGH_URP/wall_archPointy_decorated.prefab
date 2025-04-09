@@ -143,7 +143,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorType: 1
-  targetRenderer: {fileID: 0}
+  meshRenderer: {fileID: 7003032783486963343}
+  selectableMaterial: {fileID: 2100000, guid: ec506206efdb7f8478b88c26324ed9dc, type: 2}
+  selectableThickness: 0.05
 --- !u!114 &6509013516198387633
 MonoBehaviour:
   m_ObjectHideFlags: 0

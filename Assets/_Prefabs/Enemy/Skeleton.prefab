@@ -259,6 +259,7 @@ GameObject:
   - component: {fileID: 1788118017875550485}
   - component: {fileID: 8118017171825755783}
   - component: {fileID: 1087570483291050692}
+  - component: {fileID: 3238184758610262070}
   m_Layer: 0
   m_Name: Skeleton
   m_TagString: Enemy
@@ -371,6 +372,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _l0: 0
   eventEnemySpawnAfter: {fileID: 11400000, guid: 49668d952e156b24d8656278e3732df6, type: 2}
+  eventSensorTargetEnter: {fileID: 11400000, guid: e7ac6c1014d12a942ad3ea484fef1e7f, type: 2}
+  eventSensorTargetExit: {fileID: 11400000, guid: b22cfc26fd4d604468fd1786192bc1df, type: 2}
   _l1: 0
   cc: {fileID: 0}
 --- !u!114 &8118017171825755783
@@ -401,7 +404,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorType: 2
-  targetRenderer: {fileID: 0}
+  meshRenderer: {fileID: 0}
+  selectableMaterial: {fileID: 2100000, guid: ec506206efdb7f8478b88c26324ed9dc, type: 2}
+  selectableThickness: 0.05
+--- !u!114 &3238184758610262070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4900478787726182111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2b83030d7f6f4d4d8a60c2f2d673349, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  _prev: {fileID: 0}
+  ownerCC: {fileID: 0}
+  sightRange: 2
+  layer:
+    serializedVersion: 2
+    m_Bits: 4
+  tagname: Player
+  eventSensorTargetEnter: {fileID: 11400000, guid: e7ac6c1014d12a942ad3ea484fef1e7f, type: 2}
+  eventSensorTargetExit: {fileID: 11400000, guid: b22cfc26fd4d604468fd1786192bc1df, type: 2}
 --- !u!1 &5036525786499316343
 GameObject:
   m_ObjectHideFlags: 0

@@ -67,8 +67,12 @@ public class AbilityControl : MonoBehaviour
         }
     }
 
-    public void Activate(AbilityFlag flag)
+    public void Activate(AbilityFlag flag, bool forcemode=false)
     {
+        if(forcemode==true)
+        {
+            DeactivateAll();
+        }
         foreach (var d in datas)
         {
             if ((d.Flag & flag) == flag)
@@ -105,5 +109,15 @@ public class AbilityControl : MonoBehaviour
         {
             AddAbility(v, true);
         }
+    }
+
+    public void DeactivateAll()
+    {
+        
+        foreach (var a in actives)
+        {
+            a.Value.Deactivate();
+        }
+        actives.Clear();
     }
 }

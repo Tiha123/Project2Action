@@ -7,6 +7,8 @@ public class EnemyEventControl : MonoBehaviour
 {
     [HorizontalLine("Events", color: FixedColor.Blue), HideField] public bool _l0;
     [SerializeField] EventEnemySpawnAfter eventEnemySpawnAfter;
+    [SerializeField] EventSensorTargetEnter eventSensorTargetEnter;
+    [SerializeField] EventSensorTargetExit eventSensorTargetExit;
 
     [Space(10), HorizontalLine("Events", color: FixedColor.Blue), HideField] public bool _l1;
 
@@ -23,15 +25,26 @@ public class EnemyEventControl : MonoBehaviour
     void OnEnable()
     {
         eventEnemySpawnAfter?.Register(OneventEnemySpawnAfter);
+        eventSensorTargetEnter?.Register(OneventSensorTargetEnter);
+        eventSensorTargetExit?.Register(OneventSensorTargetExit);
     }
 
     void OnDisable()
     {
         eventEnemySpawnAfter?.Unregister(OneventEnemySpawnAfter);
+        eventSensorTargetEnter?.Unregister(OneventSensorTargetEnter);
+        eventSensorTargetExit?.Unregister(OneventSensorTargetExit);
     }
 
+
+
+    #region Event-SpawnAfter
     void OneventEnemySpawnAfter(EventEnemySpawnAfter e)
     {
+        if (cc != e.cc)
+        {
+            return;
+        }
         StartCoroutine(SpawnSequence(e));
     }
 
@@ -57,32 +70,42 @@ public class EnemyEventControl : MonoBehaviour
         yield return new WaitForSeconds(1f);
         cc.Visible(true);
 
-        foreach(var dat in cc.Profile.initialAbilities)
+        foreach (var dat in cc.Profile.initialAbilities)
         {
-            cc.abilityControl.AddAbility(dat,true);
+            cc.abilityControl.AddAbility(dat, false);
         }
 
         yield return new WaitForEndOfFrame();
 
-        if(TryGetComponent<CursorSelectable>(out CursorSelectable sel)==true)
+        if (TryGetComponent<CursorSelectable>(out CursorSelectable sel) == true)
         {
             sel.SetupRenderer();
         }
+
+        cc.abilityControl.Activate(AbilityFlag.Wander);
+    }
+    #endregion
+
+
+
+    void OneventSensorTargetEnter(EventSensorTargetEnter e)
+    {
+        if (e.from == cc)
+        {
+            cc.abilityControl.Activate(AbilityFlag.Trace, true);
+        }
+
     }
 
-    // void OneventEnemyDetect(EventEnemyDetect e)
-    // {
-    //     if(e.isDetected==true)
-    //     {
-    //         cc.abilityControl.Deactivate(AbilityFlag.Wander);
-    //         cc.abilityControl.AddAbility(data, true);
-    //     }
-    //     else
-    //     {
-    //         cc.abilityControl.AddAbility(data, true);
-    //         cc.abilityControl.Deactivate(AbilityFlag.Trace);
-    //     }
-    // }
+    void OneventSensorTargetExit(EventSensorTargetExit e)
+    {
+        if (e.from == cc)
+        {
+
+            cc.abilityControl.Activate(AbilityFlag.Wander, true);
+        }
+    }
+
 
 
     //비동기(Async)

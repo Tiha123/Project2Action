@@ -16,7 +16,7 @@ public class AbilityTrace : Ability<AbilityTraceData>
     float currentVelocity;
     private RaycastHit hitinfo;
     private ParticleSystem marker;
-    EventEnemyDetect eventEnemyDetect;
+    EventSensorTargetEnter eventEnemySensorTargetEnter;
 
     public AbilityTrace(AbilityTraceData data, CharacterControl owner) : base(data, owner)
     {
@@ -42,7 +42,7 @@ public class AbilityTrace : Ability<AbilityTraceData>
 
     public override void Deactivate()
     {
-
+        owner.isArrived=true;
     }
     float elapese;
     public override void Update()
@@ -70,7 +70,7 @@ public class AbilityTrace : Ability<AbilityTraceData>
 
     void FollowPath()
     {
-        owner.Display($"{owner.rb.linearVelocity.magnitude}");
+        owner.Display(data.Flag.ToString());
         if (corners == null || corners.Length <= 0 || owner.isArrived == true)
         {
             return;

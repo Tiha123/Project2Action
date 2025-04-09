@@ -118,10 +118,10 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
             owner.Animate(AnimatorHashSet._RUNTOSTOP, 0.2f);
             stopTrigger = true;
         }
-        // else if (owner.isArrived == false && stopTrigger == true)
-        // {
-        //     stopTrigger = false;
-        // }
+        if(stopTrigger==true&&owner.animator.GetHashCode()==AnimatorHashSet._RUNTOSTOP)
+        {
+            owner.Animate(AnimatorHashSet._LOCOMOTION, 0.1f);
+        }
         float a = owner.isArrived ? 0f : Mathf.Clamp01(currentVelocity);
         float movespd = Mathf.Lerp(owner.animator.GetFloat(AnimatorHashSet._MOVESPEED), a, Time.deltaTime * 10f);
         owner.animator?.SetFloat(AnimatorHashSet._MOVESPEED, movespd);

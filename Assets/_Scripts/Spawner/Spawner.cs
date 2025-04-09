@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CustomInspector;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     #region EVENTS
-    [SerializeField] protected ActorProfile actorProfile;
+    [SerializeField] protected List<ActorProfile> actorProfile;
     #endregion
     [HorizontalLine(color: FixedColor.Blue), HideField] public bool _l1;
 

@@ -19,8 +19,10 @@ public class SpawnerEnemy : Spawner
 
     void OneventEnemySpawnBefore(EventEnemySpawnBefore e)
     {
+        Vector3 rndpos= spawnPoint.position+new Vector3(Random.Range(-radius,radius),0f,Random.Range(-radius,radius));
         Quaternion rot = Quaternion.LookRotation(spawnPoint.forward);
-        cc = Instantiate(e.EnemyCC, spawnPoint.position, rot, null);
+        
+        cc = Instantiate(e.EnemyCC, rndpos, rot, null);
 
         StartCoroutine(SpawnAfter());
     }
@@ -28,7 +30,8 @@ public class SpawnerEnemy : Spawner
     IEnumerator SpawnAfter()
     {
         yield return new WaitForEndOfFrame();
-        eventEnemySpawnAfter.actorProfile = actorProfile;
+        eventEnemySpawnAfter.cc=cc;
+        eventEnemySpawnAfter.actorProfile = actorProfile[Random.Range(0, actorProfile.Count)];
         eventEnemySpawnAfter.eyePoint = cc.eyePoint;
         eventEnemySpawnAfter?.Raise();
     }
