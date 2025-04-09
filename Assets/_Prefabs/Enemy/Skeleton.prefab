@@ -199,7 +199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1850709744575572636}
   - component: {fileID: 6577391792979983119}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Collision
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -258,7 +258,8 @@ GameObject:
   - component: {fileID: 7581007429705451201}
   - component: {fileID: 1788118017875550485}
   - component: {fileID: 8118017171825755783}
-  m_Layer: 2
+  - component: {fileID: 1087570483291050692}
+  m_Layer: 0
   m_Name: Skeleton
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -387,6 +388,20 @@ MonoBehaviour:
   eventPlayerSpawnAfter: {fileID: 11400000, guid: 7afc779f97481b64d950c2b124f96e51, type: 2}
   Flags: 0
   datas: []
+--- !u!114 &1087570483291050692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4900478787726182111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de2fc6c76647e5a45b7263e23528d176, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorType: 2
+  targetRenderer: {fileID: 0}
 --- !u!1 &5036525786499316343
 GameObject:
   m_ObjectHideFlags: 0
@@ -396,7 +411,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1343547886762415067}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: _Eyepoint_
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -428,7 +443,7 @@ GameObject:
   m_Component:
   - component: {fileID: 796976281402725273}
   - component: {fileID: 3483194960420859509}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Shadow
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -483,7 +498,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2374100917571940633}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: _Model_
   m_TagString: Enemy
   m_Icon: {fileID: 0}

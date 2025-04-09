@@ -8,5 +8,6 @@ public static class AnimatorHashSet
     public static int _JUMPDOWN = Animator.StringToHash("JUMPDOWN");
     public static int _LOCOMOTION = Animator.StringToHash("Running");
     public static int _SPAWN = Animator.StringToHash("Spawn");
+    public static int _ENEMYSPEED = Animator.StringToHash("skelmovespeed");
 }
 

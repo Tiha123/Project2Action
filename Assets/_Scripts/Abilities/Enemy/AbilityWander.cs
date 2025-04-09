@@ -16,6 +16,7 @@ public class AbilityWander : Ability<AbilityWanderData>
     float currentVelocity;
     private RaycastHit hitinfo;
     private ParticleSystem marker;
+    public EventEnemyDetect eventEnemyDetect;
 
     public AbilityWander(AbilityWanderData data, CharacterControl owner) : base(data, owner)
     {
@@ -29,12 +30,12 @@ public class AbilityWander : Ability<AbilityWanderData>
 
     public override void Activate()
     {
-
+        
     }
 
     public override void Deactivate()
     {
-
+        
     }
     float elapese;
     public override void Update()
@@ -45,6 +46,7 @@ public class AbilityWander : Ability<AbilityWanderData>
             RandomPosition();
             elapese = 0f;
         }
+        MoveAnimation();
     }
 
     public override void FixedUpdate()
@@ -62,7 +64,6 @@ public class AbilityWander : Ability<AbilityWanderData>
 
         Vector3 rndpos = owner.transform.position + Random.insideUnitSphere * data.wanderRadius;
         rndpos.y=1f;
-        Debug.Log(rndpos);
 
         SetDestination(rndpos);
     }
@@ -107,8 +108,8 @@ public class AbilityWander : Ability<AbilityWanderData>
         //     stopTrigger = false;
         // }
         float a = owner.isArrived ? 0f : Mathf.Clamp01(currentVelocity);
-        float movespd = Mathf.Lerp(owner.animator.GetFloat(AnimatorHashSet._MOVESPEED), a, Time.deltaTime * 10f);
-        owner.animator?.SetFloat(AnimatorHashSet._MOVESPEED, movespd);
+        float movespd = Mathf.Lerp(owner.animator.GetFloat(AnimatorHashSet._ENEMYSPEED), a, Time.deltaTime * 10f);
+        owner.animator?.SetFloat(AnimatorHashSet._ENEMYSPEED, movespd);
     }
 
     void SetDestination(Vector3 destination)
@@ -123,5 +124,7 @@ public class AbilityWander : Ability<AbilityWanderData>
         finaltarget = corners[corners.Length - 1];
         owner.isArrived = false;
     }
+    
+    
 
 }

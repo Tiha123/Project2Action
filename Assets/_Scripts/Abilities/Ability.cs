@@ -16,7 +16,8 @@ public enum AbilityFlag
 
     // 적 캐릭터
     Wander=1<<5,
-    Trace=1<<6
+    Trace=1<<6,
+    Detect=1<<7
 }
 
 

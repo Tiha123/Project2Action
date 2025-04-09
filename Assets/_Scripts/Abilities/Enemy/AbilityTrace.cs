@@ -16,6 +16,7 @@ public class AbilityTrace : Ability<AbilityTraceData>
     float currentVelocity;
     private RaycastHit hitinfo;
     private ParticleSystem marker;
+    EventEnemyDetect eventEnemyDetect;
 
     public AbilityTrace(AbilityTraceData data, CharacterControl owner) : base(data, owner)
     {
@@ -35,7 +36,9 @@ public class AbilityTrace : Ability<AbilityTraceData>
         {
             data.traceTarget=p.transform;
         }
+
     }
+
 
     public override void Deactivate()
     {
@@ -45,6 +48,7 @@ public class AbilityTrace : Ability<AbilityTraceData>
     public override void Update()
     {
         TargetPosition();
+        MoveAnimation();
     }
 
     public override void FixedUpdate()
@@ -54,11 +58,14 @@ public class AbilityTrace : Ability<AbilityTraceData>
 
     void TargetPosition()
     {
-        if(data.traceTarget==null||owner.isArrived==false)
+        if(data.traceTarget==null)
         {
             return;
         }
+        Vector3 rndpos = data.traceTarget.position;
+        rndpos.y=1f;
 
+        SetDestination(rndpos);
     }
 
     void FollowPath()
@@ -100,8 +107,8 @@ public class AbilityTrace : Ability<AbilityTraceData>
         //     stopTrigger = false;
         // }
         float a = owner.isArrived ? 0f : Mathf.Clamp01(currentVelocity);
-        float movespd = Mathf.Lerp(owner.animator.GetFloat(AnimatorHashSet._MOVESPEED), a, Time.deltaTime * 10f);
-        owner.animator?.SetFloat(AnimatorHashSet._MOVESPEED, movespd);
+        float movespd = Mathf.Lerp(owner.animator.GetFloat(AnimatorHashSet._ENEMYSPEED), a, Time.deltaTime * 10f);
+        owner.animator?.SetFloat(AnimatorHashSet._ENEMYSPEED, movespd);
     }
 
     void SetDestination(Vector3 destination)
@@ -116,5 +123,7 @@ public class AbilityTrace : Ability<AbilityTraceData>
         finaltarget = corners[corners.Length - 1];
         owner.isArrived = false;
     }
+
+    
 
 }

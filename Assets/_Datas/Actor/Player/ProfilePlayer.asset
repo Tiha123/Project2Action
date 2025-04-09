@@ -21,7 +21,7 @@ MonoBehaviour:
   health: 100
   movePerSec: 10
   rotatePerSec: 1080
-  jumpPower: 10
+  jumpPower: 30
   jumpDuration: 0.5
   _l2: 0
   initialAbilities:

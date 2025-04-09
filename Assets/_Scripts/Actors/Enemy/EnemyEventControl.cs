@@ -2,7 +2,6 @@ using UnityEngine;
 using CustomInspector;
 using System.Collections;
 using System.Linq;
-using Unity.VisualScripting;
 
 public class EnemyEventControl : MonoBehaviour
 {
@@ -62,9 +61,28 @@ public class EnemyEventControl : MonoBehaviour
         {
             cc.abilityControl.AddAbility(dat,true);
         }
+
+        yield return new WaitForEndOfFrame();
+
+        if(TryGetComponent<CursorSelectable>(out CursorSelectable sel)==true)
+        {
+            sel.SetupRenderer();
+        }
     }
 
-
+    // void OneventEnemyDetect(EventEnemyDetect e)
+    // {
+    //     if(e.isDetected==true)
+    //     {
+    //         cc.abilityControl.Deactivate(AbilityFlag.Wander);
+    //         cc.abilityControl.AddAbility(data, true);
+    //     }
+    //     else
+    //     {
+    //         cc.abilityControl.AddAbility(data, true);
+    //         cc.abilityControl.Deactivate(AbilityFlag.Trace);
+    //     }
+    // }
 
 
     //비동기(Async)
