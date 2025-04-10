@@ -9,7 +9,6 @@ using UnityEngine.InputSystem;
 public class AbilityControl : MonoBehaviour
 {
     [Title("Event", fontSize = 15, alignment = TextAlignment.Center), HideField] bool _h0;
-    [SerializeField] EventPlayerSpawnAfter eventPlayerSpawnAfter;
 
     [Title("Ability System", fontSize = 15, alignment = TextAlignment.Center), HideField] bool _h1;
     [Space(20), ReadOnly] public AbilityFlag Flags = AbilityFlag.None;
@@ -44,11 +43,6 @@ public class AbilityControl : MonoBehaviour
         datas.Remove(d);
         Flags.Remove(d.Flag, null);
         actives.Remove(d.Flag);
-    }
-
-    void Awake()
-    {
-        eventPlayerSpawnAfter.Register(OneventPlayerSpawnAfter);
     }
 
     void Update()
@@ -103,17 +97,8 @@ public class AbilityControl : MonoBehaviour
         }
     }
 
-    void OneventPlayerSpawnAfter(EventPlayerSpawnAfter e)
-    {
-        foreach (var v in e.actorProfile.initialAbilities)
-        {
-            AddAbility(v, true);
-        }
-    }
-
     public void DeactivateAll()
     {
-        
         foreach (var a in actives)
         {
             a.Value.Deactivate();

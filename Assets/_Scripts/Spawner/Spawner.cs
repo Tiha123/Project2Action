@@ -7,7 +7,7 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     #region EVENTS
-    [SerializeField] protected List<ActorProfile> actorProfile;
+    [SerializeField] protected ActorProfile actorProfile;
     #endregion
     [HorizontalLine(color: FixedColor.Blue), HideField] public bool _l1;
 

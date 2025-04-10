@@ -47,7 +47,7 @@ namespace DungeonArchitect.Editors.Visualization
             }
             
             // Find the component in the scene
-            visualizerComponentRefInternal = Object.FindObjectOfType<DungeonMarkerVisualizerComponent>();
+            visualizerComponentRefInternal = Object.FindFirstObjectByType<DungeonMarkerVisualizerComponent>();
             if (visualizerComponentRefInternal == null)
             {
                 visualizerComponentRefInternal = CreateVisualizerGameObject_Internal();

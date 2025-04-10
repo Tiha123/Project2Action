@@ -15,7 +15,8 @@ MonoBehaviour:
   _l0: 0
   alias: Player
   portrait: {fileID: 21300000, guid: b8c009161d2d48a478ce957ea482049e, type: 3}
-  model: {fileID: 919132149155446097, guid: abe188b376c86d740a0a2d99e896643e, type: 3}
+  models:
+  - {fileID: 919132149155446097, guid: abe188b376c86d740a0a2d99e896643e, type: 3}
   avatar: {fileID: 9000000, guid: abe188b376c86d740a0a2d99e896643e, type: 3}
   _l1: 0
   health: 100

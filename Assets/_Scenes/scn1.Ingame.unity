@@ -471,18 +471,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1207195263}
     m_Modifications:
-    - target: {fileID: 2678397368212942337, guid: 1ae081db6b4a3f24490ab3d1064790c0, type: 3}
-      propertyPath: actorProfile
-      value: 
-      objectReference: {fileID: 11400000, guid: a1986f393c6a180458370a2d0bbe104a, type: 2}
-    - target: {fileID: 2678397368212942337, guid: 1ae081db6b4a3f24490ab3d1064790c0, type: 3}
-      propertyPath: eventPlayerSpawnAfter
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2678397368212942337, guid: 1ae081db6b4a3f24490ab3d1064790c0, type: 3}
-      propertyPath: eventPlayerSpawnBefore
-      value: 
-      objectReference: {fileID: 11400000, guid: 103caf9788b73ee4c9afb3cb33cfe316, type: 2}
     - target: {fileID: 7971988382877126652, guid: 1ae081db6b4a3f24490ab3d1064790c0, type: 3}
       propertyPath: m_Name
       value: EnemySpawner (3)

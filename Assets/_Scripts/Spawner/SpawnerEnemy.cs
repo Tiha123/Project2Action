@@ -23,6 +23,7 @@ public class SpawnerEnemy : Spawner
         Quaternion rot = Quaternion.LookRotation(spawnPoint.forward);
         
         cc = Instantiate(e.EnemyCC, rndpos, rot, null);
+        cc.Profile=actorProfile;
 
         StartCoroutine(SpawnAfter());
     }
@@ -31,7 +32,6 @@ public class SpawnerEnemy : Spawner
     {
         yield return new WaitForEndOfFrame();
         eventEnemySpawnAfter.cc=cc;
-        eventEnemySpawnAfter.actorProfile = actorProfile[Random.Range(0, actorProfile.Count)];
         eventEnemySpawnAfter.eyePoint = cc.eyePoint;
         eventEnemySpawnAfter?.Raise();
     }

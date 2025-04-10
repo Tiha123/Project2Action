@@ -164,8 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4bc723dbb99adf4b916e3ac54ea99f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actorProfile:
-  - {fileID: 11400000, guid: a1986f393c6a180458370a2d0bbe104a, type: 2}
+  actorProfile: {fileID: 11400000, guid: a1986f393c6a180458370a2d0bbe104a, type: 2}
   _l1: 0
   spawnPoint: {fileID: 352200222416847330}
   radius: 2

@@ -9,7 +9,7 @@ public class ActorProfile : ScriptableObject
     [HorizontalLine("Prefabs"), HideField] public bool _l0;
     public string alias;
     [Preview(Size.medium)] public Sprite portrait;
-    [Preview(Size.medium)] public GameObject model;
+    [Preview(Size.medium)] public List<GameObject> models;
     [Preview(Size.medium)] public Avatar avatar;
 
     [HorizontalLine("Attributes"), HideField] public bool _l1;

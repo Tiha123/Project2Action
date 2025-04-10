@@ -56,23 +56,27 @@ public class CharacterEventControl : MonoBehaviour
 
     IEnumerator SpawnSequence(EventPlayerSpawnAfter e)
     {
-        cc.Profile=e.actorProfile;
-        if (e.actorProfile.model == null)
+        if (cc.Profile.models == null)
         {
             Debug.LogError("모델 없음");
         }
-        var clone = Instantiate(e.actorProfile.model, cc.model);
+        var model=cc.Profile.models.Random();
+        var clone = Instantiate(model, cc.model);
         clone.GetComponentsInChildren<SkinnedMeshRenderer>().ToList().ForEach(m=>
         {
             m.gameObject.layer=LayerMask.NameToLayer("Silhouette");
         });
 
 
-        if (e.actorProfile.avatar == null)
+        if (cc.Profile.avatar == null)
         {
             Debug.LogError("아바타 없음");
         }
-        cc.animator.avatar = e.actorProfile.avatar;
+        cc.animator.avatar = cc.Profile.avatar;
+        foreach (var v in cc.Profile.initialAbilities)
+        {
+            cc.abilityControl.AddAbility(v, true);
+        }
         yield return new WaitForSeconds(1f);
         //GameManager.I.DelayCallAsync(1000,()=>{Debug.Log(10);}).Forget();
         PoolManager.I.Spawn(e.particleSpawn, transform.position, Quaternion.identity, null);

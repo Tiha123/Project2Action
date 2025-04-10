@@ -1,9 +1,16 @@
+using System.Collections;
 using UnityEngine;
 
 public class SpawnerPlayer : Spawner
 {
     [SerializeField] EventPlayerSpawnBefore eventPlayerSpawnBefore;
     [SerializeField] EventPlayerSpawnAfter eventPlayerSpawnAfter;
+
+    
+
+    CharacterControl cc;
+
+    CursorControl cursor;
     void OnEnable()
     {
         // 이벤트가 등록되면 발동, 등록 안하면 작돋ㅇ한함(트리거 열할)
@@ -23,15 +30,21 @@ public class SpawnerPlayer : Spawner
         }
         CameraControl camera = Instantiate(e.playerCamera);
         Quaternion rot = Quaternion.LookRotation(spawnPoint.forward);
-        CharacterControl cc = Instantiate(e.playerCC, spawnPoint.position, rot, null);
-        CursorControl cursor = Instantiate(e.playerCursor);
+        cc = Instantiate(e.playerCC, spawnPoint.position, rot, null);
+        cursor = Instantiate(e.playerCursor);
+        cc.Profile=actorProfile;
         cursor.EyePoint = cc.eyePoint;
+
+        StartCoroutine(SpawnAfter());
+        //GameManager.I.DelayCallAsync(1000,()=>eventPlayerSpawnAfter.Raise());
+    }
+
+    IEnumerator SpawnAfter()
+    {
+        yield return new WaitForEndOfFrame();
 
         eventPlayerSpawnAfter.eyePoint = cc.eyePoint;
         eventPlayerSpawnAfter.cursorPoint = cursor.EyePoint;
-        eventPlayerSpawnAfter.actorProfile = actorProfile[Random.Range(0,actorProfile.Count)];
         eventPlayerSpawnAfter.Raise();
-        //GameManager.I.DelayCallAsync(1000,()=>eventPlayerSpawnAfter.Raise());
-
     }
 }
