@@ -34,7 +34,7 @@ public abstract class AbilityData : ScriptableObject
 //virtual: 옵션
 public abstract class Ability 
 {
-    public virtual void Activate() { }
+    public virtual void Activate(object obj = null) { }
     public virtual void Deactivate() { }
     public virtual void Update() { }
     public virtual void FixedUpdate() { } //  빠르게(물리연산속도)업데이트

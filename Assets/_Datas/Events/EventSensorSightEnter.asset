@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44dd9cd6dbb98ab46ba2ed798a940be8, type: 3}
-  m_Name: EventTargetEnter
+  m_Script: {fileID: 11500000, guid: 18485a9ebda42724ab7beb84091220af, type: 3}
+  m_Name: EventSensorSightEnter
   m_EditorClassIdentifier: 
   from: {fileID: 0}
   to: {fileID: 0}

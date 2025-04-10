@@ -7,8 +7,10 @@ public class EnemyEventControl : MonoBehaviour
 {
     [HorizontalLine("Events", color: FixedColor.Blue), HideField] public bool _l0;
     [SerializeField] EventEnemySpawnAfter eventEnemySpawnAfter;
-    [SerializeField] EventSensorTargetEnter eventSensorTargetEnter;
-    [SerializeField] EventSensorTargetExit eventSensorTargetExit;
+    [SerializeField] EventSensorSightEnter eventSensorSightEnter;
+    [SerializeField] EventSensorSightExit eventSensorSightExit;
+    [SerializeField] EventSensorAttackEnter eventSensorAttackEnter;
+    [SerializeField] EventSensorAttackExit eventSensorAttackExit;
 
     [Space(10), HorizontalLine("Events", color: FixedColor.Blue), HideField] public bool _l1;
 
@@ -25,15 +27,19 @@ public class EnemyEventControl : MonoBehaviour
     void OnEnable()
     {
         eventEnemySpawnAfter?.Register(OneventEnemySpawnAfter);
-        eventSensorTargetEnter?.Register(OneventSensorTargetEnter);
-        eventSensorTargetExit?.Register(OneventSensorTargetExit);
+        eventSensorSightEnter?.Register(OneventSensorSightEnter);
+        eventSensorSightExit?.Register(OneventSensorSightExit);
+        eventSensorAttackEnter?.Register(OneventSensorAttackEnter);
+        eventSensorAttackExit?.Register(OneventSensorAttackExit);
     }
 
     void OnDisable()
     {
         eventEnemySpawnAfter?.Unregister(OneventEnemySpawnAfter);
-        eventSensorTargetEnter?.Unregister(OneventSensorTargetEnter);
-        eventSensorTargetExit?.Unregister(OneventSensorTargetExit);
+        eventSensorSightEnter?.Unregister(OneventSensorSightEnter);
+        eventSensorSightExit?.Unregister(OneventSensorSightExit);
+        eventSensorAttackEnter?.Unregister(OneventSensorAttackEnter);
+        eventSensorAttackExit?.Unregister(OneventSensorAttackExit);
     }
 
 
@@ -82,27 +88,45 @@ public class EnemyEventControl : MonoBehaviour
             sel.SetupRenderer();
         }
 
-        cc.abilityControl.Activate(AbilityFlag.Wander);
+        cc.abilityControl.Activate(AbilityFlag.Wander, true, null);
     }
     #endregion
 
 
 
-    void OneventSensorTargetEnter(EventSensorTargetEnter e)
+    void OneventSensorSightEnter(EventSensorSightEnter e)
     {
         if (e.from == cc)
         {
-            cc.abilityControl.Activate(AbilityFlag.Trace, true);
+            cc.abilityControl.Activate(AbilityFlag.Trace, true, e.to);
         }
 
     }
 
-    void OneventSensorTargetExit(EventSensorTargetExit e)
+    void OneventSensorSightExit(EventSensorSightExit e)
     {
         if (e.from == cc)
         {
 
-            cc.abilityControl.Activate(AbilityFlag.Wander, true);
+            cc.abilityControl.Activate(AbilityFlag.Wander, true, null);
+        }
+    }
+
+    void OneventSensorAttackEnter(EventSensorAttackEnter e)
+    {
+        if (e.from == cc)
+        {
+            cc.abilityControl.Activate(AbilityFlag.Attack, true, e.to);
+        }
+
+    }
+
+    void OneventSensorAttackExit(EventSensorAttackExit e)
+    {
+        if (e.from == cc)
+        {
+
+            cc.abilityControl.Activate(AbilityFlag.Trace, true, e.to);
         }
     }
 

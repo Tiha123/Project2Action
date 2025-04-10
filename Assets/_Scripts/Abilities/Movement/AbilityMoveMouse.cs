@@ -37,7 +37,7 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
         data.rotatePerSec=owner.Profile.rotatePerSec;
     }
 
-    public override void Activate()
+    public override void Activate(object obj=null)
     {
         if(owner.TryGetComponent<InputControl>(out var input))
         {

@@ -297,7 +297,7 @@ Animator:
   m_GameObject: {fileID: 4900478787726182111}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1c7d681d88799da42b230296e2dceea5, type: 2}
+  m_Controller: {fileID: 22100000, guid: 8cb0dd540cf8ab04ebe4c65d5dcbd5d8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -372,8 +372,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _l0: 0
   eventEnemySpawnAfter: {fileID: 11400000, guid: 49668d952e156b24d8656278e3732df6, type: 2}
-  eventSensorTargetEnter: {fileID: 11400000, guid: e7ac6c1014d12a942ad3ea484fef1e7f, type: 2}
-  eventSensorTargetExit: {fileID: 11400000, guid: b22cfc26fd4d604468fd1786192bc1df, type: 2}
+  eventSensorSightEnter: {fileID: 11400000, guid: 99007120cd5c4564e906a5224af3b2a7, type: 2}
+  eventSensorSightExit: {fileID: 11400000, guid: f0956aafc440de44c8c858593c8e8340, type: 2}
+  eventSensorAttackEnter: {fileID: 11400000, guid: 57cb7ace08b2d5f459f740f43699a829, type: 2}
+  eventSensorAttackExit: {fileID: 11400000, guid: 5cd6cbcf72dd8124cbf3a08dee40993e, type: 2}
   _l1: 0
   cc: {fileID: 0}
 --- !u!114 &8118017171825755783
@@ -388,7 +390,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e27899cff3d7214f83fa9072e7f603d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventPlayerSpawnAfter: {fileID: 11400000, guid: 7afc779f97481b64d950c2b124f96e51, type: 2}
   Flags: 0
   datas: []
 --- !u!114 &1087570483291050692
@@ -420,15 +421,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  _prev: {fileID: 0}
+  _prevSight: {fileID: 0}
+  _prevAttack: {fileID: 0}
   ownerCC: {fileID: 0}
-  sightRange: 2
+  sightRange: 4
+  attackRange: 2
   layer:
     serializedVersion: 2
     m_Bits: 4
   tagname: Player
-  eventSensorTargetEnter: {fileID: 11400000, guid: e7ac6c1014d12a942ad3ea484fef1e7f, type: 2}
-  eventSensorTargetExit: {fileID: 11400000, guid: b22cfc26fd4d604468fd1786192bc1df, type: 2}
+  eventSensorSightEnter: {fileID: 11400000, guid: 99007120cd5c4564e906a5224af3b2a7, type: 2}
+  eventSensorSightExit: {fileID: 11400000, guid: f0956aafc440de44c8c858593c8e8340, type: 2}
+  eventSensorAttackEnter: {fileID: 11400000, guid: 57cb7ace08b2d5f459f740f43699a829, type: 2}
+  eventSensorAttackExit: {fileID: 11400000, guid: 5cd6cbcf72dd8124cbf3a08dee40993e, type: 2}
 --- !u!1 &5036525786499316343
 GameObject:
   m_ObjectHideFlags: 0

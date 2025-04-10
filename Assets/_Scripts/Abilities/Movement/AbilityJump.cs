@@ -16,7 +16,7 @@ public class AbilityJump : Ability<AbilityJumpData>
         data.jumpDuration=owner.Profile.jumpDuration;
     }
 
-    public override void Activate()
+    public override void Activate(object obj=null)
     {
         if(owner.TryGetComponent<InputControl>(out var input))
         {

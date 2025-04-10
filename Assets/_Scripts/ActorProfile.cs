@@ -18,6 +18,7 @@ public class ActorProfile : ScriptableObject
     [Tooltip("초당 회전속도")] public float rotatePerSec;
     [Tooltip("점프 강도")] public float jumpPower;
     [Tooltip("점프 시간")] public float jumpDuration;
+    [Tooltip("초당 공격 속도(Attack/sec)")] public float attackSpeed;
 
     [HorizontalLine("Abilities"), HideField] public bool _l2;
     public List<AbilityData> initialAbilities = new List<AbilityData>();

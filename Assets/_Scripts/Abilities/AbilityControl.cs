@@ -61,7 +61,7 @@ public class AbilityControl : MonoBehaviour
         }
     }
 
-    public void Activate(AbilityFlag flag, bool forcemode=false)
+    public void Activate(AbilityFlag flag,  bool forcemode, object obj)
     {
         if(forcemode==true)
         {
@@ -76,7 +76,7 @@ public class AbilityControl : MonoBehaviour
                     actives[flag] = d.CreateAbility(GetComponent<CharacterControl>());
                 }
                 // HashSet<> 중복 X 자동정렬
-                actives[flag].Activate();
+                actives[flag].Activate(obj);
             }
         }
     }

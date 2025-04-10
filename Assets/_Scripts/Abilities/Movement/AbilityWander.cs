@@ -3,22 +3,17 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AbilityTrace : Ability<AbilityTraceData>
+public class AbilityWander : Ability<AbilityWanderData>
 {
-    private Camera camera;
     private NavMeshPath path;
     private Vector3[] corners;
     int next;
     Quaternion lookrot;
     Vector3 target;
     Vector3 direction;
-    Vector3 finaltarget;
     float currentVelocity;
-    private RaycastHit hitinfo;
-    private ParticleSystem marker;
-    EventSensorTargetEnter eventEnemySensorTargetEnter;
 
-    public AbilityTrace(AbilityTraceData data, CharacterControl owner) : base(data, owner)
+    public AbilityWander(AbilityWanderData data, CharacterControl owner) : base(data, owner)
     {
         path=new NavMeshPath();
         if (owner.Profile == null)
@@ -28,17 +23,10 @@ public class AbilityTrace : Ability<AbilityTraceData>
         data.movePerSec=owner.Profile.movePerSec;
     }
 
-    public override void Activate()
+    public override void Activate(object obj = null)
     {
-        GameObject p=GameObject.FindGameObjectWithTag("Player");//TempCode
-
-        if(p!=null)
-        {
-            data.traceTarget=p.transform;
-        }
-
+        
     }
-
 
     public override void Deactivate()
     {
@@ -47,7 +35,12 @@ public class AbilityTrace : Ability<AbilityTraceData>
     float elapese;
     public override void Update()
     {
-        TargetPosition();
+        elapese += Time.deltaTime;
+        if (elapese > data.wanderStay)
+        {
+            RandomPosition();
+            elapese = 0f;
+        }
         MoveAnimation();
     }
 
@@ -56,17 +49,20 @@ public class AbilityTrace : Ability<AbilityTraceData>
         FollowPath();
     }
 
-    void TargetPosition()
+    void RandomPosition()
     {
-        if(data.traceTarget==null)
+
+        if (owner.isArrived == false)
         {
             return;
         }
-        Vector3 rndpos = data.traceTarget.position;
+
+        Vector3 rndpos = owner.transform.position + Random.insideUnitSphere * data.wanderRadius;
         rndpos.y=1f;
 
         SetDestination(rndpos);
     }
+
 
     void FollowPath()
     {
@@ -107,23 +103,21 @@ public class AbilityTrace : Ability<AbilityTraceData>
         //     stopTrigger = false;
         // }
         float a = owner.isArrived ? 0f : Mathf.Clamp01(currentVelocity);
-        float movespd = Mathf.Lerp(owner.animator.GetFloat(AnimatorHashSet._ENEMYSPEED), a, Time.deltaTime * 10f);
-        owner.animator?.SetFloat(AnimatorHashSet._ENEMYSPEED, movespd);
+        float movespd = Mathf.Lerp(owner.animator.GetFloat(AnimatorHashSet._MOVESPEED), a, Time.deltaTime * 10f);
+        owner.animator?.SetFloat(AnimatorHashSet._MOVESPEED, movespd);
     }
 
     void SetDestination(Vector3 destination)
     {
         if (!NavMesh.CalculatePath(owner.transform.position, destination, NavMesh.AllAreas, path))
         {
-            Debug.Log($"경로탐색 실패!{destination}");
             return;
         }
         corners = path.corners;
         next = 1;
-        finaltarget = corners[corners.Length - 1];
         owner.isArrived = false;
     }
-
+    
     
 
 }

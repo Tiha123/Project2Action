@@ -16,7 +16,7 @@ public class CharacterEventControl : MonoBehaviour
 
     void Awake()
     {
-        if (TryGetComponent(out cc)==false)
+        if (TryGetComponent(out cc) == false)
         {
             Debug.LogWarning($"GameEventControl ] CharacterControl 없음");
         }
@@ -44,8 +44,8 @@ public class CharacterEventControl : MonoBehaviour
         }
         else
         {
-            cc.abilityControl.Activate(AbilityFlag.MoveKeyboard);
-            cc.abilityControl.Activate(AbilityFlag.MoveMouse);
+            cc.abilityControl.Activate(AbilityFlag.MoveKeyboard, false, null);
+            cc.abilityControl.Activate(AbilityFlag.MoveMouse, false, null);
         }
     }
 
@@ -60,11 +60,11 @@ public class CharacterEventControl : MonoBehaviour
         {
             Debug.LogError("모델 없음");
         }
-        var model=cc.Profile.models.Random();
+        var model = cc.Profile.models.Random();
         var clone = Instantiate(model, cc.model);
-        clone.GetComponentsInChildren<SkinnedMeshRenderer>().ToList().ForEach(m=>
+        clone.GetComponentsInChildren<SkinnedMeshRenderer>().ToList().ForEach(m =>
         {
-            m.gameObject.layer=LayerMask.NameToLayer("Silhouette");
+            m.gameObject.layer = LayerMask.NameToLayer("Silhouette");
         });
 
 

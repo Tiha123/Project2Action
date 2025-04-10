@@ -28,7 +28,7 @@ public class AbilityMoveKeyboard : Ability<AbilityMoveKeyboardData>
         Movement();
     }
 
-    public override void Activate()
+    public override void Activate(object obj=null)
     {
         if(owner.TryGetComponent<InputControl>(out var input))
         {

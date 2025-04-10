@@ -13,6 +13,6 @@ public class AbilityTraceData : AbilityData
     public override Ability CreateAbility(CharacterControl owner) => new AbilityTrace(this, owner);
 
     [Tooltip("추격 대상")]
-    public Transform traceTarget;
+    public CharacterControl traceTarget;
 
 }
