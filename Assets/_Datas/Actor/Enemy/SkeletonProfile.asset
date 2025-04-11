@@ -21,12 +21,19 @@ MonoBehaviour:
   - {fileID: 188982, guid: d86c716d338a1a04d89b6ee52d44933c, type: 3}
   - {fileID: 197444, guid: b2951f8d32af933468dd00c41bb3f7d8, type: 3}
   avatar: {fileID: 9000000, guid: 20300ac630e0fcd4dbab63a9b39cdafa, type: 3}
+  _l3: 0
+  ATTACK:
+  - {fileID: 7400000, guid: 5fc58e648726c914f8dee69d8b0cf7ec, type: 3}
+  - {fileID: 7400000, guid: 4d4ad1323cb15f449b3fb62d38f5f5e4, type: 3}
+  - {fileID: 7400000, guid: 209a69b56ebf4474b90999ee91a1062a, type: 3}
+  aoc: {fileID: 22100000, guid: 8cb0dd540cf8ab04ebe4c65d5dcbd5d8, type: 2}
   _l1: 0
   health: 50
   movePerSec: 8
   rotatePerSec: 540
   jumpPower: 0
   jumpDuration: 0
+  attackSpeed: 3
   _l2: 0
   initialAbilities:
   - {fileID: 11400000, guid: f08ba019914d4114b9687c6f56c8d02d, type: 2}

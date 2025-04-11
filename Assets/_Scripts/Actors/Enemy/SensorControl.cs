@@ -30,10 +30,11 @@ public class SensorControl : MonoBehaviour
         {
             Debug.LogWarning("SensorControl ] CharacterControl 없음");
         }
+        InvokeRepeating("CheckOverlap", 0.1f, 0.5f);
     }
 
     bool b0=false;
-    void Update()
+    void CheckOverlap()
     {
         Collider[] overlaps = Physics.OverlapSphere(ownerCC.eyePoint.position, sightRange, layer);
         b0 = false;

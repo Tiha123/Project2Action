@@ -24,8 +24,8 @@ MonoBehaviour:
   rotatePerSec: 1080
   jumpPower: 30
   jumpDuration: 0.5
+  attackSpeed: 0
   _l2: 0
   initialAbilities:
   - {fileID: 11400000, guid: e98ad84b48b264c489fba4447d41f8b5, type: 2}
   - {fileID: 11400000, guid: 94dae3775272d4944b2fe5908edcab2d, type: 2}
-  - {fileID: 11400000, guid: 1490e1ff24d9c694d8e5757eee156900, type: 2}

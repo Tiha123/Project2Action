@@ -72,6 +72,16 @@ public class CharacterControl : MonoBehaviour
         animator?.CrossFadeInFixedTime(hash,duration,layer,0f);
     }
 
+    public void Animate(string name, AnimatorOverrideController aoc, AnimationClip clip, float anispd, float duration, int layer = 0)
+    {
+        if(animator==null)
+        {
+            return;
+        }
+        animator.runtimeAnimatorController=aoc;
+        aoc[name]=clip;
+        animator?.CrossFadeInFixedTime(name,duration,layer,0f);
+    }
     public void Display(string info)
     {
         if (uiinfo==null)
@@ -82,9 +92,6 @@ public class CharacterControl : MonoBehaviour
         uiinfo.text=info;
     }
 
-
-    #region ANIMATE
-    
     // 타겟을 바라본다 (y축만 회전)
     public void LookatY(Vector3 target)
     {
@@ -94,22 +101,29 @@ public class CharacterControl : MonoBehaviour
         transform.rotation = Quaternion.Euler(rot);
     }
 
-    public void AnimateMoveSpeed(float targetspeed)
+    #region ANIMATE
+    
+
+    public void AnimateMoveSpeed(float targetspeed, bool immediate)
     {
         if(animator==null)
         {
             return;
         }
+        if(immediate==true)
+        {
+            animator.SetFloat(AnimatorHashSet._MOVESPEED, targetspeed);
+        }
+        else
+        {
+            float curr = animator.GetFloat(AnimatorHashSet._MOVESPEED);
+            float spd = Mathf.Lerp(curr, targetspeed, Time.deltaTime * 10f);
+            animator.SetFloat(AnimatorHashSet._MOVESPEED, spd);
+        }
 
-        float curr = animator.GetFloat(AnimatorHashSet._MOVESPEED);
-        float spd = Mathf.Lerp(curr, targetspeed, Time.deltaTime * 10f);
-        animator.SetFloat(AnimatorHashSet._MOVESPEED, spd);
     }
 
-    public void AnimateSinlgeAttack(Vector3 target)
-    {
-        LookatY(target);
-        Animate(AnimatorHashSet._ATTACK, 0.1f);
-    }
+    
+
     #endregion
 }

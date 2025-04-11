@@ -12,6 +12,10 @@ public class ActorProfile : ScriptableObject
     [Preview(Size.medium)] public List<GameObject> models;
     [Preview(Size.medium)] public Avatar avatar;
 
+    [HorizontalLine("Animation"), HideField] public bool _l3;
+    public List<AnimationClip> ATTACK;
+    public AnimatorOverrideController aoc;
+
     [HorizontalLine("Attributes"), HideField] public bool _l1;
     [Tooltip("체력")] public int health;
     [Tooltip("초당 이동속도")] public float movePerSec;

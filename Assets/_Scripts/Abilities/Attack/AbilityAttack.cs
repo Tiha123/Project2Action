@@ -1,8 +1,14 @@
 using UnityEngine;
+using System.Threading;
+using Cysharp.Threading.Tasks;
+using Unity.VisualScripting;
 
 public class AbilityAttack : Ability<AbilityAttackData>
 {
+    bool isAttacking = false;
     private float attackSpeed;
+    private CancellationTokenSource cts;
+
     public AbilityAttack(AbilityAttackData data, CharacterControl ow) : base(data, ow)
     {
         if (owner.Profile == null)
@@ -10,6 +16,7 @@ public class AbilityAttack : Ability<AbilityAttackData>
             return;
         }
 
+        cts=new CancellationTokenSource();
         attackSpeed = owner.Profile.attackSpeed;
     }
 
@@ -24,25 +31,39 @@ public class AbilityAttack : Ability<AbilityAttackData>
 
     public override void Deactivate()
     {
+        cts.Cancel();
     }
 
-    float elapese = 0f;
     public override void Update()
     {
-        if (data.target == null)
+        if (isAttacking == true || data.target == null)
         {
             return;
         }
 
-        elapese += Time.deltaTime;
-        if (elapese >= attackSpeed)
-        {
-            owner.AnimateSinlgeAttack(data.target.eyePoint.position);
-            elapese = 0f;
-        }
+        DelayAttack().Forget();
 
-        owner.AnimateMoveSpeed(0f);
+        owner.LookatY(data.target.eyePoint.position);
+        AnimationClip clip=owner.Profile.ATTACK.Random();
+
+        owner.Animate("ATTACK", owner.Profile.aoc, clip, attackSpeed, 0.1f, 0);
+        owner.AnimateMoveSpeed(0f,true);
     }
 
-    
+    async UniTaskVoid DelayAttack()
+    {
+        try
+        {
+            isAttacking=true;
+            await UniTask.WaitForSeconds(attackSpeed);
+            isAttacking=false;
+        }
+        catch(System.Exception e)
+        {
+            Debug.LogException(e);
+        }
+
+    }
+
+
 }

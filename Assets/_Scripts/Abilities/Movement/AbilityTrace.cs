@@ -96,7 +96,7 @@ public class AbilityTrace : Ability<AbilityTraceData>
     void MoveAnimation()
     {
         float a = owner.isArrived ? 0f : Mathf.Clamp01(currentVelocity);
-        owner.AnimateMoveSpeed(a);
+        owner.AnimateMoveSpeed(a,false);
     }
 
     void SetDestination(Vector3 destination)

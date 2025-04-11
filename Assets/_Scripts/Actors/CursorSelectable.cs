@@ -1,9 +1,11 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CursorSelectable : MonoBehaviour
 {
     public CursorType cursorType;
-    public Renderer meshRenderer;
+    public Renderer[] meshRenderers;
     
     [Tooltip("아웃라인 Material")]
     public Material selectableMaterial;
@@ -12,29 +14,32 @@ public class CursorSelectable : MonoBehaviour
 
     public void SetupRenderer()
     {
-        if(meshRenderer!=null)
+        if(meshRenderers.Length>0)
         {
             return;
         }
-        meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        meshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
 
-        if(meshRenderer != null)
+        if(meshRenderers.Length>0)
         {
             return;
         }
-        meshRenderer=GetComponentInChildren<MeshRenderer>();
+        meshRenderers=GetComponentsInChildren<MeshRenderer>();
     }
 
     public void Select(bool on)
     {
-        if (meshRenderer == null)
+        if (meshRenderers == null || meshRenderers.Length<=0)
         {
             return;
         }
         string layerName = on ? "Outline" : "Default";
-        meshRenderer.gameObject.layer = LayerMask.NameToLayer(layerName);
-
+        foreach(Renderer m in meshRenderers)
+        {
+            m.gameObject.layer = LayerMask.NameToLayer(layerName);
+        }
         selectableMaterial?.SetFloat("_Thickness", selectableThickness);
+
     }
 
 }
