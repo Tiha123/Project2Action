@@ -260,6 +260,7 @@ GameObject:
   - component: {fileID: 8118017171825755783}
   - component: {fileID: 1087570483291050692}
   - component: {fileID: 3238184758610262070}
+  - component: {fileID: 4210354274801527331}
   m_Layer: 0
   m_Name: Skeleton
   m_TagString: Enemy
@@ -405,7 +406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorType: 2
-  meshRenderer: {fileID: 0}
+  meshRenderers: []
   selectableMaterial: {fileID: 2100000, guid: ec506206efdb7f8478b88c26324ed9dc, type: 2}
   selectableThickness: 0.05
 --- !u!114 &3238184758610262070
@@ -424,7 +425,7 @@ MonoBehaviour:
   _prevSight: {fileID: 0}
   _prevAttack: {fileID: 0}
   ownerCC: {fileID: 0}
-  sightRange: 4
+  sightRange: 5
   attackRange: 2
   layer:
     serializedVersion: 2
@@ -434,6 +435,32 @@ MonoBehaviour:
   eventSensorSightExit: {fileID: 11400000, guid: f0956aafc440de44c8c858593c8e8340, type: 2}
   eventSensorAttackEnter: {fileID: 11400000, guid: 57cb7ace08b2d5f459f740f43699a829, type: 2}
   eventSensorAttackExit: {fileID: 11400000, guid: 5cd6cbcf72dd8124cbf3a08dee40993e, type: 2}
+--- !u!114 &4210354274801527331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4900478787726182111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a007effe2d77b7419c1e02d212b9217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _l0: 0
+  eventPlayerSpawnBefore: {fileID: 11400000, guid: 103caf9788b73ee4c9afb3cb33cfe316, type: 2}
+  eventPlayerSpawnAfter: {fileID: 11400000, guid: 7afc779f97481b64d950c2b124f96e51, type: 2}
+  eventEnemySpawnAfter: {fileID: 11400000, guid: 49668d952e156b24d8656278e3732df6, type: 2}
+  eventCameraSwitch: {fileID: 11400000, guid: fea73e1e4e6da5b40b487fedaffc578e, type: 2}
+  _l1: 0
+  owner: {fileID: 0}
+  smoke: {fileID: 0}
+  smoke2: {fileID: 0}
+  swing1: {fileID: 5838766919343693026, guid: a7a48a4083e773a4e8a36e6a45f9d2ca, type: 3}
+  footLeft: {fileID: 0}
+  footRight: {fileID: 0}
+  handLeft: {fileID: 0}
+  handRight: {fileID: 0}
 --- !u!1 &5036525786499316343
 GameObject:
   m_ObjectHideFlags: 0

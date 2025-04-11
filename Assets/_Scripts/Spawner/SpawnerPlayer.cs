@@ -45,6 +45,7 @@ public class SpawnerPlayer : Spawner
 
         eventPlayerSpawnAfter.eyePoint = cc.eyePoint;
         eventPlayerSpawnAfter.cursorPoint = cursor.EyePoint;
+        eventPlayerSpawnAfter.cc=cc;
         eventPlayerSpawnAfter.Raise();
     }
 }

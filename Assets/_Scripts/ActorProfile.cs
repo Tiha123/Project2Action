@@ -3,6 +3,8 @@ using CustomInspector;
 using UnityEngine;
 
 
+public enum ActorType {_None, Player, ENEMY, NPC}
+
 [CreateAssetMenu(menuName = "Datas/ActorProfile")]
 public class ActorProfile : ScriptableObject
 {
@@ -23,6 +25,7 @@ public class ActorProfile : ScriptableObject
     [Tooltip("점프 강도")] public float jumpPower;
     [Tooltip("점프 시간")] public float jumpDuration;
     [Tooltip("초당 공격 속도(Attack/sec)")] public float attackSpeed;
+    public ActorType actorType;
 
     [HorizontalLine("Abilities"), HideField] public bool _l2;
     public List<AbilityData> initialAbilities = new List<AbilityData>();
