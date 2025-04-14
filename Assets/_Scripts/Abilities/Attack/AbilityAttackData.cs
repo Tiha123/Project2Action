@@ -8,4 +8,8 @@ public class AbilityAttackData : AbilityData
     public override Ability CreateAbility(CharacterControl owner)=>new AbilityAttack(this, owner);
 
     [ReadOnly] public CharacterControl target;
+
+    public EventAttackBefore eventAttackBefore;
+    public EventAttackDamage eventAttackDamage;
+
 }

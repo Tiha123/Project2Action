@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50a318087509c0449a2a491699efe457, type: 3}
-  m_Name: TraceData
+  m_Script: {fileID: 11500000, guid: 33fed4d79e4423344ad6790b8046b4f9, type: 3}
+  m_Name: EventAttackAfter
   m_EditorClassIdentifier: 
-  movePerSec: 7
-  rotatePerSec: 1080
-  stopDistance: 0.1
-  traceTarget: {fileID: 0}
-  eventAttackBefore: {fileID: 0}
-  eventAttackAfter: {fileID: 0}
+  from: {fileID: 0}
+  to: {fileID: 0}
+  damage: 0
+  particleHit2: {fileID: 7047468216702989548, guid: ebd649280d836d84db8eb91a886d27c8, type: 3}

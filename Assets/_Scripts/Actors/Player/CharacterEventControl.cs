@@ -9,6 +9,7 @@ public class CharacterEventControl : MonoBehaviour
     [SerializeField] EventPlayerSpawnBefore eventPlayerSpawnBefore;
     [SerializeField] EventPlayerSpawnAfter eventPlayerSpawnAfter;
     [SerializeField] GameEventCameraSwitch eventCameraSwitch;
+    [SerializeField] EventAttackDamage eventAttackDamage;
 
     [Space(10), HorizontalLine("Events", color: FixedColor.Blue), HideField] public bool _l1;
 
@@ -26,11 +27,14 @@ public class CharacterEventControl : MonoBehaviour
     {
         eventPlayerSpawnAfter?.Register(OneventPlayerSpawnAfter);
         eventCameraSwitch?.Register(OneventCameraSwitch);
+        eventAttackDamage?.Register(OneventAttackDamage);
     }
 
     void OnDisable()
     {
+        eventPlayerSpawnAfter?.Unregister(OneventPlayerSpawnAfter);
         eventCameraSwitch?.Unregister(OneventCameraSwitch);
+        eventAttackDamage?.Unregister(OneventAttackDamage);
     }
 
 
@@ -52,6 +56,16 @@ public class CharacterEventControl : MonoBehaviour
     void OneventPlayerSpawnAfter(EventPlayerSpawnAfter e)
     {
         StartCoroutine(SpawnSequence(e));
+    }
+
+    void OneventAttackDamage(EventAttackDamage e)
+    {
+        if(cc!=e.to)
+        {
+            return;
+        }
+        PoolManager.I.Spawn(e.particleHit2, transform.position,Quaternion.identity, null);
+        cc.Profile.health-=e.damage;
     }
 
     IEnumerator SpawnSequence(EventPlayerSpawnAfter e)

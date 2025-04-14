@@ -26,8 +26,8 @@ public class SensorControl : MonoBehaviour
 
     public EventSensorSightExit eventSensorSightExit;
 
-    public EventSensorAttackEnter eventSensorAttackEnter;
-    public EventSensorAttackExit eventSensorAttackExit;
+    public EventAttackBefore eventAttackBefore;
+    public EventAttackDamage eventAttackDamage;
 
     void Start()
     {
@@ -124,7 +124,7 @@ public class SensorControl : MonoBehaviour
     //     }
     //     _prevAttack = target;
 
-    //     eventSensorAttackEnter.from = ownerCC;
+    //     eventAttackEnter.from = ownerCC;
     //     eventSensorAttackEnter.to = target;
         
     //     eventSensorAttackEnter?.Raise();

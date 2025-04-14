@@ -374,8 +374,8 @@ MonoBehaviour:
   eventEnemySpawnAfter: {fileID: 11400000, guid: 49668d952e156b24d8656278e3732df6, type: 2}
   eventSensorSightEnter: {fileID: 11400000, guid: 99007120cd5c4564e906a5224af3b2a7, type: 2}
   eventSensorSightExit: {fileID: 11400000, guid: f0956aafc440de44c8c858593c8e8340, type: 2}
-  eventSensorAttackEnter: {fileID: 11400000, guid: 57cb7ace08b2d5f459f740f43699a829, type: 2}
-  eventSensorAttackExit: {fileID: 11400000, guid: 5cd6cbcf72dd8124cbf3a08dee40993e, type: 2}
+  eventSensorAttackEnter: {fileID: 11400000, guid: 691a30742bf509c4d8294be17f790c5f, type: 2}
+  eventSensorAttackExit: {fileID: 11400000, guid: 7b5263d65fff6824cbc8136ddfdf2dd3, type: 2}
   _l1: 0
   cc: {fileID: 0}
 --- !u!114 &8118017171825755783
@@ -425,6 +425,7 @@ MonoBehaviour:
   eventPlayerSpawnAfter: {fileID: 11400000, guid: 7afc779f97481b64d950c2b124f96e51, type: 2}
   eventEnemySpawnAfter: {fileID: 11400000, guid: 49668d952e156b24d8656278e3732df6, type: 2}
   eventCameraSwitch: {fileID: 11400000, guid: fea73e1e4e6da5b40b487fedaffc578e, type: 2}
+  eventAttackBefore: {fileID: 11400000, guid: 57cb7ace08b2d5f459f740f43699a829, type: 2}
   _l1: 0
   owner: {fileID: 0}
   smoke: {fileID: 0}
@@ -567,10 +568,11 @@ MonoBehaviour:
   targetTag: Player
   attackRadius: 2
   showGizmos: 1
+  eventEnemySpawnAfter: {fileID: 11400000, guid: 49668d952e156b24d8656278e3732df6, type: 2}
   eventSensorSightEnter: {fileID: 11400000, guid: 99007120cd5c4564e906a5224af3b2a7, type: 2}
   eventSensorSightExit: {fileID: 11400000, guid: f0956aafc440de44c8c858593c8e8340, type: 2}
-  eventSensorAttackEnter: {fileID: 11400000, guid: 57cb7ace08b2d5f459f740f43699a829, type: 2}
-  eventSensorAttackExit: {fileID: 11400000, guid: 5cd6cbcf72dd8124cbf3a08dee40993e, type: 2}
+  eventSensorAttackEnter: {fileID: 11400000, guid: 691a30742bf509c4d8294be17f790c5f, type: 2}
+  eventAttackExit: {fileID: 11400000, guid: 7b5263d65fff6824cbc8136ddfdf2dd3, type: 2}
 --- !u!1 &6358929001739249325
 GameObject:
   m_ObjectHideFlags: 0

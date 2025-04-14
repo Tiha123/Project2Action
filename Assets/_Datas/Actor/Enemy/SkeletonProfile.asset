@@ -29,11 +29,15 @@ MonoBehaviour:
   aoc: {fileID: 22100000, guid: 8cb0dd540cf8ab04ebe4c65d5dcbd5d8, type: 2}
   _l1: 0
   health: 50
-  movePerSec: 8
+  movePerSec: 7
   rotatePerSec: 540
   jumpPower: 0
   jumpDuration: 0
   attackSpeed: 3
+  attackRange: 2
+  sightRange: 0
+  baseDamage: 0
+  actorType: 0
   _l2: 0
   initialAbilities:
   - {fileID: 11400000, guid: f08ba019914d4114b9687c6f56c8d02d, type: 2}

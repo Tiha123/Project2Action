@@ -20,13 +20,33 @@ public class Sensor : MonoBehaviour
     public float attackRadius = 3f; // 공격 반경
     public bool showGizmos = true;
     private CharacterControl owner, target;
+    SensorFOV sensorFOV;
 
     [Header("Target Events")]
+    [SerializeField] EventEnemySpawnAfter eventEnemySpawnAfter;
     [SerializeField] EventSensorSightEnter eventSensorSightEnter;
     [SerializeField] EventSensorSightExit eventSensorSightExit;
     [SerializeField] EventSensorAttackEnter eventSensorAttackEnter;
-    [SerializeField] EventSensorAttackExit eventSensorAttackExit;
+    [SerializeField] EventSensorAttackExit eventAttackExit;
     
+    void OnEnable()
+    {
+        eventEnemySpawnAfter.Register(OneventEnemySpawnAfter);
+    }
+    void OnDisable()
+    {
+        eventEnemySpawnAfter.Unregister(OneventEnemySpawnAfter);
+    }
+    void OneventEnemySpawnAfter(EventEnemySpawnAfter e)
+    {
+        if(owner!=e.cc)
+        {
+            return;
+        }
+        detectionRadius=owner.Profile.sightRange;
+        attackRadius=owner.Profile.attackRange;
+        
+    }
 
     private Dictionary<CharacterControl, TargetState> visibilityStates = new Dictionary<CharacterControl, TargetState>();
 
@@ -35,7 +55,11 @@ public class Sensor : MonoBehaviour
         owner=GetComponentInParent<CharacterControl>();
         if(owner==null)
         {
-            Debug.LogError($"Sensor ] target - CharacterControl 없음");
+            Debug.LogError($"Sensor ] owner - CharacterControl 없음");
+        }
+        if(TryGetComponent<SensorFOV>(out sensorFOV)==false)
+        {
+            Debug.LogError($"Sensor ] SensorFOV 없음");
         }
         InvokeRepeating("DetectTargets", 0f, interval);
     }
@@ -51,6 +75,10 @@ public class Sensor : MonoBehaviour
                 continue;
 
             target = hit.GetComponentInParent<CharacterControl>();
+            if(target==null)
+            {
+                Debug.LogError($"Sensor ] target - CharacterControl 없음");
+            }
             Vector3 direction = (target.eyePoint.position - transform.position).normalized;
 
             float angle = Vector3.Angle(transform.forward, direction);
@@ -60,21 +88,21 @@ public class Sensor : MonoBehaviour
             currentFrameTargets.Add(target);
 
             float distance = Vector3.Distance(transform.position, target.eyePoint.position);//거리
-            bool isVisible = !Physics.Raycast(transform.position, direction, distance, blockLayer);//장애물
-            bool isArrived = distance <= attackRadius;//공격거리
+            bool isvisible = !Physics.Raycast(transform.position, direction, distance, blockLayer);//장애물
+            bool isarrived = distance <= attackRadius;//공격거리
 
             visibilityStates.TryGetValue(target, out TargetState previousState);
 
             TargetState newState = new TargetState
             {
-                isVisible = isVisible,
-                isArrived = isArrived
+                isVisible = isvisible,
+                isArrived = isarrived
             };
 
             if (!visibilityStates.ContainsKey(target))
             {
                 visibilityStates[target] = newState;
-                if(isVisible)
+                if(isvisible)
                 {
                     OnFound();
                 }
@@ -83,15 +111,15 @@ public class Sensor : MonoBehaviour
                     OnBlocked();
                 }
                 
-                if(isArrived)
+                if(isarrived)
                 {
                     OnArrived();
                 }
             }
-            else if (previousState.isVisible != isVisible || previousState.isArrived != isArrived)
+            else if (previousState.isVisible != isvisible || previousState.isArrived != isarrived)
             {
                 visibilityStates[target] = newState;
-                if(isVisible)
+                if(isvisible)
                 {
                     OnFound();
                 }
@@ -100,7 +128,7 @@ public class Sensor : MonoBehaviour
                     OnBlocked();
                 }
                 
-                if(isArrived&&!previousState.isArrived)
+                if(isarrived&&!previousState.isArrived)
                 {
                     OnArrived();
                 }
@@ -170,6 +198,7 @@ public class Sensor : MonoBehaviour
 
     void OnFound()
     {
+        sensorFOV?.AlertColor(true);
         owner.Display("Found");
         eventSensorSightEnter.from=owner;
         eventSensorSightEnter.to=target;
@@ -178,6 +207,7 @@ public class Sensor : MonoBehaviour
 
     void OnBlocked()
     {
+        sensorFOV?.AlertColor(false);
         owner.Display("Blocked");
         eventSensorSightExit.from=owner;
         eventSensorSightExit.to=target;
@@ -186,6 +216,7 @@ public class Sensor : MonoBehaviour
 
     void OnLost()
     {
+        sensorFOV?.AlertColor(false);
         owner.Display("Lost");
         eventSensorSightExit.from=owner;
         eventSensorSightExit.to=target;
@@ -194,6 +225,7 @@ public class Sensor : MonoBehaviour
 
     void OnArrived()
     {
+        sensorFOV?.AlertColor(true);
         owner.Display("Arrived");
         eventSensorAttackEnter.from=owner;
         eventSensorAttackEnter.to=target;

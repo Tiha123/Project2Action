@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af15d8e9d3e8f9e4fa67881a663ea538, type: 3}
   m_Name: AttackData
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  eventAttackBefore: {fileID: 11400000, guid: 57cb7ace08b2d5f459f740f43699a829, type: 2}
+  eventAttackAfter: {fileID: 11400000, guid: 5cd6cbcf72dd8124cbf3a08dee40993e, type: 2}

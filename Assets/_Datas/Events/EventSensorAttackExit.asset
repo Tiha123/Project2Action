@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33fed4d79e4423344ad6790b8046b4f9, type: 3}
+  m_Script: {fileID: 11500000, guid: ec91c066fd4a6b042944ee7a9b47fa2d, type: 3}
   m_Name: EventSensorAttackExit
   m_EditorClassIdentifier: 
   from: {fileID: 0}

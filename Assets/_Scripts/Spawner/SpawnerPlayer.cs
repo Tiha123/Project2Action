@@ -13,7 +13,7 @@ public class SpawnerPlayer : Spawner
     CursorControl cursor;
     void OnEnable()
     {
-        // 이벤트가 등록되면 발동, 등록 안하면 작돋ㅇ한함(트리거 열할)
+        // 이벤트가 등록되면 발동, 등록 안하면 작동 안함(트리거 역할)
         eventPlayerSpawnBefore?.Register(OneventPlayerSpawnBefore);
 
     }

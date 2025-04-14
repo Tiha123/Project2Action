@@ -12,6 +12,7 @@ public class EnemyEventControl : MonoBehaviour
     [SerializeField] EventSensorAttackEnter eventSensorAttackEnter;
     [SerializeField] EventSensorAttackExit eventSensorAttackExit;
 
+
     [Space(10), HorizontalLine("Events", color: FixedColor.Blue), HideField] public bool _l1;
 
     public CharacterControl cc;
@@ -107,7 +108,6 @@ public class EnemyEventControl : MonoBehaviour
     {
         if (e.from == cc)
         {
-
             cc.abilityControl.Activate(AbilityFlag.Wander, true, null);
         }
     }
@@ -118,7 +118,6 @@ public class EnemyEventControl : MonoBehaviour
         {
             cc.abilityControl.Activate(AbilityFlag.Attack, true, e.to);
         }
-
     }
 
     void OneventSensorAttackExit(EventSensorAttackExit e)

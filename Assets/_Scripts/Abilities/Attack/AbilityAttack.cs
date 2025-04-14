@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using Unity.VisualScripting;
 
 public class AbilityAttack : Ability<AbilityAttackData>
 {
@@ -16,22 +15,38 @@ public class AbilityAttack : Ability<AbilityAttackData>
             return;
         }
 
-        cts=new CancellationTokenSource();
         attackSpeed = owner.Profile.attackSpeed;
     }
 
     public override void Activate(object obj = null)
     {
+        cts?.Dispose();
+        cts=new CancellationTokenSource();
         if (obj != null && obj is CharacterControl)
         {
             data.target = obj as CharacterControl;
         }
         owner.Display(data.Flag.ToString());
+
+        data.eventAttackBefore.Register(OneventAttackBefore);
+    }
+
+    public void OneventAttackBefore(EventAttackBefore e)
+    {
+        if(owner != e.from)
+        {
+            return;
+        }
+        data.eventAttackDamage.from=owner;
+        data.eventAttackDamage.to=data.target;
+        data.eventAttackDamage.damage=owner.Profile.baseDamage;
+        data.eventAttackDamage.Raise();
     }
 
     public override void Deactivate()
     {
         cts.Cancel();
+        cts.Dispose();
     }
 
     public override void Update()
@@ -55,12 +70,20 @@ public class AbilityAttack : Ability<AbilityAttackData>
         try
         {
             isAttacking=true;
-            await UniTask.WaitForSeconds(attackSpeed);
+            await UniTask.WaitForSeconds(attackSpeed, cancellationToken: cts.Token);
             isAttacking=false;
+        }
+        catch(System.OperationCanceledException e)
+        {
+            Debug.LogException(e);
         }
         catch(System.Exception e)
         {
             Debug.LogException(e);
+        }
+        finally
+        {
+            cts.Cancel();
         }
 
     }

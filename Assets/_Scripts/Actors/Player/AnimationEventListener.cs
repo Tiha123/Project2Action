@@ -9,6 +9,7 @@ public class AnimationEventListener : MonoBehaviour
     [SerializeField] EventPlayerSpawnAfter eventPlayerSpawnAfter;
     [SerializeField] EventEnemySpawnAfter eventEnemySpawnAfter;
     [SerializeField] GameEventCameraSwitch eventCameraSwitch;
+    [SerializeField] EventAttackBefore eventAttackBefore;
 
     [Space(10), HorizontalLine("Events", color: FixedColor.Blue), HideField] public bool _l1;
     [ReadOnly] public CharacterControl owner;
@@ -101,6 +102,7 @@ public class AnimationEventListener : MonoBehaviour
 
     public void Attack(string s)
     {
+        eventAttackBefore.Raise();
         if(Random.Range(0,10)>=7)
         {
             var rot = Quaternion.LookRotation(owner.transform.forward, Vector3.up);

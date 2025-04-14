@@ -5,7 +5,7 @@ using UnityEngine;
 public class CursorSelectable : MonoBehaviour
 {
     public CursorType cursorType;
-    public Renderer[] meshRenderers;
+    public List<Renderer> meshRenderers=new List<Renderer>();
     
     [Tooltip("아웃라인 Material")]
     public Material selectableMaterial;
@@ -14,22 +14,17 @@ public class CursorSelectable : MonoBehaviour
 
     public void SetupRenderer()
     {
-        if(meshRenderers.Length>0)
-        {
-            return;
-        }
-        meshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
+        
+        var skinnedmeshes = GetComponentsInChildren<SkinnedMeshRenderer>().ToList();
+        var meshes=GetComponentsInChildren<MeshRenderer>().ToList();
 
-        if(meshRenderers.Length>0)
-        {
-            return;
-        }
-        meshRenderers=GetComponentsInChildren<MeshRenderer>();
+        meshRenderers.AddRange(skinnedmeshes);
+        meshRenderers.AddRange(meshes);
     }
 
     public void Select(bool on)
     {
-        if (meshRenderers == null || meshRenderers.Length<=0)
+        if (meshRenderers == null || meshRenderers.Count<=0)
         {
             return;
         }
