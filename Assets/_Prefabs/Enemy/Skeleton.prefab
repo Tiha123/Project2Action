@@ -259,7 +259,6 @@ GameObject:
   - component: {fileID: 1788118017875550485}
   - component: {fileID: 8118017171825755783}
   - component: {fileID: 1087570483291050692}
-  - component: {fileID: 3238184758610262070}
   - component: {fileID: 4210354274801527331}
   m_Layer: 0
   m_Name: Skeleton
@@ -409,32 +408,6 @@ MonoBehaviour:
   meshRenderers: []
   selectableMaterial: {fileID: 2100000, guid: ec506206efdb7f8478b88c26324ed9dc, type: 2}
   selectableThickness: 0.05
---- !u!114 &3238184758610262070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4900478787726182111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2b83030d7f6f4d4d8a60c2f2d673349, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  _prevSight: {fileID: 0}
-  _prevAttack: {fileID: 0}
-  ownerCC: {fileID: 0}
-  sightRange: 5
-  attackRange: 2
-  layer:
-    serializedVersion: 2
-    m_Bits: 4
-  tagname: Player
-  eventSensorSightEnter: {fileID: 11400000, guid: 99007120cd5c4564e906a5224af3b2a7, type: 2}
-  eventSensorSightExit: {fileID: 11400000, guid: f0956aafc440de44c8c858593c8e8340, type: 2}
-  eventSensorAttackEnter: {fileID: 11400000, guid: 57cb7ace08b2d5f459f740f43699a829, type: 2}
-  eventSensorAttackExit: {fileID: 11400000, guid: 5cd6cbcf72dd8124cbf3a08dee40993e, type: 2}
 --- !u!114 &4210354274801527331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -470,6 +443,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1343547886762415067}
+  - component: {fileID: 6953799736367688023}
+  - component: {fileID: 1723789640594926710}
+  - component: {fileID: 7903291690050523416}
+  - component: {fileID: 3855126602103817770}
   m_Layer: 0
   m_Name: _Eyepoint_
   m_TagString: Enemy
@@ -492,6 +469,108 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5886903026107040406}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &6953799736367688023
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5036525786499316343}
+  m_Mesh: {fileID: 0}
+--- !u!23 &1723789640594926710
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5036525786499316343}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7903291690050523416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5036525786499316343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 692807514bb40c04fae1671091177dd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewRadius: 5
+  viewAngle: 90
+  resolution: 10
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 1
+  fovMaterial: {fileID: 2100000, guid: da22cc5d00a674d49b958d56e90a3e4f, type: 2}
+  normalColor: {r: 0, g: 1, b: 0, a: 1}
+  alertColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!114 &3855126602103817770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5036525786499316343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c53b02ab8a1773428b1acb39f1bbad9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interval: 0.5
+  detectionRadius: 5
+  fieldOfViewAngle: 60
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 4
+  blockLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  targetTag: Player
+  attackRadius: 2
+  showGizmos: 1
+  eventSensorSightEnter: {fileID: 11400000, guid: 99007120cd5c4564e906a5224af3b2a7, type: 2}
+  eventSensorSightExit: {fileID: 11400000, guid: f0956aafc440de44c8c858593c8e8340, type: 2}
+  eventSensorAttackEnter: {fileID: 11400000, guid: 57cb7ace08b2d5f459f740f43699a829, type: 2}
+  eventSensorAttackExit: {fileID: 11400000, guid: 5cd6cbcf72dd8124cbf3a08dee40993e, type: 2}
 --- !u!1 &6358929001739249325
 GameObject:
   m_ObjectHideFlags: 0

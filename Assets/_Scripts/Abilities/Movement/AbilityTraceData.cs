@@ -15,4 +15,8 @@ public class AbilityTraceData : AbilityData
     [Tooltip("추격 대상")]
     public CharacterControl traceTarget;
 
+    public EventSensorAttackEnter eventSensorAttackEnter;
+
+    public EventSensorAttackExit eventSensorAttackExit;
+
 }

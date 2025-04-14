@@ -1,6 +1,6 @@
 using UnityEngine;
 using CustomInspector;
-using System.Linq;
+using System.Collections.Generic;
 
 public class SensorControl : MonoBehaviour
 {
@@ -14,8 +14,13 @@ public class SensorControl : MonoBehaviour
     [SerializeField] float sightRange;
     [SerializeField] float attackRange;
 
-    [SerializeField] LayerMask layer;
-    [SerializeField] string tagname;
+    [SerializeField] LayerMask targetLayer;//목표
+    [SerializeField] LayerMask blockLayer;//장애물
+    [SerializeField] string targetTag;//목표 태그
+
+    bool isVisible;
+    private float distance;
+    Dictionary<CharacterControl, bool> visibleStates=new Dictionary<CharacterControl, bool>();
 
     public EventSensorSightEnter eventSensorSightEnter;
 
@@ -33,90 +38,118 @@ public class SensorControl : MonoBehaviour
         InvokeRepeating("CheckOverlap", 0.1f, 0.5f);
     }
 
-    bool b0=false;
     void CheckOverlap()
     {
-        Collider[] overlaps = Physics.OverlapSphere(ownerCC.eyePoint.position, sightRange, layer);
-        b0 = false;
-        overlaps.ToList().ForEach(v =>
+        Collider[] overlaps = Physics.OverlapSphere(ownerCC.eyePoint.position, sightRange, targetLayer);
+        foreach(var c in overlaps)
         {
-            if (v.gameObject.tag == tagname)
+            if(c.tag != targetTag)
             {
-                target = v.GetComponentInParent<CharacterControl>();
-                SightEnter();
+                continue;
+            }
 
-                var d = Vector3.Distance(target.eyePoint.position, ownerCC.eyePoint.position);
-                if (d <= attackRange)
+            target=c.GetComponentInParent<CharacterControl>();
+            if(target==null)
+            {
+                Debug.LogError("SensorControl ] CharacterControl 없음");
+            }
+
+            distance = Vector3.Distance(ownerCC.eyePoint.position, target.eyePoint.position);
+            Vector3 dir = (target.eyePoint.position-ownerCC.eyePoint.position).normalized;
+
+            isVisible = !Physics.Raycast(ownerCC.eyePoint.position, dir, distance, blockLayer);
+            bool wasVisible;
+            visibleStates.TryGetValue(target, out wasVisible);
+
+            if(visibleStates.ContainsKey(target)==false)
+            {
+                visibleStates[target]=isVisible;
+                if(isVisible)
                 {
-                    AttackEnter();
+                    OnFound();        
                 }
                 else
                 {
-                    AttackExit();
+                    OnBlocked();
                 }
-
-                b0 = true;
-                return;
-
             }
         }
-        );
-        if (b0 == false)
-        {
-            SightExit();
-        }
-
     }
 
-    void SightEnter()
+    private void OnFound()
     {
-        if (target == null || _prevSight == target)
-        {
-            return;
-        }
-        _prevSight = target;
-        eventSensorSightEnter.from = ownerCC;
-        eventSensorSightEnter.to = target;
-        eventSensorSightEnter?.Raise();
+        Debug.Log("Found");
     }
 
-    void SightExit()
+    private void OnBlocked()
     {
-        if (target == null || _prevSight == null)
-        {
-            return;
-        }
-        _prevSight = null;
-        eventSensorSightExit.from = ownerCC;
-        eventSensorSightExit.to = eventSensorSightEnter.to;
-        eventSensorSightExit?.Raise();
+        Debug.Log("Blocked");
     }
 
-    // 공격 범위 진입 시
-    private void AttackEnter()
+    private void OnLost()
     {
-        if (target == null || _prevAttack == target)
-        {
-            return;
-        }
-        _prevAttack = target;
+        Debug.Log("Lost");
+    }
 
-        eventSensorAttackEnter.from = ownerCC;
-        eventSensorAttackEnter.to = target;
+    // void SightEnter()
+    // {
+    //     if (target == null || _prevSight == target)
+    //     {
+    //         return;
+    //     }
+    //     _prevSight = target;
+    //     eventSensorSightEnter.from = ownerCC;
+    //     eventSensorSightEnter.to = target;
+    //     eventSensorSightEnter?.Raise();
+    // }
+
+    // void SightExit()
+    // {
+    //     if (target == null || _prevSight == null)
+    //     {
+    //         return;
+    //     }
+    //     _prevSight = null;
+    //     eventSensorSightExit.from = ownerCC;
+    //     eventSensorSightExit.to = eventSensorSightEnter.to;
+    //     eventSensorSightExit?.Raise();
+    // }
+
+    // // 공격 범위 진입 시
+    // private void AttackEnter()
+    // {
+    //     if (target == null || _prevAttack == target)
+    //     {
+    //         return;
+    //     }
+    //     _prevAttack = target;
+
+    //     eventSensorAttackEnter.from = ownerCC;
+    //     eventSensorAttackEnter.to = target;
         
-        eventSensorAttackEnter?.Raise();
-    }
+    //     eventSensorAttackEnter?.Raise();
+    // }
 
-    private void AttackExit()
-    {
-        if (target == null || _prevAttack == null)
-        {
-            return;
-        }
-        _prevAttack = null;
-        eventSensorAttackExit.from = ownerCC;
-        eventSensorAttackExit.to = eventSensorAttackEnter.to;
-        eventSensorAttackExit?.Raise();
-    }
+    // private void AttackExit()
+    // {
+    //     if (target == null || _prevAttack == null)
+    //     {
+    //         return;
+    //     }
+    //     _prevAttack = null;
+    //     eventSensorAttackExit.from = ownerCC;
+    //     eventSensorAttackExit.to = eventSensorAttackEnter.to;
+    //     eventSensorAttackExit?.Raise();
+    // }
+    // //오브젝트를 선택했을 때만 기즈모
+    // void OnDrawGizmosSelected()
+    // {
+    //     if(target==null)
+    //     {
+    //         return;
+    //     }
+    //     Gizmos.color= isVisible ? Color.blue : Color.red;
+    //     Gizmos.DrawLine(ownerCC.eyePoint.position, target.eyePoint.position);
+    // }
 
 }

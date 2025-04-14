@@ -125,7 +125,6 @@ public class EnemyEventControl : MonoBehaviour
     {
         if (e.from == cc)
         {
-
             cc.abilityControl.Activate(AbilityFlag.Trace, true, e.to);
         }
     }

@@ -11,6 +11,7 @@ public class AbilityTrace : Ability<AbilityTraceData>
     Vector3 target;
     Vector3 direction;
     float currentVelocity;
+    bool isAttack=false;
 
     public AbilityTrace(AbilityTraceData data, CharacterControl owner) : base(data, owner)
     {
@@ -63,7 +64,6 @@ public class AbilityTrace : Ability<AbilityTraceData>
 
     void FollowPath()
     {
-        owner.Display(data.Flag.ToString());
         if (corners == null || corners.Length <= 0 || owner.isArrived == true)
         {
             return;
@@ -81,6 +81,17 @@ public class AbilityTrace : Ability<AbilityTraceData>
         Vector3 movement = direction * data.movePerSec * 50f * Time.deltaTime;
         owner.rb.linearVelocity = new Vector3(movement.x, owner.rb.linearVelocity.y, movement.z);
         currentVelocity = Vector3.Distance(Vector3.zero, owner.rb.linearVelocity);
+
+        if(Vector3.Distance(owner.eyePoint.position, data.traceTarget.eyePoint.position)<=owner.Profile.attackRange&&isAttack==false)
+        {
+            isAttack=true;
+            Debug.Log("공격가능");
+        }
+        else if(Vector3.Distance(owner.eyePoint.position, data.traceTarget.eyePoint.position)>owner.Profile.attackRange&&isAttack==true)
+        {
+            isAttack=false;
+            Debug.Log("공격불가능");
+        }
 
         if (Vector3.Distance(target, owner.transform.position) < data.stopDistance)
         {

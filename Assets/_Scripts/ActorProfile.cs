@@ -25,6 +25,7 @@ public class ActorProfile : ScriptableObject
     [Tooltip("점프 강도")] public float jumpPower;
     [Tooltip("점프 시간")] public float jumpDuration;
     [Tooltip("초당 공격 속도(Attack/sec)")] public float attackSpeed;
+    [Tooltip("공격 범위(/m)")] public float attackRange;
     public ActorType actorType;
 
     [HorizontalLine("Abilities"), HideField] public bool _l2;
