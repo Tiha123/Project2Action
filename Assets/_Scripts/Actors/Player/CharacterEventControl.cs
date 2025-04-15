@@ -60,12 +60,16 @@ public class CharacterEventControl : MonoBehaviour
 
     void OneventAttackDamage(EventAttackDamage e)
     {
-        if(cc!=e.to)
+        if (cc != e.to)
         {
             return;
         }
-        PoolManager.I.Spawn(e.particleHit2, transform.position,Quaternion.identity, null);
-        cc.Profile.health-=e.damage;
+        //타격 이펙트
+        PoolManager.I.Spawn(e.particleHit2, transform.position, Quaternion.identity, null);
+        Vector3 rndsphere=Random.insideUnitSphere;
+        rndsphere.y=0f;
+        Vector3 rndpos = rndsphere * 0.25f + cc.eyePoint.position;
+        PoolManager.I.Spawn(e.feeadbackFloatingText, rndpos, Quaternion.identity, cc.transform);
     }
 
     IEnumerator SpawnSequence(EventPlayerSpawnAfter e)
@@ -87,17 +91,20 @@ public class CharacterEventControl : MonoBehaviour
             Debug.LogError("아바타 없음");
         }
         cc.animator.avatar = cc.Profile.avatar;
+        PoolManager.I.Spawn(e.particleSpawn, transform.position, Quaternion.identity, null);
+        cc.Visible(true);
+        cc.Animate(AnimatorHashSet._SPAWN, 0f);
+        yield return new WaitForSeconds(1f);
+
         foreach (var v in cc.Profile.initialAbilities)
         {
             cc.abilityControl.AddAbility(v, true);
         }
         yield return new WaitForSeconds(1f);
+        cc.ui.Show(true);
+
         //GameManager.I.DelayCallAsync(1000,()=>{Debug.Log(10);}).Forget();
-        PoolManager.I.Spawn(e.particleSpawn, transform.position, Quaternion.identity, null);
 
-
-        cc.Visible(true);
-        cc.Animate(AnimatorHashSet._SPAWN, 0f);
 
     }
 

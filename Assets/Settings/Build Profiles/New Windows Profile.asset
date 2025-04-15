@@ -840,7 +840,7 @@ MonoBehaviour:
     - line: '|   webGLCloseOnQuit: 0'
     - line: '|   webWasm2023: 0'
     - line: '|   scriptingDefineSymbols:'
-    - line: '|     Standalone: NODECANVAS'
+    - line: '|     Standalone: NODECANVAS;MOREMOUNTAINS_NICEVIBRATIONS_INSTALLED'
     - line: '|   additionalCompilerArguments: {}'
     - line: '|   platformArchitecture: {}'
     - line: '|   scriptingBackend:'

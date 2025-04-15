@@ -66,7 +66,7 @@ public class AbilityWander : Ability<AbilityWanderData>
 
     void FollowPath()
     {
-        owner.Display(data.Flag.ToString());
+        owner.ui.Display(data.Flag.ToString());
         if (corners == null || corners.Length <= 0 || owner.isArrived == true)
         {
             return;

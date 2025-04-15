@@ -10,4 +10,5 @@ public class EventAttackDamage : GameEvent<EventAttackDamage>
     [ReadOnly] public CharacterControl to;
     [ReadOnly] public int damage;
     [Tooltip("공격 파티클")] public PoolableParticle particleHit2;
+    public PoolableFeedbacks feeadbackFloatingText;
 }

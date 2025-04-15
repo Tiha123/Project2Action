@@ -30,7 +30,7 @@ public class AbilityTrace : Ability<AbilityTraceData>
         {
             return;
         }
-        owner.Display(data.Flag.ToString());
+        owner.ui.Display(data.Flag.ToString());
     }
 
 

@@ -26,7 +26,7 @@ public class AbilityAttack : Ability<AbilityAttackData>
         {
             data.target = obj as CharacterControl;
         }
-        owner.Display(data.Flag.ToString());
+        owner.ui.Display(data.Flag.ToString());
 
         data.eventAttackBefore.Register(OneventAttackBefore);
     }

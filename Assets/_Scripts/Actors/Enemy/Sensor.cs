@@ -199,7 +199,7 @@ public class Sensor : MonoBehaviour
     void OnFound()
     {
         sensorFOV?.AlertColor(true);
-        owner.Display("Found");
+        owner.ui.Display("Found");
         eventSensorSightEnter.from=owner;
         eventSensorSightEnter.to=target;
         eventSensorSightEnter.Raise();
@@ -208,7 +208,7 @@ public class Sensor : MonoBehaviour
     void OnBlocked()
     {
         sensorFOV?.AlertColor(false);
-        owner.Display("Blocked");
+        owner.ui.Display("Blocked");
         eventSensorSightExit.from=owner;
         eventSensorSightExit.to=target;
         eventSensorSightExit.Raise();
@@ -217,7 +217,7 @@ public class Sensor : MonoBehaviour
     void OnLost()
     {
         sensorFOV?.AlertColor(false);
-        owner.Display("Lost");
+        owner.ui.Display("Lost");
         eventSensorSightExit.from=owner;
         eventSensorSightExit.to=target;
         eventSensorSightExit.Raise();
@@ -226,7 +226,7 @@ public class Sensor : MonoBehaviour
     void OnArrived()
     {
         sensorFOV?.AlertColor(true);
-        owner.Display("Arrived");
+        owner.ui.Display("Arrived");
         eventSensorAttackEnter.from=owner;
         eventSensorAttackEnter.to=target;
         eventSensorAttackEnter.Raise();

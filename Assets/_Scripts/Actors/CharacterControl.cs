@@ -1,7 +1,6 @@
 using UnityEngine;
 using CustomInspector;
 using TMPro;
-using UnityEngine.Rendering;
 
 // GAS(Game ability system)
 
@@ -11,6 +10,7 @@ public class CharacterControl : MonoBehaviour
 
 
     [HideInInspector] public AbilityControl abilityControl;
+    [HideInInspector] public UIControl ui;
 
     [ReadOnly] public bool isGrounded;
     [ReadOnly] public bool isArrived = true;
@@ -21,7 +21,6 @@ public class CharacterControl : MonoBehaviour
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public Animator animator;
     [SerializeField, ReadOnly] private ActorProfile profile;
-    [ReadOnly] public TextMeshPro uiinfo;
 
     
     public ActorProfile Profile 
@@ -44,15 +43,12 @@ public class CharacterControl : MonoBehaviour
         {
             Debug.LogWarning("CharacterControl ] Animator없음");
         }
+        if (TryGetComponent(out ui) == false)
+        {
+            Debug.LogWarning("CharacterControl ] UIControl없음");
+        }
         model=transform.Find("_Model_");
         eyePoint=transform.Find("_Eyepoint_");
-
-        uiinfo=GetComponentInChildren<TextMeshPro>();
-        if(uiinfo==null)
-        {
-            Debug.Log("CharacterControl ] _INFO_ 없음");
-        }
-        
     }
 
     void Update()
@@ -81,15 +77,6 @@ public class CharacterControl : MonoBehaviour
         animator.runtimeAnimatorController=aoc;
         aoc[name]=clip;
         animator?.CrossFadeInFixedTime(name,duration,layer,0f);
-    }
-    public void Display(string info)
-    {
-        if (uiinfo==null)
-        {
-            return;
-        }
-        
-        uiinfo.text=info;
     }
 
     // 타겟을 바라본다 (y축만 회전)
