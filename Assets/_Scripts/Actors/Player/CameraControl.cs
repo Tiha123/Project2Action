@@ -5,7 +5,6 @@ public class CameraControl : MonoBehaviour
 {
 
     #region EVENTS
-    [SerializeField] EventPlayerSpawnBefore eventPlayerSpawnBefore;
     [SerializeField] EventPlayerSpawnAfter eventPlayerSpawnAfter;
     #endregion
 

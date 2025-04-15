@@ -5,6 +5,7 @@ public struct CharacterState
 {
     public int healthCurrent;
 
+    public int attackDamage;
     public void Set(ActorProfile profile)
     {
         healthCurrent=profile.health;
@@ -100,7 +101,6 @@ public class CharacterControl : MonoBehaviour
 
     #region ANIMATE
     
-
     public void AnimateMoveSpeed(float targetspeed, bool immediate)
     {
         if(animator==null)
@@ -119,8 +119,6 @@ public class CharacterControl : MonoBehaviour
         }
 
     }
-
-    
 
     #endregion
 }

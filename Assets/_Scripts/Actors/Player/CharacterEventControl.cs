@@ -7,9 +7,7 @@ public class CharacterEventControl : MonoBehaviour
 {
     #region Event
     [HorizontalLine("Events", color: FixedColor.Blue), HideField] public bool _l0;
-    [SerializeField] EventPlayerSpawnBefore eventPlayerSpawnBefore;
     [SerializeField] EventPlayerSpawnAfter eventPlayerSpawnAfter;
-    [SerializeField] GameEventCameraSwitch eventCameraSwitch;
     [SerializeField] EventAttackDamage eventAttackDamage;
     [Space(10), HorizontalLine("Events", color: FixedColor.Blue), HideField] public bool _l1;
     #endregion
@@ -27,14 +25,12 @@ public class CharacterEventControl : MonoBehaviour
     void OnEnable()
     {
         eventPlayerSpawnAfter?.Register(OneventPlayerSpawnAfter);
-        eventCameraSwitch?.Register(OneventCameraSwitch);
         eventAttackDamage?.Register(OneventAttackDamage);
     }
 
     void OnDisable()
     {
         eventPlayerSpawnAfter?.Unregister(OneventPlayerSpawnAfter);
-        eventCameraSwitch?.Unregister(OneventCameraSwitch);
         eventAttackDamage?.Unregister(OneventAttackDamage);
     }
 
@@ -103,9 +99,11 @@ public class CharacterEventControl : MonoBehaviour
         Vector3 rndsphere = Random.insideUnitSphere;
         rndsphere.y = 0f;
         Vector3 rndpos = rndsphere * 0.25f + cc.eyePoint.position;
-        PoolManager.I.Spawn(e.feeadbackFloatingText, rndpos, Quaternion.identity, cc.transform);
-        cc.ui.SetHealth(cc.Profile.health, cc.Profile.health);
-
+        var floating = PoolManager.I.Spawn(e.feeadbackFloatingText, rndpos, Quaternion.identity, cc.transform) as PoolableFeedbacks;
+        if(floating!=null)
+        {
+            floating.SetText($"{e.damage}");
+        }
         cc.state.healthCurrent -= e.damage;
         cc.ui.SetHealth(cc.state.healthCurrent, cc.Profile.health);
     }

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
+using CustomInspector;
 
 public struct TargetState
 {
@@ -19,7 +19,7 @@ public class Sensor : MonoBehaviour
     public string targetTag = "Enemy";
     public float attackRadius = 3f; // 공격 반경
     public bool showGizmos = true;
-    private CharacterControl owner, target;
+    [SerializeField, ReadOnly] private CharacterControl owner, target;
     SensorFOV sensorFOV;
 
     [Header("Target Events")]
@@ -88,21 +88,21 @@ public class Sensor : MonoBehaviour
             currentFrameTargets.Add(target);
 
             float distance = Vector3.Distance(transform.position, target.eyePoint.position);//거리
-            bool isvisible = !Physics.Raycast(transform.position, direction, distance, blockLayer);//장애물
-            bool isarrived = distance <= attackRadius;//공격거리
+            bool isVisible = !Physics.Raycast(transform.position, direction, distance, blockLayer);//장애물
+            bool isArrived = distance <= attackRadius;//공격거리
 
             visibilityStates.TryGetValue(target, out TargetState previousState);
 
             TargetState newState = new TargetState
             {
-                isVisible = isvisible,
-                isArrived = isarrived
+                isVisible = isVisible,
+                isArrived = isArrived
             };
 
             if (!visibilityStates.ContainsKey(target))
             {
                 visibilityStates[target] = newState;
-                if(isvisible)
+                if(isVisible)
                 {
                     OnFound();
                 }
@@ -111,15 +111,15 @@ public class Sensor : MonoBehaviour
                     OnBlocked();
                 }
                 
-                if(isarrived)
+                if(isArrived)
                 {
                     OnArrived();
                 }
             }
-            else if (previousState.isVisible != isvisible || previousState.isArrived != isarrived)
+            else if (previousState.isVisible != isVisible || previousState.isArrived != isArrived)
             {
                 visibilityStates[target] = newState;
-                if(isvisible)
+                if(isVisible)
                 {
                     OnFound();
                 }
@@ -128,7 +128,7 @@ public class Sensor : MonoBehaviour
                     OnBlocked();
                 }
                 
-                if(isarrived&&!previousState.isArrived)
+                if(isArrived&&!previousState.isArrived)
                 {
                     OnArrived();
                 }
@@ -148,11 +148,6 @@ public class Sensor : MonoBehaviour
         //실제 삭제
         foreach (var t in toRemove)
             visibilityStates.Remove(t);
-    }
-
-    void TriggerEvent(UnityEvent<Transform> unityEvent, Transform target)
-    {
-        unityEvent?.Invoke(target);
     }
 
     void OnDrawGizmosSelected()

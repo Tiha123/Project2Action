@@ -1,4 +1,5 @@
 using CustomInspector;
+using MoreMountains.Feedbacks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,12 +13,12 @@ public class UIControl : MonoBehaviour
     [SerializeField] Slider sliderHealth;
 //임시
 
-    void Start()
+    void Awake()
     {
-        uiRoot=transform.Find("_UI");
+        uiRoot=transform.Find("_UI_");
         if(uiRoot==null)
         {
-            Debug.LogWarning("UICONtrol ] _UI_없음");
+            Debug.LogWarning("UIControl ] _UI_없음");
         }
         Show(false);
     }
@@ -33,15 +34,18 @@ public class UIControl : MonoBehaviour
             uiRoot.localScale=Vector3.zero;
             return;
         }
-        uiRoot.gameObject.SetActive(on);
+        else
+        {
+            uiRoot.gameObject.SetActive(true);
+        }
     }
     public void Display(string info)
     {
-
         if(textmesh==null)
         {
             return;
         }
+        textmesh.text=info;
     }
 
     public void SetHealth(int max, int current)

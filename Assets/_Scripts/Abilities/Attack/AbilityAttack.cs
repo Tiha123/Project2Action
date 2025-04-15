@@ -39,7 +39,7 @@ public class AbilityAttack : Ability<AbilityAttackData>
         }
         data.eventAttackDamage.from=owner;
         data.eventAttackDamage.to=data.target;
-        data.eventAttackDamage.damage=owner.Profile.baseDamage;
+        data.eventAttackDamage.damage=owner.state.attackDamage;
         data.eventAttackDamage.Raise();
     }
 

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5031773687053315509}
   - component: {fileID: 538215221342062606}
   - component: {fileID: 1072823141433294682}
-  - component: {fileID: 7488421617438130994}
   m_Layer: 0
   m_Name: info
   m_TagString: Enemy
@@ -177,20 +176,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 538215221342062606}
   m_maskType: 0
---- !u!114 &7488421617438130994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 96848513995296136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a96c7bb618a24074d8a873536e685111, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offset: {fileID: 0}
-  offsetForce: 0.5
 --- !u!1 &141797225969501945
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,7 +258,7 @@ MonoBehaviour:
   SafeMode: 3
   Direction: 0
   AutoChangeDirectionOnEnd: 0
-  AutoPlayOnStart: 0
+  AutoPlayOnStart: 1
   AutoPlayOnEnable: 0
   ForceTimescaleMode: 0
   ForcedTimescaleMode: 1
@@ -869,7 +854,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _l0: 0
-  eventPlayerSpawnBefore: {fileID: 11400000, guid: 103caf9788b73ee4c9afb3cb33cfe316, type: 2}
   eventPlayerSpawnAfter: {fileID: 11400000, guid: 7afc779f97481b64d950c2b124f96e51, type: 2}
   eventEnemySpawnAfter: {fileID: 11400000, guid: 49668d952e156b24d8656278e3732df6, type: 2}
   eventCameraSwitch: {fileID: 11400000, guid: fea73e1e4e6da5b40b487fedaffc578e, type: 2}
@@ -897,6 +881,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiRoot: {fileID: 0}
   textmesh: {fileID: 1072823141433294682}
+  sliderHealth: {fileID: 0}
 --- !u!1 &5036525786499316343
 GameObject:
   m_ObjectHideFlags: 0
@@ -926,7 +911,7 @@ Transform:
   m_GameObject: {fileID: 5036525786499316343}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.478, z: 0}
+  m_LocalPosition: {x: 0, y: 1.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1023,13 +1008,15 @@ MonoBehaviour:
   fieldOfViewAngle: 60
   targetLayer:
     serializedVersion: 2
-    m_Bits: 4
+    m_Bits: 196
   blockLayer:
     serializedVersion: 2
     m_Bits: 1
   targetTag: Player
   attackRadius: 2
   showGizmos: 1
+  owner: {fileID: 0}
+  target: {fileID: 0}
   eventEnemySpawnAfter: {fileID: 11400000, guid: 49668d952e156b24d8656278e3732df6, type: 2}
   eventSensorSightEnter: {fileID: 11400000, guid: 99007120cd5c4564e906a5224af3b2a7, type: 2}
   eventSensorSightExit: {fileID: 11400000, guid: f0956aafc440de44c8c858593c8e8340, type: 2}

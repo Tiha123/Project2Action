@@ -5,7 +5,6 @@ using System.Collections;
 public class AnimationEventListener : MonoBehaviour
 {
     [HorizontalLine("Events", color: FixedColor.Blue), HideField] public bool _l0;
-    [SerializeField] EventPlayerSpawnBefore eventPlayerSpawnBefore;
     [SerializeField] EventPlayerSpawnAfter eventPlayerSpawnAfter;
     [SerializeField] EventEnemySpawnAfter eventEnemySpawnAfter;
     [SerializeField] GameEventCameraSwitch eventCameraSwitch;
