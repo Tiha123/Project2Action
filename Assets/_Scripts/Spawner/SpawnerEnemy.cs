@@ -24,6 +24,7 @@ public class SpawnerEnemy : Spawner
         
         cc = Instantiate(e.EnemyCC, rndpos, rot, null);
         cc.Profile=actorProfile;
+        cc.state.Set(actorProfile);
 
         StartCoroutine(SpawnAfter());
     }

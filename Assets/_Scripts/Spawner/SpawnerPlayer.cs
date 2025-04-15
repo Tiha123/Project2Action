@@ -33,6 +33,7 @@ public class SpawnerPlayer : Spawner
         cc = Instantiate(e.playerCC, spawnPoint.position, rot, null);
         cursor = Instantiate(e.playerCursor);
         cc.Profile=actorProfile;
+        cc.state.Set(actorProfile);
         cursor.EyePoint = cc.eyePoint;
 
         StartCoroutine(SpawnAfter());

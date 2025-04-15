@@ -1,11 +1,16 @@
 using CustomInspector;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIControl : MonoBehaviour
 {
     [ReadOnly] public Transform uiRoot;
+
+//임시
     [SerializeField] TextMeshPro textmesh;
+    [SerializeField] Slider sliderHealth;
+//임시
 
     void Start()
     {
@@ -37,5 +42,18 @@ public class UIControl : MonoBehaviour
         {
             return;
         }
+    }
+
+    public void SetHealth(int max, int current)
+    {
+        if(sliderHealth==null)
+        {
+            return;
+        }
+        float val = (float)current;
+        float val2 = (float)max;
+        float val3=current/max;
+
+        sliderHealth.value=val3;
     }
 }

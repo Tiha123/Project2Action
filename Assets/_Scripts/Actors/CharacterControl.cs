@@ -1,7 +1,16 @@
 using UnityEngine;
 using CustomInspector;
-using TMPro;
+//임시
+public struct CharacterState
+{
+    public int healthCurrent;
 
+    public void Set(ActorProfile profile)
+    {
+        healthCurrent=profile.health;
+    }
+}
+//임시
 // GAS(Game ability system)
 
 // 캐릭터관리
@@ -21,6 +30,7 @@ public class CharacterControl : MonoBehaviour
     [HideInInspector] public Rigidbody rb;
     [HideInInspector] public Animator animator;
     [SerializeField, ReadOnly] private ActorProfile profile;
+    public CharacterState state;
 
     
     public ActorProfile Profile 

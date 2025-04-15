@@ -500,7 +500,7 @@ GameObject:
   - component: {fileID: 3917904120390755761}
   - component: {fileID: 3917904120390755766}
   m_Layer: 5
-  m_Name: Slider_BasicType_00_White
+  m_Name: UiHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -612,7 +612,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 5
   m_WholeNumbers: 0
-  m_Value: 2.07
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1362,6 +1362,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiRoot: {fileID: 0}
   textmesh: {fileID: 0}
+  sliderHealth: {fileID: 3917904120390755766}
 --- !u!1 &9034364121076353508
 GameObject:
   m_ObjectHideFlags: 0

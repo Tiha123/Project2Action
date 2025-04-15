@@ -5,13 +5,14 @@ using System.Linq;
 
 public class CharacterEventControl : MonoBehaviour
 {
+    #region Event
     [HorizontalLine("Events", color: FixedColor.Blue), HideField] public bool _l0;
     [SerializeField] EventPlayerSpawnBefore eventPlayerSpawnBefore;
     [SerializeField] EventPlayerSpawnAfter eventPlayerSpawnAfter;
     [SerializeField] GameEventCameraSwitch eventCameraSwitch;
     [SerializeField] EventAttackDamage eventAttackDamage;
-
     [Space(10), HorizontalLine("Events", color: FixedColor.Blue), HideField] public bool _l1;
+    #endregion
 
     public CharacterControl cc;
 
@@ -38,7 +39,6 @@ public class CharacterEventControl : MonoBehaviour
     }
 
 
-
     void OneventCameraSwitch(GameEventCameraSwitch e)
     {
         if (e.inout == true)
@@ -56,20 +56,6 @@ public class CharacterEventControl : MonoBehaviour
     void OneventPlayerSpawnAfter(EventPlayerSpawnAfter e)
     {
         StartCoroutine(SpawnSequence(e));
-    }
-
-    void OneventAttackDamage(EventAttackDamage e)
-    {
-        if (cc != e.to)
-        {
-            return;
-        }
-        //타격 이펙트
-        PoolManager.I.Spawn(e.particleHit2, transform.position, Quaternion.identity, null);
-        Vector3 rndsphere=Random.insideUnitSphere;
-        rndsphere.y=0f;
-        Vector3 rndpos = rndsphere * 0.25f + cc.eyePoint.position;
-        PoolManager.I.Spawn(e.feeadbackFloatingText, rndpos, Quaternion.identity, cc.transform);
     }
 
     IEnumerator SpawnSequence(EventPlayerSpawnAfter e)
@@ -104,12 +90,26 @@ public class CharacterEventControl : MonoBehaviour
         cc.ui.Show(true);
 
         //GameManager.I.DelayCallAsync(1000,()=>{Debug.Log(10);}).Forget();
-
-
     }
+    #region damage
+    void OneventAttackDamage(EventAttackDamage e)
+    {
+        if (cc != e.to)
+        {
+            return;
+        }
+        //타격 이펙트
+        PoolManager.I.Spawn(e.particleHit2, transform.position, Quaternion.identity, null);
+        Vector3 rndsphere = Random.insideUnitSphere;
+        rndsphere.y = 0f;
+        Vector3 rndpos = rndsphere * 0.25f + cc.eyePoint.position;
+        PoolManager.I.Spawn(e.feeadbackFloatingText, rndpos, Quaternion.identity, cc.transform);
+        cc.ui.SetHealth(cc.Profile.health, cc.Profile.health);
 
-
-
+        cc.state.healthCurrent -= e.damage;
+        cc.ui.SetHealth(cc.state.healthCurrent, cc.Profile.health);
+    }
+    #endregion
 
     //비동기(Async)
     // 1. 코루틴 (Co-routine)
