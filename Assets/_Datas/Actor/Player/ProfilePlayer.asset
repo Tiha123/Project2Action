@@ -19,21 +19,24 @@ MonoBehaviour:
   - {fileID: 8782885591418389632, guid: 96e7032994e5b06438e3e05309d48462, type: 3}
   avatar: {fileID: 9000000, guid: abe188b376c86d740a0a2d99e896643e, type: 3}
   _l3: 0
-  ATTACK: []
-  aoc: {fileID: 0}
+  ATTACK:
+  - {fileID: 7400000, guid: 3e48d088e886ed34b835ab9259b09df3, type: 2}
+  - {fileID: 7400000, guid: bfa617855785020428599121a8c7489d, type: 2}
+  aoc: {fileID: 22100000, guid: 026efe0816efe1442936e81a74eada3e, type: 2}
   _l1: 0
   health: 100
   movePerSec: 10
   rotatePerSec: 1080
   jumpPower: 30
   jumpDuration: 0.5
-  attackSpeed: 0
-  attackRange: 0
+  attackSpeed: 1
+  attackRange: 2
   sightRange: 0
   baseDamage: 0
-  actorType: 0
+  actorType: 1
   _l2: 0
   initialAbilities:
   - {fileID: 11400000, guid: e98ad84b48b264c489fba4447d41f8b5, type: 2}
   - {fileID: 11400000, guid: 94dae3775272d4944b2fe5908edcab2d, type: 2}
   - {fileID: 11400000, guid: df7d42ad02383e94e95f3f2b9d3b6a65, type: 2}
+  - {fileID: 11400000, guid: 1490e1ff24d9c694d8e5757eee156900, type: 2}

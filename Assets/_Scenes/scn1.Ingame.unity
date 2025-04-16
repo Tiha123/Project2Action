@@ -246,6 +246,7 @@ MonoBehaviour:
   eventPlayerSpawnAfter: {fileID: 11400000, guid: 7afc779f97481b64d950c2b124f96e51, type: 2}
   eventEnemySpawnBefore: {fileID: 11400000, guid: f7aaed933a659ea4d9ffd545f1f74aef, type: 2}
   eventEnemySpawnAfter: {fileID: 11400000, guid: 49668d952e156b24d8656278e3732df6, type: 2}
+  eventDeath: {fileID: 11400000, guid: 42e8a25072826ee4fa67e0b40e2c383f, type: 2}
 --- !u!4 &864585995 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8108458063392521803, guid: 02f893684bbfc374a9f792102a639c46, type: 3}

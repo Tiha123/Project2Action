@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af15d8e9d3e8f9e4fa67881a663ea538, type: 3}
-  m_Name: AttackData
+  m_Name: AIAttackData
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   eventAttackBefore: {fileID: 11400000, guid: 57cb7ace08b2d5f459f740f43699a829, type: 2}

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using UnityEngine.InputSystem;
 
 public class AbilityAttack : Ability<AbilityAttackData>
 {
@@ -18,8 +19,13 @@ public class AbilityAttack : Ability<AbilityAttackData>
         attackSpeed = owner.Profile.attackSpeed;
     }
 
+
     public override void Activate(object obj = null)
     {
+        if(owner.TryGetComponent<InputControl>(out var input))
+        {
+            input.actionInput.Player.Attack.performed+=InputAttack;
+        }
         cts?.Dispose();
         cts=new CancellationTokenSource();
         if (obj != null && obj is CharacterControl)
@@ -29,6 +35,17 @@ public class AbilityAttack : Ability<AbilityAttackData>
         owner.ui.Display(data.Flag.ToString());
 
         data.eventAttackBefore.Register(OneventAttackBefore);
+    }
+
+
+    public override void Deactivate()
+    {
+        if(owner.TryGetComponent<InputControl>(out var input))
+        {
+            input.actionInput.Player.Attack.performed-=InputAttack;
+        }
+        cts.Cancel();
+        cts.Dispose();
     }
 
     public void OneventAttackBefore(EventAttackBefore e)
@@ -42,13 +59,6 @@ public class AbilityAttack : Ability<AbilityAttackData>
         data.eventAttackDamage.damage=owner.state.attackDamage;
         data.eventAttackDamage.Raise();
     }
-
-    public override void Deactivate()
-    {
-        cts.Cancel();
-        cts.Dispose();
-    }
-
     public override void Update()
     {
         if (isAttacking == true || data.target == null)
@@ -85,8 +95,10 @@ public class AbilityAttack : Ability<AbilityAttackData>
         {
             cts.Cancel();
         }
-
     }
 
+    void InputAttack(InputAction.CallbackContext ctx)
+    {
 
+    }
 }

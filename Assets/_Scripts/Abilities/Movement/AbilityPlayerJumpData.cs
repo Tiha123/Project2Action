@@ -1,7 +1,7 @@
 using UnityEngine;
 using CustomInspector;
 
-[CreateAssetMenu(menuName ="Abilities/Jump")]
+[CreateAssetMenu(menuName ="Abilities/PlayerJump")]
 public class AbilityJumpData : AbilityData
 {
     public override AbilityFlag Flag => AbilityFlag.Jump;
