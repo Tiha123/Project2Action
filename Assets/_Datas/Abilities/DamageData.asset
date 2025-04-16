@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0c5e40452185dd4e8d63d0b33e945c7, type: 3}
   m_Name: DamageData
   m_EditorClassIdentifier: 
+  eventDeath: {fileID: 11400000, guid: 42e8a25072826ee4fa67e0b40e2c383f, type: 2}

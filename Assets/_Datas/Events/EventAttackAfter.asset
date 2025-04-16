@@ -16,3 +16,4 @@ MonoBehaviour:
   to: {fileID: 0}
   damage: 0
   particleHit2: {fileID: 7047468216702989548, guid: ebd649280d836d84db8eb91a886d27c8, type: 3}
+  feeadbackFloatingText: {fileID: 8066488039708623590, guid: c3de59e00494a7647bddb573b85f4308, type: 3}

@@ -119,7 +119,6 @@ public class CharacterEventControl : MonoBehaviour
         }
         cc.Animate(AnimatorHashSet._DEATH, 0.2f);
         cc.abilityControl.RemoveALL();
-        GameManager.I.ShowInfo("You are dead", 10f);
     }
     #endregion
 

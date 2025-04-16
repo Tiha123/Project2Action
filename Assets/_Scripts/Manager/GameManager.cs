@@ -9,11 +9,6 @@ public class GameManager : BehaviourSingleton<GameManager>
     [SerializeField] TextMeshProUGUI textInformation;
     protected override bool isDontdestroy()=>true;
 
-    void Start()
-    {
-        textInformation.text = "";
-    }
-
     public void ShowInfo(string info, float duration =1f)
     {
         if(feedbackInformation.IsPlaying==true)
