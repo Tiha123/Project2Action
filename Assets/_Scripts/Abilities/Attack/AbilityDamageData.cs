@@ -7,4 +7,6 @@ public class AbilityDamageData : AbilityData
 
     public override Ability CreateAbility(CharacterControl owner) => new AbilityDamage(this, owner);
 
+    public EventDeath eventDeath;
+
 }

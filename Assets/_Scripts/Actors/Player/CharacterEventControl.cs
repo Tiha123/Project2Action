@@ -9,6 +9,7 @@ public class CharacterEventControl : MonoBehaviour
     [HorizontalLine("Events", color: FixedColor.Blue), HideField] public bool _l0;
     [SerializeField] EventPlayerSpawnAfter eventPlayerSpawnAfter;
     [SerializeField] EventAttackDamage eventAttackDamage;
+    [SerializeField] EventDeath eventDeath;
     [Space(10), HorizontalLine("Events", color: FixedColor.Blue), HideField] public bool _l1;
     #endregion
 
@@ -26,12 +27,15 @@ public class CharacterEventControl : MonoBehaviour
     {
         eventPlayerSpawnAfter?.Register(OneventPlayerSpawnAfter);
         eventAttackDamage?.Register(OneventAttackDamage);
+        eventDeath?.Register(OneventDeath);
+
     }
 
     void OnDisable()
     {
         eventPlayerSpawnAfter?.Unregister(OneventPlayerSpawnAfter);
         eventAttackDamage?.Unregister(OneventAttackDamage);
+        eventDeath?.Unregister(OneventDeath);
     }
 
 
@@ -64,10 +68,10 @@ public class CharacterEventControl : MonoBehaviour
         var clone = Instantiate(model, cc.model);
 
 
-        var feedback=model.GetComponentInChildren<FeedbackControl>();
-        if(feedback!=null)
+        var feedback = model.GetComponentInChildren<FeedbackControl>();
+        if (feedback != null)
         {
-            cc.feedbackControl=feedback;
+            cc.feedbackControl = feedback;
         }
         clone.GetComponentsInChildren<SkinnedMeshRenderer>().ToList().ForEach(m =>
         {
@@ -103,6 +107,19 @@ public class CharacterEventControl : MonoBehaviour
         cc.abilityControl.Activate(AbilityFlag.Dmamge, false, e);
         //타격 이펙트
         PoolManager.I.Spawn(e.particleHit2, transform.position, Quaternion.identity, null);
+    }
+    #endregion
+
+    #region Death
+    void OneventDeath(EventDeath e)
+    {
+        if(cc!=e.target)
+        {
+            return;
+        }
+        cc.Animate(AnimatorHashSet._DEATH, 0.2f);
+        cc.abilityControl.RemoveALL();
+        GameManager.I.ShowInfo("You are dead", 10f);
     }
     #endregion
 

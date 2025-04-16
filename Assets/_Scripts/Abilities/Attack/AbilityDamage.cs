@@ -34,15 +34,14 @@ public class AbilityDamage : Ability<AbilityDamageData>
         //tempcode
         if(owner.state.healthCurrent<=0)
         {
-            owner.Animate(AnimatorHashSet._DEATH,0.2f);
-            owner.abilityControl.RemoveALL();
+            data.eventDeath.target=owner;
+            data.eventDeath.Raise();
         }
     }
 
     public override void Deactivate()
     {
-        owner.isDamageable=false;
-
+        owner.isDamageable = false;
         owner.ui.Show(false);
     }
 }

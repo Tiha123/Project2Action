@@ -16,7 +16,7 @@ MonoBehaviour:
   alias: Player
   portrait: {fileID: 21300000, guid: b8c009161d2d48a478ce957ea482049e, type: 3}
   models:
-  - {fileID: 919132149155446097, guid: abe188b376c86d740a0a2d99e896643e, type: 3}
+  - {fileID: 8782885591418389632, guid: 96e7032994e5b06438e3e05309d48462, type: 3}
   avatar: {fileID: 9000000, guid: abe188b376c86d740a0a2d99e896643e, type: 3}
   _l3: 0
   ATTACK: []
