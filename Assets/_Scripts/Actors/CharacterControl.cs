@@ -21,9 +21,11 @@ public class CharacterControl : MonoBehaviour
 
     [HideInInspector] public AbilityControl abilityControl;
     [HideInInspector] public UIControl ui;
+    [HideInInspector] public FeedbackControl feedbackControl;
 
     [ReadOnly] public bool isGrounded;
     [ReadOnly] public bool isArrived = true;
+    [ReadOnly] public bool isDamageable;
     public Transform eyePoint;
     [ReadOnly] public Transform model;
 
@@ -58,6 +60,7 @@ public class CharacterControl : MonoBehaviour
         {
             Debug.LogWarning("CharacterControl ] UIControl없음");
         }
+        
         model=transform.Find("_Model_");
         eyePoint=transform.Find("_Eyepoint_");
     }

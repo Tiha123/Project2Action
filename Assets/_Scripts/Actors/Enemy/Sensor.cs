@@ -11,7 +11,7 @@ public struct TargetState
 public class Sensor : MonoBehaviour
 {
     [Header("Detection Settings")]
-    public float interval = 0.5f; // Interval for detection checks
+    public float interval = 0.3f; // Interval for detection checks
     public float detectionRadius = 5f;
     public float fieldOfViewAngle = 60f; // New FOV angle parameter
     public LayerMask targetLayer;
@@ -20,7 +20,6 @@ public class Sensor : MonoBehaviour
     public float attackRadius = 3f; // 공격 반경
     public bool showGizmos = true;
     [SerializeField, ReadOnly] private CharacterControl owner, target;
-    SensorFOV sensorFOV;
 
     [Header("Target Events")]
     [SerializeField] EventEnemySpawnAfter eventEnemySpawnAfter;
@@ -57,10 +56,6 @@ public class Sensor : MonoBehaviour
         {
             Debug.LogError($"Sensor ] owner - CharacterControl 없음");
         }
-        if(TryGetComponent<SensorFOV>(out sensorFOV)==false)
-        {
-            Debug.LogError($"Sensor ] SensorFOV 없음");
-        }
         InvokeRepeating("DetectTargets", 0f, interval);
     }
 
@@ -68,16 +63,25 @@ public class Sensor : MonoBehaviour
     {
         HashSet<CharacterControl> currentFrameTargets = new HashSet<CharacterControl>();
         Collider[] hits = Physics.OverlapSphere(transform.position, detectionRadius, targetLayer);
-
         foreach (Collider hit in hits)
         {
+            Debug.Log(hit);
             if (!hit.CompareTag(targetTag))
+            {
+                Debug.Log("Continued");
                 continue;
+            }
 
             target = hit.GetComponentInParent<CharacterControl>();
+            Debug.Log("Not Continued");
             if(target==null)
             {
                 Debug.LogError($"Sensor ] target - CharacterControl 없음");
+            }
+
+            if(target.isDamageable==false)
+            {
+                continue;
             }
             Vector3 direction = (target.eyePoint.position - transform.position).normalized;
 
@@ -193,7 +197,6 @@ public class Sensor : MonoBehaviour
 
     void OnFound()
     {
-        sensorFOV?.AlertColor(true);
         owner.ui.Display("Found");
         eventSensorSightEnter.from=owner;
         eventSensorSightEnter.to=target;
@@ -202,7 +205,6 @@ public class Sensor : MonoBehaviour
 
     void OnBlocked()
     {
-        sensorFOV?.AlertColor(false);
         owner.ui.Display("Blocked");
         eventSensorSightExit.from=owner;
         eventSensorSightExit.to=target;
@@ -211,7 +213,6 @@ public class Sensor : MonoBehaviour
 
     void OnLost()
     {
-        sensorFOV?.AlertColor(false);
         owner.ui.Display("Lost");
         eventSensorSightExit.from=owner;
         eventSensorSightExit.to=target;
@@ -220,7 +221,6 @@ public class Sensor : MonoBehaviour
 
     void OnArrived()
     {
-        sensorFOV?.AlertColor(true);
         owner.ui.Display("Arrived");
         eventSensorAttackEnter.from=owner;
         eventSensorAttackEnter.to=target;

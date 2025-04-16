@@ -18,6 +18,9 @@ MonoBehaviour:
   models:
   - {fileID: 919132149155446097, guid: abe188b376c86d740a0a2d99e896643e, type: 3}
   avatar: {fileID: 9000000, guid: abe188b376c86d740a0a2d99e896643e, type: 3}
+  _l3: 0
+  ATTACK: []
+  aoc: {fileID: 0}
   _l1: 0
   health: 100
   movePerSec: 10
@@ -25,7 +28,12 @@ MonoBehaviour:
   jumpPower: 30
   jumpDuration: 0.5
   attackSpeed: 0
+  attackRange: 0
+  sightRange: 0
+  baseDamage: 0
+  actorType: 0
   _l2: 0
   initialAbilities:
   - {fileID: 11400000, guid: e98ad84b48b264c489fba4447d41f8b5, type: 2}
   - {fileID: 11400000, guid: 94dae3775272d4944b2fe5908edcab2d, type: 2}
+  - {fileID: 11400000, guid: df7d42ad02383e94e95f3f2b9d3b6a65, type: 2}

@@ -40,6 +40,7 @@ public class AbilityControl : MonoBehaviour
         {
             return;
         }
+        Deactivate(d.Flag);
         datas.Remove(d);
         Flags.Remove(d.Flag, null);
         actives.Remove(d.Flag);
@@ -67,7 +68,11 @@ public class AbilityControl : MonoBehaviour
         {
             DeactivateAll();
         }
-        foreach (var d in datas)
+        // 실시간 삭제된 데이터 반영
+        List<AbilityData> temp = new List<AbilityData>();
+        temp.AddRange(datas.GetRange(0,datas.Count));
+
+        foreach (var d in temp)
         {
             if ((d.Flag & flag) == flag)
             {
@@ -103,6 +108,14 @@ public class AbilityControl : MonoBehaviour
         {
             a.Value.Deactivate();
         }
+        actives.Clear();
+    }
+
+    public void RemoveALL()
+    {
+        Flags=AbilityFlag.None;
+        DeactivateAll();
+        datas.Clear();
         actives.Clear();
     }
 }

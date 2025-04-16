@@ -62,6 +62,13 @@ public class CharacterEventControl : MonoBehaviour
         }
         var model = cc.Profile.models.Random();
         var clone = Instantiate(model, cc.model);
+
+
+        var feedback=model.GetComponentInChildren<FeedbackControl>();
+        if(feedback!=null)
+        {
+            cc.feedbackControl=feedback;
+        }
         clone.GetComponentsInChildren<SkinnedMeshRenderer>().ToList().ForEach(m =>
         {
             m.gameObject.layer = LayerMask.NameToLayer("Silhouette");
@@ -83,7 +90,6 @@ public class CharacterEventControl : MonoBehaviour
             cc.abilityControl.AddAbility(v, true);
         }
         yield return new WaitForSeconds(1f);
-        cc.ui.Show(true);
 
         //GameManager.I.DelayCallAsync(1000,()=>{Debug.Log(10);}).Forget();
     }
@@ -94,18 +100,9 @@ public class CharacterEventControl : MonoBehaviour
         {
             return;
         }
+        cc.abilityControl.Activate(AbilityFlag.Dmamge, false, e);
         //타격 이펙트
         PoolManager.I.Spawn(e.particleHit2, transform.position, Quaternion.identity, null);
-        Vector3 rndsphere = Random.insideUnitSphere;
-        rndsphere.y = 0f;
-        Vector3 rndpos = rndsphere * 0.25f + cc.eyePoint.position;
-        var floating = PoolManager.I.Spawn(e.feeadbackFloatingText, rndpos, Quaternion.identity, cc.transform) as PoolableFeedbacks;
-        if(floating!=null)
-        {
-            floating.SetText($"{e.damage}");
-        }
-        cc.state.healthCurrent -= e.damage;
-        cc.ui.SetHealth(cc.state.healthCurrent, cc.Profile.health);
     }
     #endregion
 
