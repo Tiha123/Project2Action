@@ -85,12 +85,10 @@ public class AbilityTrace : Ability<AbilityTraceData>
         if(Vector3.Distance(owner.eyePoint.position, data.traceTarget.eyePoint.position)<=owner.Profile.attackRange&&isAttack==false)
         {
             isAttack=true;
-            Debug.Log("공격가능");
         }
         else if(Vector3.Distance(owner.eyePoint.position, data.traceTarget.eyePoint.position)>owner.Profile.attackRange&&isAttack==true)
         {
             isAttack=false;
-            Debug.Log("공격불가능");
         }
 
         if (Vector3.Distance(target, owner.transform.position) < data.stopDistance)

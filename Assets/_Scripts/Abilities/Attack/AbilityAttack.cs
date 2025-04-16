@@ -22,10 +22,6 @@ public class AbilityAttack : Ability<AbilityAttackData>
 
     public override void Activate(object obj = null)
     {
-        if(owner.TryGetComponent<InputControl>(out var input))
-        {
-            input.actionInput.Player.Attack.performed+=InputAttack;
-        }
         cts?.Dispose();
         cts=new CancellationTokenSource();
         if (obj != null && obj is CharacterControl)
@@ -40,10 +36,7 @@ public class AbilityAttack : Ability<AbilityAttackData>
 
     public override void Deactivate()
     {
-        if(owner.TryGetComponent<InputControl>(out var input))
-        {
-            input.actionInput.Player.Attack.performed-=InputAttack;
-        }
+        data.eventAttackBefore.Unregister(OneventAttackBefore);
         cts.Cancel();
         cts.Dispose();
     }
@@ -85,20 +78,11 @@ public class AbilityAttack : Ability<AbilityAttackData>
         }
         catch(System.OperationCanceledException e)
         {
-            Debug.LogException(e);
+            //Debug.LogException(e);
         }
         catch(System.Exception e)
         {
-            Debug.LogException(e);
+            //Debug.LogException(e);
         }
-        finally
-        {
-            cts.Cancel();
-        }
-    }
-
-    void InputAttack(InputAction.CallbackContext ctx)
-    {
-
     }
 }

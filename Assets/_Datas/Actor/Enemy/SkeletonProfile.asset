@@ -35,8 +35,8 @@ MonoBehaviour:
   jumpDuration: 0
   attackSpeed: 3
   attackRange: 2
-  sightRange: 0
-  baseDamage: 0
+  sightRange: 10
+  baseDamage: 5
   actorType: 0
   _l2: 0
   initialAbilities:

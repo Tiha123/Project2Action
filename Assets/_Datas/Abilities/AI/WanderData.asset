@@ -12,3 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62695b0b062a59a4db319020a12de77a, type: 3}
   m_Name: WanderData
   m_EditorClassIdentifier: 
+  movePerSec: 7
+  rotatePerSec: 1080
+  stopDistance: 0.3
+  wanderRadius: 5
+  wanderStay: 2

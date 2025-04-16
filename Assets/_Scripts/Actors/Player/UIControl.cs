@@ -54,8 +54,6 @@ public class UIControl : MonoBehaviour
         {
             return;
         }
-        float val = (float)current;
-        float val2 = (float)max;
         float val3=current/max;
 
         sliderHealth.value=val3;

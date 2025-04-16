@@ -65,15 +65,12 @@ public class Sensor : MonoBehaviour
         Collider[] hits = Physics.OverlapSphere(transform.position, detectionRadius, targetLayer);
         foreach (Collider hit in hits)
         {
-            Debug.Log(hit);
             if (!hit.CompareTag(targetTag))
             {
-                Debug.Log("Continued");
+
                 continue;
             }
-
             target = hit.GetComponentInParent<CharacterControl>();
-            Debug.Log("Not Continued");
             if(target==null)
             {
                 Debug.LogError($"Sensor ] target - CharacterControl 없음");
@@ -156,11 +153,12 @@ public class Sensor : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
+        Debug.Log(1);
         if (!showGizmos) return;
-
+        Debug.Log(2);
         if (visibilityStates == null)
             return;
-
+        Debug.Log(3);
         if (fieldOfViewAngle > 0)
         {
             Gizmos.color = Color.cyan;

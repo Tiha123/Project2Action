@@ -1,5 +1,3 @@
-using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -32,20 +30,21 @@ public class AbilityWander : Ability<AbilityWanderData>
     {
         owner.isArrived=true;
     }
-    float elapese;
+    float elapsed;
     public override void Update()
     {
-        elapese += Time.deltaTime;
-        if (elapese > data.wanderStay)
+        elapsed += Time.deltaTime;
+        if (elapsed > data.wanderStay)
         {
             RandomPosition();
-            elapese = 0f;
+            elapsed = 0f;
         }
         MoveAnimation();
     }
 
     public override void FixedUpdate()
     {
+        if (owner == null || owner.rb == null) return;
         FollowPath();
     }
 
@@ -58,7 +57,7 @@ public class AbilityWander : Ability<AbilityWanderData>
         }
 
         Vector3 rndpos = owner.transform.position + Random.insideUnitSphere * data.wanderRadius;
-        rndpos.y=1f;
+        rndpos.y=0.9f;
 
         SetDestination(rndpos);
     }
@@ -102,7 +101,7 @@ public class AbilityWander : Ability<AbilityWanderData>
         // {
         //     stopTrigger = false;
         // }
-        float a = owner.isArrived ? 0f : Mathf.Clamp01(currentVelocity);
+        float a = owner.isArrived ? 0f : Mathf.Clamp01(currentVelocity/data.movePerSec);
         float movespd = Mathf.Lerp(owner.animator.GetFloat(AnimatorHashSet._MOVESPEED), a, Time.deltaTime * 10f);
         owner.animator?.SetFloat(AnimatorHashSet._MOVESPEED, movespd);
     }
