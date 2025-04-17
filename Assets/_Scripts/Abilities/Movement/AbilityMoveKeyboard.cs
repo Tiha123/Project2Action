@@ -81,7 +81,7 @@ public class AbilityMoveKeyboard : Ability<AbilityMoveKeyboardData>
     {
         direction=Vector3.zero;
         owner.rb.linearVelocity = Vector3.zero;
-        owner.animator?.SetFloat(AnimatorHashSet._MOVESPEED, 0f);
+        owner.animator?.SetFloat(AnimatorHashSet.MOVESPEED, 0f);
     }
 
     void Movement()
@@ -93,8 +93,8 @@ public class AbilityMoveKeyboard : Ability<AbilityMoveKeyboardData>
         {
             float velocity2 = Vector3.Distance(Vector3.zero, owner.rb.linearVelocity);
             float targetspeed = Mathf.Clamp01(Mathf.Abs(velocity2) / data.movePerSec);
-            float movespd = Mathf.Lerp(owner.animator.GetFloat(AnimatorHashSet._MOVESPEED), targetspeed, Time.deltaTime * 10f);
-            owner.animator?.SetFloat(AnimatorHashSet._MOVESPEED, movespd);
+            float movespd = Mathf.Lerp(owner.animator.GetFloat(AnimatorHashSet.MOVESPEED), targetspeed, Time.deltaTime * 10f);
+            owner.animator?.SetFloat(AnimatorHashSet.MOVESPEED, movespd);
             // if(horz==0f&&vert==0f)
             // {
             //     owner.animator?.CrossFadeInFixedTime("RUNTOSTOP", 0.2f, 0, 0f);

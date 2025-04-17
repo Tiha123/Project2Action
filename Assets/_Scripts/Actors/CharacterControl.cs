@@ -1,7 +1,7 @@
 using UnityEngine;
 using CustomInspector;
-using UnityEditor.Timeline.Actions;
-using ParadoxNotion.Design;
+using ParadoxNotion.Animation;
+using DG.Tweening;
 //임시
 public struct CharacterState
 {
@@ -37,6 +37,7 @@ public class CharacterControl : MonoBehaviour
     [HideInInspector] public Animator animator;
     [SerializeField, ReadOnly] private ActorProfile profile;
     public CharacterState state;
+    Tween tweenrot;
 
     
     public ActorProfile Profile 
@@ -98,12 +99,18 @@ public class CharacterControl : MonoBehaviour
     }
 
     // 타겟을 바라본다 (y축만 회전)
+    Quaternion targetrotation;
     public void LookatY(Vector3 target)
     {
+        if(tweenrot!=null)
+        {
+            tweenrot.Kill(true);
+        }
         target.y=0;
         Vector3 direction = target - new Vector3(eyePoint.position.x, 0f, eyePoint.position.z);
-        Vector3 rot = Quaternion.LookRotation(direction.normalized).eulerAngles;
-        transform.rotation = Quaternion.Euler(rot);
+        targetrotation = Quaternion.LookRotation(direction.normalized);
+        tweenrot= transform.DORotateQuaternion(targetrotation,0.2f).SetEase(Ease.OutSine);
+        // transform.rotation = Quaternion.Euler(rot);
     }
 
     #region ANIMATE
@@ -116,26 +123,26 @@ public class CharacterControl : MonoBehaviour
         }
         if(immediate==true)
         {
-            animator.SetFloat(AnimatorHashSet._MOVESPEED, targetspeed);
+            animator.SetFloat(AnimatorHashSet.MOVESPEED, targetspeed);
         }
         else
         {
-            float curr = animator.GetFloat(AnimatorHashSet._MOVESPEED);
+            float curr = animator.GetFloat(AnimatorHashSet.MOVESPEED);
             float spd = Mathf.Lerp(curr, targetspeed, Time.deltaTime * 10f);
-            animator.SetFloat(AnimatorHashSet._MOVESPEED, spd);
+            animator.SetFloat(AnimatorHashSet.MOVESPEED, spd);
         }
 
     }
 
-    public void AnimateTrigger(int hash, AnimatorOverrideController aoc, AnimationClip clip)
+    public void AnimateTrigger(string key, AnimatorOverrideController aoc, AnimationClip clip)
     {
         if(animator=null)
         {
             return;
         }
-        aoc[name]=clip;
+        aoc[key]=clip;
         animator.runtimeAnimatorController=aoc;
-        animator.SetTrigger(hash);
+        animator.SetTrigger(key);
     }
 
     #endregion

@@ -12,6 +12,7 @@ public class CharacterEventControl : MonoBehaviour
     [SerializeField] EventDeath eventDeath;
     [SerializeField] EventSensorSightEnter eventSensorSightEnter;
     [SerializeField] EventSensorSightExit eventSensorSightExit;
+    [SerializeField] EventCursorHover eventCursorHover;
     [Space(10), HorizontalLine("Events", color: FixedColor.Blue), HideField] public bool _l1;
     #endregion
 
@@ -32,6 +33,7 @@ public class CharacterEventControl : MonoBehaviour
         eventDeath?.Register(OneventDeath);
         eventSensorSightEnter.Register(OneventSensorSightEnter);
         eventSensorSightExit.Register(OneventSensorSightExit);
+        eventCursorHover.Register(OneventCursorHover);
 
     }
 
@@ -41,7 +43,7 @@ public class CharacterEventControl : MonoBehaviour
         eventAttackDamage?.Unregister(OneventAttackDamage);
         eventDeath?.Unregister(OneventDeath);
         eventSensorSightEnter?.Unregister(OneventSensorSightEnter);
-        eventSensorSightExit.Unregister(OneventSensorSightExit);
+        eventCursorHover.Unregister(OneventCursorHover);
 
     }
 
@@ -91,15 +93,10 @@ public class CharacterEventControl : MonoBehaviour
             Debug.LogError("아바타 없음");
         }
 
-        if(cc.ik!=null)
-        {
-            cc.ik.target=e.cursorPoint;
-        }
-
         cc.animator.avatar = cc.Profile.avatar;
         PoolManager.I.Spawn(e.particleSpawn, transform.position, Quaternion.identity, null);
         cc.Visible(true);
-        cc.Animate(AnimatorHashSet._SPAWN, 0f);
+        cc.Animate(AnimatorHashSet.SPAWN, 0f);
         yield return new WaitForSeconds(1f);
 
         foreach (var v in cc.Profile.initialAbilities)
@@ -117,12 +114,12 @@ public class CharacterEventControl : MonoBehaviour
         {
             return;
         }
-        cc.ik.isTarget=true;
-        cc.ik.target=e.to.eyePoint;
+        
     }
     void OneventSensorSightExit(EventSensorSightExit e)
     {
-        if(cc!=e.from)
+        //바라보는 자신 체크, 바라볼 타겟 체크
+        if(cc!=e.from || cc.ik.target != e.to)
         {
             return;
         }
@@ -135,7 +132,7 @@ public class CharacterEventControl : MonoBehaviour
         {
             return;
         }
-        cc.abilityControl.Activate(AbilityFlag.Dmamge, false, e);
+        cc.abilityControl.Activate(AbilityFlag.Damage, false, e);
         //타격 이펙트
         PoolManager.I.Spawn(e.particleHit2, transform.position, Quaternion.identity, null);
     }
@@ -148,11 +145,17 @@ public class CharacterEventControl : MonoBehaviour
         {
             return;
         }
-        cc.Animate(AnimatorHashSet._DEATH, 0.2f);
+        cc.Animate(AnimatorHashSet.DEATH, 0.2f);
         cc.abilityControl.RemoveALL();
         cc.ik.isTarget=false;
     }
     #endregion
+    void OneventCursorHover(EventCursorHover e)
+    {
+        cc.ik.isTarget=true;
+        cc.ik.target=e.target.eyePoint;
+        cc.LookatY(e.target.eyePoint.position);
+    }
 
     //비동기(Async)
     // 1. 코루틴 (Co-routine)

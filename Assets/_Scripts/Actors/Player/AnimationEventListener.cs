@@ -113,4 +113,9 @@ public class AnimationEventListener : MonoBehaviour
             return;
         }
     }
+
+    public void Swing(string on)
+    {
+        owner.feedbackControl.PlaySwingTrail(on.ToLower() == "on");
+    }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CursorSelectable : MonoBehaviour
 {
+    [HideInInspector] public CharacterControl targetCC;
     public CursorType cursorType;
     public List<Renderer> meshRenderers=new List<Renderer>();
     
@@ -14,6 +15,7 @@ public class CursorSelectable : MonoBehaviour
 
     public void SetupRenderer()
     {
+        targetCC=GetComponentInParent<CharacterControl>();
         
         var skinnedmeshes = GetComponentsInChildren<SkinnedMeshRenderer>().ToList();
         var meshes=GetComponentsInChildren<MeshRenderer>().ToList();

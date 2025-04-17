@@ -62,13 +62,13 @@ public class AbilityJump : Ability<AbilityJumpData>
             }
             elapsed = 0f;
             isJumping = true;
-            owner.Animate(AnimatorHashSet._JUMPUP, 0.1f);
+            owner.Animate(AnimatorHashSet.JUMPUP, 0.1f);
     }
 
     private void JumpDown()
     {
         isJumping = false;
-        owner.Animate(AnimatorHashSet._JUMPDOWN, 0.02f); //jumpForce와 linearvelocity의 동기화
+        owner.Animate(AnimatorHashSet.JUMPDOWN, 0.02f); //jumpForce와 linearvelocity의 동기화
     }
 
     private void InputJump(InputAction.CallbackContext ctx)

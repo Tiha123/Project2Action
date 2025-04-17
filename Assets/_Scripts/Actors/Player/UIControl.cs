@@ -9,7 +9,7 @@ public class UIControl : MonoBehaviour
     [ReadOnly] public Transform uiRoot;
 
 //임시
-    [SerializeField] TextMeshPro textmesh;
+    [SerializeField] TextMeshProUGUI textmesh;
     [SerializeField] Slider sliderHealth;
 //임시
 

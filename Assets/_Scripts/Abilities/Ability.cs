@@ -13,7 +13,7 @@ public enum AbilityFlag
     Jump = 1 << 2,// 0100
     Dodge = 1 << 3,// 1000
     Attack = 1 << 4,
-    Dmamge = 1 << 5,
+    Damage = 1 << 5,
 
     // 적 캐릭터
     Wander = 1 << 6,

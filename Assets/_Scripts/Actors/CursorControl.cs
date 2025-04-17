@@ -24,7 +24,6 @@ public class CursorControl : MonoBehaviour
     [SerializeField] Transform cursorP;
     [SerializeField] Transform cursorFixedP;
     [SerializeField] LineRenderer line;
-    [SerializeField] LayerMask layerMask;
     private Camera cam;
     public Transform EyePoint { get => eyePoint; set => eyePoint = value; }
     public Transform CursorFixedPoint { get => cursorFixedP; }
@@ -36,6 +35,7 @@ public class CursorControl : MonoBehaviour
     private CursorSelectable currHovered;
 
     private CursorSelectable prevHovered;
+    [SerializeField] EventCursorHover eventCursorHover;
 
     void Start()
     {
@@ -58,7 +58,7 @@ public class CursorControl : MonoBehaviour
         }
         prevHovered = currHovered;
         Ray ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
-        if (Physics.Raycast(ray, out var hit,100f, layerMask))
+        if (Physics.Raycast(ray, out var hit))
         {
             currHovered = hit.collider.gameObject.GetComponent<CursorSelectable>();
             if(currHovered==null)
@@ -128,6 +128,8 @@ public class CursorControl : MonoBehaviour
         currHovered.Select(true);
         SetCursor(sel.cursorType);
 
+        eventCursorHover.target=sel.targetCC;
+        eventCursorHover.Raise();
     }
 
     void OnHoverExit(CursorSelectable o)

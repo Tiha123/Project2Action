@@ -14,7 +14,7 @@ public class AbilityDamage : Ability<AbilityDamageData>
         EventAttackDamage e = obj as EventAttackDamage;
         if (e == null)
         {
-            Debug.LogWarning("AbilityDamage ] EventAttackAfter 없음");
+            Debug.LogWarning("AbilityDamage ] EventAttackDamage 없음");
             return;
         }
         owner.isDamageable=true;

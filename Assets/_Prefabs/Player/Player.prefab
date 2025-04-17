@@ -1428,7 +1428,7 @@ Transform:
   m_GameObject: {fileID: 5536255928478589782}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1671,6 +1671,8 @@ MonoBehaviour:
   eventPlayerSpawnAfter: {fileID: 11400000, guid: 7afc779f97481b64d950c2b124f96e51, type: 2}
   eventAttackDamage: {fileID: 11400000, guid: 5cd6cbcf72dd8124cbf3a08dee40993e, type: 2}
   eventDeath: {fileID: 11400000, guid: 42e8a25072826ee4fa67e0b40e2c383f, type: 2}
+  eventSensorSightEnter: {fileID: 0}
+  eventSensorSightExit: {fileID: 0}
   _l1: 0
   cc: {fileID: 0}
 --- !u!114 &2533402993609185581

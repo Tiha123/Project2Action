@@ -102,8 +102,8 @@ public class AbilityWander : Ability<AbilityWanderData>
         //     stopTrigger = false;
         // }
         float a = owner.isArrived ? 0f : Mathf.Clamp01(currentVelocity/data.movePerSec);
-        float movespd = Mathf.Lerp(owner.animator.GetFloat(AnimatorHashSet._MOVESPEED), a, Time.deltaTime * 10f);
-        owner.animator?.SetFloat(AnimatorHashSet._MOVESPEED, movespd);
+        float movespd = Mathf.Lerp(owner.animator.GetFloat(AnimatorHashSet.MOVESPEED), a, Time.deltaTime * 10f);
+        owner.animator?.SetFloat(AnimatorHashSet.MOVESPEED, movespd);
     }
 
     void SetDestination(Vector3 destination)
