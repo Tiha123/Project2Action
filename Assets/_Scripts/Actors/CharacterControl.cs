@@ -1,5 +1,7 @@
 using UnityEngine;
 using CustomInspector;
+using UnityEditor.Timeline.Actions;
+using ParadoxNotion.Design;
 //임시
 public struct CharacterState
 {
@@ -22,6 +24,7 @@ public class CharacterControl : MonoBehaviour
     [HideInInspector] public AbilityControl abilityControl;
     [HideInInspector] public UIControl ui;
     [HideInInspector] public FeedbackControl feedbackControl;
+    [HideInInspector] public AnimationIKControl ik;
 
     [ReadOnly] public bool isGrounded;
     [ReadOnly] public bool isArrived = true;
@@ -60,6 +63,7 @@ public class CharacterControl : MonoBehaviour
         {
             Debug.LogWarning("CharacterControl ] UIControl없음");
         }
+        ik=GetComponent<AnimationIKControl>();
         
         model=transform.Find("_Model_");
         eyePoint=transform.Find("_Eyepoint_");
@@ -121,6 +125,17 @@ public class CharacterControl : MonoBehaviour
             animator.SetFloat(AnimatorHashSet._MOVESPEED, spd);
         }
 
+    }
+
+    public void AnimateTrigger(int hash, AnimatorOverrideController aoc, AnimationClip clip)
+    {
+        if(animator=null)
+        {
+            return;
+        }
+        aoc[name]=clip;
+        animator.runtimeAnimatorController=aoc;
+        animator.SetTrigger(hash);
     }
 
     #endregion

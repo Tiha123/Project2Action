@@ -34,6 +34,7 @@ MonoBehaviour:
   sightRange: 0
   baseDamage: 0
   actorType: 1
+  animatorOverride: {fileID: 22100000, guid: 026efe0816efe1442936e81a74eada3e, type: 2}
   _l2: 0
   initialAbilities:
   - {fileID: 11400000, guid: e98ad84b48b264c489fba4447d41f8b5, type: 2}

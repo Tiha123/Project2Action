@@ -10,6 +10,8 @@ public class CharacterEventControl : MonoBehaviour
     [SerializeField] EventPlayerSpawnAfter eventPlayerSpawnAfter;
     [SerializeField] EventAttackDamage eventAttackDamage;
     [SerializeField] EventDeath eventDeath;
+    [SerializeField] EventSensorSightEnter eventSensorSightEnter;
+    [SerializeField] EventSensorSightExit eventSensorSightExit;
     [Space(10), HorizontalLine("Events", color: FixedColor.Blue), HideField] public bool _l1;
     #endregion
 
@@ -28,6 +30,8 @@ public class CharacterEventControl : MonoBehaviour
         eventPlayerSpawnAfter?.Register(OneventPlayerSpawnAfter);
         eventAttackDamage?.Register(OneventAttackDamage);
         eventDeath?.Register(OneventDeath);
+        eventSensorSightEnter.Register(OneventSensorSightEnter);
+        eventSensorSightExit.Register(OneventSensorSightExit);
 
     }
 
@@ -36,6 +40,9 @@ public class CharacterEventControl : MonoBehaviour
         eventPlayerSpawnAfter?.Unregister(OneventPlayerSpawnAfter);
         eventAttackDamage?.Unregister(OneventAttackDamage);
         eventDeath?.Unregister(OneventDeath);
+        eventSensorSightEnter?.Unregister(OneventSensorSightEnter);
+        eventSensorSightExit.Unregister(OneventSensorSightExit);
+
     }
 
 
@@ -83,6 +90,12 @@ public class CharacterEventControl : MonoBehaviour
         {
             Debug.LogError("아바타 없음");
         }
+
+        if(cc.ik!=null)
+        {
+            cc.ik.target=e.cursorPoint;
+        }
+
         cc.animator.avatar = cc.Profile.avatar;
         PoolManager.I.Spawn(e.particleSpawn, transform.position, Quaternion.identity, null);
         cc.Visible(true);
@@ -98,6 +111,24 @@ public class CharacterEventControl : MonoBehaviour
         //GameManager.I.DelayCallAsync(1000,()=>{Debug.Log(10);}).Forget();
     }
     #region damage
+    void OneventSensorSightEnter(EventSensorSightEnter e)
+    {
+        if(cc!=e.from)
+        {
+            return;
+        }
+        cc.ik.isTarget=true;
+        cc.ik.target=e.to.eyePoint;
+    }
+    void OneventSensorSightExit(EventSensorSightExit e)
+    {
+        if(cc!=e.from)
+        {
+            return;
+        }
+        cc.ik.isTarget=false;
+        cc.ik.target=null;
+    }
     void OneventAttackDamage(EventAttackDamage e)
     {
         if (cc != e.to)
@@ -119,6 +150,7 @@ public class CharacterEventControl : MonoBehaviour
         }
         cc.Animate(AnimatorHashSet._DEATH, 0.2f);
         cc.abilityControl.RemoveALL();
+        cc.ik.isTarget=false;
     }
     #endregion
 

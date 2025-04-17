@@ -19,7 +19,7 @@ public class Sensor : MonoBehaviour
     public string targetTag = "Enemy";
     public float attackRadius = 3f; // 공격 반경
     public bool showGizmos = true;
-    [SerializeField, ReadOnly] private CharacterControl owner, target;
+    [ReadOnly] private CharacterControl owner, target;
 
     [Header("Target Events")]
     [SerializeField] EventEnemySpawnAfter eventEnemySpawnAfter;

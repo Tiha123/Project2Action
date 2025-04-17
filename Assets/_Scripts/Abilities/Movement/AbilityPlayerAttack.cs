@@ -31,6 +31,7 @@ public class AbilityPlayerAttack : Ability<AbilityPlayerAttackData>
 
         void InputAttack(InputAction.CallbackContext ctx)
     {
-
+        AnimationClip aniclip=owner.Profile.ATTACK.Random();
+        owner.AnimateTrigger(AnimatorHashSet._ATTACK, owner.Profile.animatorOverride, aniclip);
     }
 }

@@ -29,6 +29,7 @@ public class ActorProfile : ScriptableObject
     [Tooltip("시야 범위(/m)")] public float sightRange;
     [Tooltip("기본 공격력")] public int baseDamage;
     public ActorType actorType;
+    public AnimatorOverrideController animatorOverride;
 
     [HorizontalLine("Abilities"), HideField] public bool _l2;
     public List<AbilityData> initialAbilities = new List<AbilityData>();

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7014842443798610544}
   - component: {fileID: 3631365171034259081}
   - component: {fileID: 8334827105610408429}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: floor_tiles_shifted
   m_TagString: Untagged
   m_Icon: {fileID: 0}
