@@ -2,6 +2,7 @@ using UnityEngine;
 using CustomInspector;
 using System.Collections;
 using System.Linq;
+using DG.Tweening;
 
 public class CharacterEventControl : MonoBehaviour
 {
@@ -33,7 +34,7 @@ public class CharacterEventControl : MonoBehaviour
         eventDeath?.Register(OneventDeath);
         eventSensorSightEnter.Register(OneventSensorSightEnter);
         eventSensorSightExit.Register(OneventSensorSightExit);
-        eventCursorHover.Register(OneventCursorHover);
+        // eventCursorHover.Register(OneventCursorHover);
 
     }
 
@@ -43,7 +44,7 @@ public class CharacterEventControl : MonoBehaviour
         eventAttackDamage?.Unregister(OneventAttackDamage);
         eventDeath?.Unregister(OneventDeath);
         eventSensorSightEnter?.Unregister(OneventSensorSightEnter);
-        eventCursorHover.Unregister(OneventCursorHover);
+        // eventCursorHover.Unregister(OneventCursorHover);
 
     }
 
@@ -104,6 +105,7 @@ public class CharacterEventControl : MonoBehaviour
             cc.abilityControl.AddAbility(v, true);
         }
         yield return new WaitForSeconds(1f);
+        cc.ui.Show(true);
 
         //GameManager.I.DelayCallAsync(1000,()=>{Debug.Log(10);}).Forget();
     }
@@ -119,12 +121,12 @@ public class CharacterEventControl : MonoBehaviour
     void OneventSensorSightExit(EventSensorSightExit e)
     {
         //바라보는 자신 체크, 바라볼 타겟 체크
-        if(cc!=e.from || cc.ik.target != e.to)
-        {
-            return;
-        }
-        cc.ik.isTarget=false;
-        cc.ik.target=null;
+        // if(cc!=e.from || cc.ik.target != e.to)
+        // {
+        //     return;
+        // }
+        // cc.ik.isTarget=false;
+        // cc.ik.target=null;
     }
     void OneventAttackDamage(EventAttackDamage e)
     {
@@ -147,15 +149,17 @@ public class CharacterEventControl : MonoBehaviour
         }
         cc.Animate(AnimatorHashSet.DEATH, 0.2f);
         cc.abilityControl.RemoveALL();
-        cc.ik.isTarget=false;
+        // cc.Live(false);
+        DOVirtual.DelayedCall(2f, ()=>cc.ui.Show(false));
+        // cc.ik.isTarget=false;
     }
     #endregion
-    void OneventCursorHover(EventCursorHover e)
-    {
-        cc.ik.isTarget=true;
-        cc.ik.target=e.target.eyePoint;
-        cc.LookatY(e.target.eyePoint.position);
-    }
+    // void OneventCursorHover(EventCursorHover e)
+    // {
+    //     cc.ik.isTarget=true;
+    //     cc.ik.target=e.target.eyePoint;
+    //     cc.LookatY(e.target.eyePoint.position);
+    // }
 
     //비동기(Async)
     // 1. 코루틴 (Co-routine)

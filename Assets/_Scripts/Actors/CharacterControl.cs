@@ -8,9 +8,14 @@ public struct CharacterState
     public int healthCurrent;
 
     public int attackDamage;
+
+    public float attackRange;
+
     public void Set(ActorProfile profile)
     {
         healthCurrent=profile.health;
+        attackDamage=profile.baseDamage;
+        attackRange=profile.attackRange;
     }
 }
 //임시
@@ -24,13 +29,14 @@ public class CharacterControl : MonoBehaviour
     [HideInInspector] public AbilityControl abilityControl;
     [HideInInspector] public UIControl ui;
     [HideInInspector] public FeedbackControl feedbackControl;
-    [HideInInspector] public AnimationIKControl ik;
+    // [HideInInspector] public AnimationIKControl ik;
 
     [ReadOnly] public bool isGrounded;
     [ReadOnly] public bool isArrived = true;
     [ReadOnly] public bool isDamageable;
     public Transform eyePoint;
     [ReadOnly] public Transform model;
+    [ReadOnly] public CapsuleCollider col;
 
     public float isGroundedOffset = 1.1f;
     [HideInInspector] public Rigidbody rb;
@@ -64,7 +70,7 @@ public class CharacterControl : MonoBehaviour
         {
             Debug.LogWarning("CharacterControl ] UIControl없음");
         }
-        ik=GetComponent<AnimationIKControl>();
+        // ik=GetComponent<AnimationIKControl>();
         
         model=transform.Find("_Model_");
         eyePoint=transform.Find("_Eyepoint_");
@@ -89,7 +95,7 @@ public class CharacterControl : MonoBehaviour
 
     public void Animate(string name, AnimatorOverrideController aoc, AnimationClip clip, float anispd, float duration, int layer = 0)
     {
-        if(animator==null)
+        if(animator==null || clip == null)
         {
             return;
         }
@@ -136,7 +142,7 @@ public class CharacterControl : MonoBehaviour
 
     public void AnimateTrigger(string key, AnimatorOverrideController aoc, AnimationClip clip)
     {
-        if(animator=null)
+        if(animator== null || clip == null)
         {
             return;
         }

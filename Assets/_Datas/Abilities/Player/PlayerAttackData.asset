@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ff9ce5a30099747900e8e0247ba93c, type: 3}
   m_Name: PlayerAttackData
   m_EditorClassIdentifier: 
+  eventAttackBefore: {fileID: 11400000, guid: 57cb7ace08b2d5f459f740f43699a829, type: 2}
+  eventAttackDamage: {fileID: 11400000, guid: 5cd6cbcf72dd8124cbf3a08dee40993e, type: 2}
+  target: {fileID: 0}
   attackSpeed: 0

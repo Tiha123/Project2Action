@@ -8,6 +8,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/scn0.Loader.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/_Scenes/scn2.Level1.unity
+    guid: ca7c30cd23758d14cb979ac1d7338c59
+  - enabled: 1
+    path: Assets/_Scenes/scn2.Level2.unity
+    guid: ff7cc55cc44b31643b6db7e8ba3fdf9e
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

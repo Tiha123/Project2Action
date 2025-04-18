@@ -11,6 +11,8 @@ public class EnemyEventControl : MonoBehaviour
     [SerializeField] EventSensorSightExit eventSensorSightExit;
     [SerializeField] EventSensorAttackEnter eventSensorAttackEnter;
     [SerializeField] EventSensorAttackExit eventSensorAttackExit;
+    [SerializeField] EventAttackDamage eventAttackDamage;
+    [SerializeField] EventDeath eventDeath;
 
 
     [Space(10), HorizontalLine("Events", color: FixedColor.Blue), HideField] public bool _l1;
@@ -32,6 +34,7 @@ public class EnemyEventControl : MonoBehaviour
         eventSensorSightExit?.Register(OneventSensorSightExit);
         eventSensorAttackEnter?.Register(OneventSensorAttackEnter);
         eventSensorAttackExit?.Register(OneventSensorAttackExit);
+        eventAttackDamage?.Register(OneventAttackDamage);
     }
 
     void OnDisable()
@@ -41,6 +44,7 @@ public class EnemyEventControl : MonoBehaviour
         eventSensorSightExit?.Unregister(OneventSensorSightExit);
         eventSensorAttackEnter?.Unregister(OneventSensorAttackEnter);
         eventSensorAttackExit?.Unregister(OneventSensorAttackExit);
+        eventAttackDamage?.Unregister(OneventAttackDamage);
     }
 
 
@@ -126,6 +130,32 @@ public class EnemyEventControl : MonoBehaviour
         {
             cc.abilityControl.Activate(AbilityFlag.Trace, true, e.to);
         }
+    }
+
+    void OneventAttackDamage(EventAttackDamage e)
+    {
+        if (cc != e.to || cc==e.from)
+        {
+            return;
+        }
+        if(e.from.Profile.actorType != ActorType.Player)
+        {
+            return;
+        }
+        cc.abilityControl.Activate(AbilityFlag.Damage, false, e);
+        //타격 이펙트
+        PoolManager.I.Spawn(e.particleHit2, transform.position, Quaternion.identity, null);
+    }
+
+    void OneventDeath(EventDeath e)
+    {
+        if(cc!=e.target)
+        {
+            return;
+        }
+        AnimationClip clip=cc.Profile.DAMAGE.Random();
+
+        cc.AnimateTrigger("ATTACK", cc.Profile.aoc, clip);
     }
 
 

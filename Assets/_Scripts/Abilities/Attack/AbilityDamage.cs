@@ -20,6 +20,10 @@ public class AbilityDamage : Ability<AbilityDamageData>
         owner.isDamageable=true;
 
         owner.feedbackControl?.PlayImpact();
+
+        AnimationClip clip=owner.Profile.DAMAGE.Random();
+        owner.AnimateTrigger("DAMAGE", owner.Profile.aoc, clip);
+
         Vector3 rndsphere = Random.insideUnitSphere;
         rndsphere.y = 0f;
         Vector3 rndpos = rndsphere * 0.25f + owner.eyePoint.position;

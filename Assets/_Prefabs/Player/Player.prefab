@@ -1526,7 +1526,6 @@ GameObject:
   - component: {fileID: 1441540204986163357}
   - component: {fileID: 2533402993609185581}
   - component: {fileID: 5166501841400314042}
-  - component: {fileID: 47065673727264530}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -1565,7 +1564,7 @@ Animator:
   m_GameObject: {fileID: 8144856337956261130}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 72a64c22c99bf694a82f6d3aac6b3cd8, type: 2}
+  m_Controller: {fileID: 22100000, guid: 026efe0816efe1442936e81a74eada3e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1631,12 +1630,12 @@ MonoBehaviour:
   abilityControl: {fileID: 0}
   ui: {fileID: 0}
   feedbackControl: {fileID: 0}
-  ik: {fileID: 0}
   isGrounded: 0
   isArrived: 1
   isDamageable: 0
   eyePoint: {fileID: 0}
   model: {fileID: 0}
+  col: {fileID: 0}
   isGroundedOffset: 1.1
   rb: {fileID: 0}
   animator: {fileID: 0}
@@ -1671,8 +1670,9 @@ MonoBehaviour:
   eventPlayerSpawnAfter: {fileID: 11400000, guid: 7afc779f97481b64d950c2b124f96e51, type: 2}
   eventAttackDamage: {fileID: 11400000, guid: 5cd6cbcf72dd8124cbf3a08dee40993e, type: 2}
   eventDeath: {fileID: 11400000, guid: 42e8a25072826ee4fa67e0b40e2c383f, type: 2}
-  eventSensorSightEnter: {fileID: 0}
-  eventSensorSightExit: {fileID: 0}
+  eventSensorSightEnter: {fileID: 11400000, guid: 99007120cd5c4564e906a5224af3b2a7, type: 2}
+  eventSensorSightExit: {fileID: 11400000, guid: f0956aafc440de44c8c858593c8e8340, type: 2}
+  eventCursorHover: {fileID: 11400000, guid: d23e7f9c88dcfc045b7c9588858c9ed4, type: 2}
   _l1: 0
   cc: {fileID: 0}
 --- !u!114 &2533402993609185581
@@ -1716,24 +1716,6 @@ MonoBehaviour:
   uiRoot: {fileID: 0}
   textmesh: {fileID: 0}
   sliderHealth: {fileID: 3917904120390755766}
---- !u!114 &47065673727264530
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8144856337956261130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa79c3e94233cf641a95d1b669fa13b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  overallWeight: 1
-  headWeight: 0.5
-  bodyWeight: 0.5
-  currentWeight: 0
-  isTarget: 0
 --- !u!1 &9034364121076353508
 GameObject:
   m_ObjectHideFlags: 0

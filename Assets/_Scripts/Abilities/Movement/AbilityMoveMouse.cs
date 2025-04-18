@@ -18,12 +18,14 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
     float currentVelocity;
     private RaycastHit hitinfo;
     private ParticleSystem marker;
+    CursorControl cursor;
 
     public AbilityMoveMouse(AbilityMoveMouseData data, CharacterControl ow) : base(data, ow)
     {
         camera = Camera.main;
         path = new NavMeshPath();
         marker = GameObject.Instantiate(data.marker).GetComponent<ParticleSystem>();
+        cursor=GameObject.FindFirstObjectByType<CursorControl>();
         if (marker == null)
         {
             Debug.LogWarning("MoveMouse ] marker없음");
@@ -76,6 +78,7 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
 
     public override void Update()
     {
+        RotateByCursor();
         MoveAnimation();
     }
 
@@ -139,6 +142,14 @@ public class AbilityMoveMouse : Ability<AbilityMoveMouseData>
         owner.isArrived = false;
         stopTrigger = Vector3.Distance(owner.rb.position, hitinfo.point) > data.runtostopDistance.y ? false : true;
         DrawDebugPath();
+    }
+
+    void RotateByCursor()
+    {
+        Vector3 cursorpoint=cursor.CursorFixedPoint.position;
+        cursorpoint.y=0f;
+        // lookrot = Quaternion.LookRotation(direction);
+        // owner.transform.rotation=Quaternion.RotateTowards(owner.transform.rotation, lookrot);
     }
 
     private void DrawDebugPath()

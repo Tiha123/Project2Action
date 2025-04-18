@@ -1,13 +1,10 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ScenarioManager : MonoBehaviour
 {
     public EventPlayerSpawnBefore eventPlayerSpawnBefore;
-    public EventPlayerSpawnAfter eventPlayerSpawnAfter;
     public EventEnemySpawnBefore eventEnemySpawnBefore;
-    public EventEnemySpawnAfter eventEnemySpawnAfter;
     public EventDeath eventDeath;
 
     void OnEnable()

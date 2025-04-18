@@ -37,7 +37,8 @@ public class AnimationEventListener : MonoBehaviour
 
     void OnDisable()
     {
-        
+        eventPlayerSpawnAfter.Unregister(OneventPlayerSpawnAfter);
+        eventEnemySpawnAfter.Unregister(OneventEnemySpawnAfter);
     }
 
     public void OneventPlayerSpawnAfter(EventPlayerSpawnAfter e)
@@ -81,7 +82,10 @@ public class AnimationEventListener : MonoBehaviour
         {
             return;
         }
-
+        if(smoke==null || smoke2 == null)
+        {
+            return;
+        }
         if (s == "L")
         {
             PoolManager.I.Spawn(smoke, footLeft.position, Quaternion.identity, null);
@@ -101,7 +105,12 @@ public class AnimationEventListener : MonoBehaviour
 
     public void Attack(string s)
     {
+        eventAttackBefore.from=owner;
         eventAttackBefore.Raise();
+        if(swing1==null)
+        {
+            return;
+        }
         if(Random.Range(0,10)>=7)
         {
             var rot = Quaternion.LookRotation(owner.transform.forward, Vector3.up);

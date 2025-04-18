@@ -16,6 +16,8 @@ public class ActorProfile : ScriptableObject
 
     [HorizontalLine("Animation"), HideField] public bool _l3;
     public List<AnimationClip> ATTACK;
+    public List<AnimationClip> DEATH;
+    public List<AnimationClip> DAMAGE;
     public AnimatorOverrideController aoc;
 
     [HorizontalLine("Attributes"), HideField] public bool _l1;
