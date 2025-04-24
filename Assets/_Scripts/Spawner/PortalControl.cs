@@ -12,7 +12,8 @@ public class PortalControl : MonoBehaviour
         if(other.tag=="Player")
         {
             trans.gameObject.SetActive(true);
-            other.gameObject.SetActive(false);
+            CharacterControl a=other.GetComponentInParent<CharacterControl>();
+            a.gameObject.SetActive(false);
         }
     }
 }

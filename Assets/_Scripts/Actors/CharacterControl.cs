@@ -1,6 +1,5 @@
 using UnityEngine;
 using CustomInspector;
-using ParadoxNotion.Animation;
 using DG.Tweening;
 //임시
 public struct CharacterState
